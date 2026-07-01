@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>document.documentElement.classList.add('motion-ready');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deal Sports — Construcción de Superficies Deportivas en Uruguay</title>
+  <link rel="stylesheet" href="index.css?v=2.1">
+  <style>
+    /* Immediate Layout Grid Fail-safe */
+    .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
+    .grid-3 { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 30px !important; }
+    .grid-4 { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 30px !important; }
+    .grid-5 { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; gap: 20px !important; }
+
+    @media (max-width: 1200px) {
+      .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+      .grid-5 { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+    @media (max-width: 768px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+      .grid-5 { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 576px) {
+      .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr !important; gap: 16px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="global-surface-glow"></div>
+
+  <!-- ==========================================
+       STICKY NAVIGATION HEADER
+       ========================================== -->
+  <header class="header header--transparent" id="main-header">
+    <div class="container header__inner">
+      <!-- Vector Logo -->
+      <div class="header__logo" onclick="navigate('home')">
+        <img id="header-logo-img" src="./assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 34px; width: auto; object-fit: contain; transition: var(--trans);">
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="header__nav" id="main-nav">
+        <span class="nav-link active" onclick="navigate('home')" id="nav-home">Inicio</span>
+        <span class="nav-link" onclick="navigate('nosotros')" id="nav-nosotros">Nosotros</span>
+        
+        <!-- Dropdown Surfaces -->
+        <div class="nav-dropdown">
+          <span class="nav-link" id="nav-superficies">Superficies ▾</span>
+          <div class="nav-dropdown-menu">
+            <span class="nav-dropdown-item" onclick="navigate('tenis')">Canchas de Tenis</span>
+            <span class="nav-dropdown-item" onclick="navigate('padel')">Canchas de Padel</span>
+            <span class="nav-dropdown-item" onclick="navigate('futbol')">Fútbol Sintético</span>
+            <span class="nav-dropdown-item" onclick="navigate('putting')">Putting Green & Chip</span>
+            <span class="nav-dropdown-item" onclick="navigate('basket')">Basketball & Pickleball</span>
+            <span class="nav-dropdown-item" onclick="navigate('skate')">Skateparks</span>
+            <span class="nav-dropdown-item" onclick="navigate('hockey')">Canchas de Hockey</span>
+          </div>
+        </div>
+
+        <span class="nav-link" onclick="navigate('servicios')" id="nav-servicios">Servicios</span>
+        <span class="nav-link" onclick="navigate('proveedores')" id="nav-proveedores">Proveedores</span>
+        <span class="nav-link" onclick="navigate('portafolio')" id="nav-portafolio">Proyectos</span>
+        <span class="nav-link nav-link--mobile-contact" onclick="navigate('contacto')" id="nav-contacto">Presupuesto</span>
+      </nav>
+
+      <!-- CTA Nav Button -->
+      <div class="header__cta">
+        <button class="btn btn-primary motion-magnet" onclick="navigate('contacto')">Presupuesto <span class="btn-arrow-circle">↗</span></button>
+        <button class="menu-toggle" id="menu-toggle-btn" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE: HOME / INICIO
+       ========================================== -->
+  <div class="page active" id="page-home">
+    <section class="hero hero--centered motion-hero">
+      <div class="hero__media motion-hero-media">
+        <!-- 
+          Nota sobre el video de fondo:
+          YouTube impone ciertas limitaciones nativas. Aunque se usan parámetros para ocultar controles (controls=0, modestbranding=1, etc.), YouTube puede mostrar brevemente el título, avatar o el botón "Ver más tarde" al inicio. 
+          Para lograr un fondo visual 100% limpio y profesional (sin ningún elemento superpuesto), la mejor alternativa es usar un archivo de video propio (.mp4) alojado en el servidor junto con la etiqueta <video autoplay muted loop playsinline>.
+        -->
+        <iframe
+          class="hero__video-bg desktop-only-video"
+          src="https://www.youtube.com/embed/Sul7ocbsnHc?autoplay=1&mute=1&loop=1&playlist=Sul7ocbsnHc&controls=0&disablekb=1&fs=0&rel=0&playsinline=1&modestbranding=1&vq=hd1080"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          aria-hidden="true"
+        ></iframe>
+        <div class="hero__decor-bg"></div>
+      </div>
+      <div class="container hero__container motion-hero-content">
+        <div class="hero-centered-badge motion-hero-badge">
+          <div class="hero-centered-badge-dot"></div>
+          <span class="hero-centered-badge-text">40 años construyendo deporte en Uruguay</span>
+        </div>
+        <h1 class="hero__title hero-title motion-hero-title" aria-label="Tu proyecto deportivo, ejecutado con experiencia" data-hero-title-ready="true">
+          <span class="hero-title__line">
+            <span class="hero-title__word">Tu</span>
+            <span class="hero-title__word">proyecto</span>
+            <span class="hero-title__word">deportivo,</span>
+          </span>
+
+          <span class="hero-title__line hero-title__line--mixed">
+            <em class="hero-title__word hero-title__word--em">ejecutado</em>
+            <span class="hero-title__word">con</span>
+          </span>
+
+          <span class="hero-title__line">
+            <span class="hero-title__word">experiencia</span>
+          </span>
+        </h1>
+        <p class="hero__sub motion-hero-sub">Somos una empresa líder en construcción de superficies deportivas en Uruguay. Tennis, Padel, Futbol Pickleball, Golf Greens y mas, para Barrios, Clubes, Chacras y Particulares.</p>
+        <div class="hero__actions motion-hero-actions">
+          <button class="btn btn-accent motion-text-reveal motion-magnet" onclick="navigate('contacto')">Solicitá tu presupuesto <span class="btn-arrow-circle">↗</span></button>
+          <button class="btn btn-outline-white motion-text-reveal motion-magnet" onclick="navigate('portafolio')">Ver proyectos realizados <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        
+        <div class="hero-centered-tagline motion-hero-tagline">
+          <span>350+</span> proyectos deportivos ejecutados con éxito en Uruguay
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="container">
+        <div class="stats-bar__inner">
+          <div class="stat-item">
+            <div class="stat-num">40<span>+</span></div>
+            <div class="stat-label">Años de actividad</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">120<span>K</span></div>
+            <div class="stat-label">Metros cuadrados construidos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">19<span></span></div>
+            <div class="stat-label">Departamentos cubiertos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5<span></span></div>
+            <div class="stat-label">Marcas internacionales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview Section -->
+    <section class="section overview-section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container overview-section__container">
+        <div class="overview-layout">
+          <div class="overview-copy">
+            <span class="section-label motion-text-reveal">Lo que nos define</span>
+            <h2 class="section-title">Construimos el espacio <em>deportivo</em> de tus sueños</h2>
+            <p class="section-desc motion-text-reveal">Nos especializamos en materializar proyectos deportivos completos de alto nivel. 40 años asesorando e innovando con cada cliente en Uruguay.</p>
+            
+            <div class="overview-checklist">
+              <div class="overview-check-item"><span>✓</span> 40 años de trayectoria</div>
+              <div class="overview-check-item"><span>✓</span> Equipos y montajes propios</div>
+              <div class="overview-check-item"><span>✓</span> Respaldo de marcas líderes</div>
+            </div>
+            
+            <button class="btn btn-secondary motion-text-reveal motion-magnet" onclick="navigate('nosotros')">
+              Nuestra Historia <span class="btn-arrow-circle">↗</span>
+            </button>
+          </div>
+
+          <div class="overview-visual" aria-label="Tenista frente a una cancha deportiva construida por Deal Sports">
+            <img
+              class="overview-visual__image"
+              src="./assets/images/tenis-home.png"
+              alt="Tenista frente a una cancha polideportiva construida por Deal Sports"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee de Logos -->
+    <section class="logo-marquee-section" aria-label="Marcas y clientes de Deal Sports">
+      <!-- Fila 1 (Izquierda a Derecha) -->
+      <div class="logo-marquee logo-marquee--left">
+        <div class="logo-marquee__track">
+          <!-- Set 1 -->
+          <img src="./marquee/Artboard 1 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 1 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 1.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <!-- Duplicado para loop -->
+          <img src="./marquee/Artboard 1 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 1 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 1.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 3.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+        </div>
+      </div>
+
+      <!-- Fila 2 (Derecha a Izquierda, distinta velocidad o dirección) -->
+      <div class="logo-marquee logo-marquee--right">
+        <div class="logo-marquee__track">
+          <!-- Set 1 -->
+          <img src="./marquee/Artboard 4 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 4 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 4.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <!-- Duplicado para loop -->
+          <img src="./marquee/Artboard 4 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 4 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 4.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 5.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6 copy 2.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6 copy.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="./marquee/Artboard 6.png" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+        </div>
+      </div>
+    </section>
+
+    <!-- Surfaces (4-Column Grid Mapped to Waveyu Section 3) -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-center-right motion-decorative"></div>
+      <div class="container">
+        <div class="section-header-flex">
+          <div>
+            <span class="section-label motion-text-reveal">Superficies</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Canchas para cualquier <em>nivel de juego</em></h2>
+          </div>
+          <button class="btn btn-secondary motion-text-reveal motion-magnet" onclick="navigate('portafolio')">
+            Ver todas <span class="btn-arrow-circle">↗</span>
+          </button>
+        </div>
+        
+        <div class="skills-grid">
+          <!-- Card 1: Tenis -->
+          <div class="skill-card" onclick="navigate('tenis')">
+            <div class="skill-card-top">
+              <div class="skill-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7" fill="currentColor" fill-opacity="0.1"></circle><line x1="10" y1="3" x2="10" y2="17"></line><line x1="3" y1="10" x2="17" y2="10"></line><path d="M15 15L20 20"></path><circle cx="19" cy="5" r="2" fill="var(--brand-orange)" stroke="none"></circle></svg>
+              </div>
+              <span class="skill-badge">Durocolor/Lykold</span>
+            </div>
+            <div class="skill-card-bottom">
+              <h3 class="skill-title">Canchas de Tenis</h3>
+              <p class="skill-desc motion-text-reveal">Polvo de ladrillo, césped artificial, resinas acrílicas y superficies amortiguadas de primer nivel.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Padel -->
+          <div class="skill-card" onclick="navigate('padel')">
+            <div class="skill-card-top">
+              <div class="skill-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6" fill="currentColor" fill-opacity="0.15"></circle><path d="M13.2 13.2L18 18"></path><path d="M16.5 16.5L19.5 19.5"></path><circle cx="16" cy="6" r="2.5" fill="var(--brand-orange)" stroke="none"></circle></svg>
+              </div>
+              <span class="skill-badge">Padel Tech</span>
+            </div>
+            <div class="skill-card-bottom">
+              <h3 class="skill-title">Canchas de Padel</h3>
+              <p class="skill-desc motion-text-reveal">Representantes oficiales en Uruguay. Estructura, vidrio templado, pasto sintético y resinas de estándar internacional.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Fútbol -->
+          <div class="skill-card" onclick="navigate('futbol')">
+            <div class="skill-card-top">
+              <div class="skill-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M7.5 7.5l2.5 2.5M14 10l2.5-2.5M10 14l-2.5 2.5M16.5 16.5L14 14"></path></svg>
+              </div>
+              <span class="skill-badge">Real Turf</span>
+            </div>
+            <div class="skill-card-bottom">
+              <h3 class="skill-title">Fútbol Sintético</h3>
+              <p class="skill-desc motion-text-reveal">Césped artificial de alta performance para fútbol 5, 7 y 11, con máxima durabilidad y mínimo mantenimiento.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: Golf -->
+          <div class="skill-card" onclick="navigate('putting')">
+            <div class="skill-card-top">
+              <div class="skill-icon-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22H6"></path><path d="M12 22V2"></path><path d="M12 2l7 4-7 4"></path><circle cx="16" cy="18" r="1.5" fill="var(--brand-orange)" stroke="none"></circle></svg>
+              </div>
+              <span class="skill-badge">Premium Golf</span>
+            </div>
+            <div class="skill-card-bottom">
+              <h3 class="skill-title">Putting Green & Chip</h3>
+              <p class="skill-desc motion-text-reveal">Diseño residencial de alta fidelidad, con ondulaciones y rodamiento exacto para práctica profesional en casa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nosotros / About Us Accordion Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="villa-layout">
+          <!-- Left: Large Image Container -->
+          <div class="villa-visual">
+            <span class="villa-badge">40 Años de Trayectoria</span>
+            <img src="./assets/fotos_web/solanas.jpg" alt="Construcción Deal Sports">
+          </div>
+          <!-- Right: Accordion Details -->
+          <div>
+            <span class="section-label motion-text-reveal">Sobre Nosotros</span>
+            <h2 class="section-title">Nuestra forma de <em>construir</em></h2>
+            <p class="section-desc motion-text-reveal">Cuarenta años no se improvisan. Cada proyecto lleva el respaldo de una empresa que conoce cada variable técnica del deporte en Uruguay.</p>
+            
+            <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">Producción Propia</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Con más de 40 años en el mercado uruguayo, no tercerizamos nuestras obras. Contamos con equipos de instaladores especializados y equipamiento propio para garantizar la ejecución de principio a fin.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">Logística y Montaje</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Coordinamos la importación directa y el transporte de todos los componentes (estructuras, vidrios, césped, resinas) a cualquier punto del país, garantizando un montaje rápido y preciso bajo normas internacionales.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">Diseño a Medida</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Cada espacio es único. Analizamos la planimetría del terreno, la orientación solar y el nivel freático para diseñar la solución de drenaje, base y superficie ideal para tu proyecto, ya sea residencial o comercial.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">Trayectoria y Respaldo</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Representamos de forma exclusiva y directa a marcas líderes globales como Padel Tech (España), Fortune Padel (China), Real Turf y Laykold (USA). Esto asegura repuestos originales y garantías reales post-venta.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services (3-Card Horizontal Stack) Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--orange glow-center-left motion-decorative"></div>
+      <div class="container">
+        <div class="stack-layout">
+          <!-- Left Column: Bold header and description -->
+          <div>
+            <span class="section-label motion-text-reveal">Servicios Complementarios</span>
+            <h2 class="section-title">Soluciones integrales para tu <em>cancha</em></h2>
+            <p class="section-desc motion-text-reveal">No solo construimos la superficie. Nos encargamos de todo el equipamiento perimetral, iluminación de alta eficiencia y accesorios para que tu complejo quede listo para jugar desde el primer día.</p>
+            <button class="btn btn-primary motion-magnet" onclick="navigate('servicios')">
+              Ver todos los servicios <span class="btn-arrow-circle">↗</span>
+            </button>
+          </div>
+
+          <!-- Right Column: Stack of 3 horizontal rounded cards -->
+          <div class="stack-list">
+            <!-- Card 1: Cerramientos -->
+            <div class="stack-card" onclick="navigate('servicios')">
+              <div class="stack-card-content">
+                <span class="stack-card-label">Protección Perimetral</span>
+                <h3 class="stack-card-title">Cerramientos Estructurales</h3>
+                <p class="stack-card-desc motion-text-reveal">Mallas metálicas y vidrios templados certificados de alta resistencia para la contención ideal de juego.</p>
+              </div>
+              <div class="stack-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+              </div>
+            </div>
+
+            <!-- Card 2: Iluminación -->
+            <div class="stack-card" onclick="navigate('servicios')">
+              <div class="stack-card-content">
+                <span class="stack-card-label">Eficiencia Energética</span>
+                <h3 class="stack-card-title">Iluminación LED Profesional</h3>
+                <p class="stack-card-desc motion-text-reveal">Proyectores de última generación con cálculo lumínico para una visibilidad perfecta sin sombras.</p>
+              </div>
+              <div class="stack-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
+              </div>
+            </div>
+
+            <!-- Card 3: Accesorios -->
+            <div class="stack-card" onclick="navigate('servicios')">
+              <div class="stack-card-content">
+                <span class="stack-card-label">Equipamiento Oficial</span>
+                <h3 class="stack-card-title">Accesorios Deportivos</h3>
+                <p class="stack-card-desc motion-text-reveal">Redes reglamentarias, postes, protectores de red y equipamiento complementario homologado.</p>
+              </div>
+              <div class="stack-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects (Dark Photography Grid) Section -->
+    <section class="section section--dark">
+      <div class="container">
+        <span class="section-label motion-text-reveal">Galería de Obras</span>
+        <h2 class="section-title">Proyectos <em>Destacados</em></h2>
+        <p class="section-desc motion-text-reveal">Conocé algunas de nuestras instalaciones más representativas construidas a lo largo de todo Uruguay.</p>
+        
+        <div class="dark-grid">
+          <div class="portfolio-card" onclick="navigate('portafolio')">
+            <div class="portfolio-card__bg" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), url('./assets/fotos_web/18---solanas-tenis-complejo.jpg') center/cover no-repeat;"></div>
+            <div class="portfolio-card__tags">
+              <span class="portfolio-card__tag">Tenis</span>
+              <span class="portfolio-card__tag">Punta del Este</span>
+            </div>
+            <div class="portfolio-card__content">
+              <h3 class="portfolio-card__title">Solanas</h3>
+              <p class="portfolio-card__desc">Complejo de Tenis Premium — Superficie de alta competición.</p>
+              <div class="portfolio-card__btn">
+                <span>Ver Proyecto</span>
+                <span class="portfolio-card__btn-arrow">↗</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-card" onclick="navigate('portafolio')">
+            <div class="portfolio-card__bg" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), url('./assets/fotos_web/16--reserva-montoya-golf-- urbanizacion.jpg') center/cover no-repeat;"></div>
+            <div class="portfolio-card__tags">
+              <span class="portfolio-card__tag">Golf</span>
+              <span class="portfolio-card__tag">Punta del Este</span>
+            </div>
+            <div class="portfolio-card__content">
+              <h3 class="portfolio-card__title">Reserva Montoya</h3>
+              <p class="portfolio-card__desc">Urbanización — Putting greens de primer nivel.</p>
+              <div class="portfolio-card__btn">
+                <span>Ver Proyecto</span>
+                <span class="portfolio-card__btn-arrow">↗</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-card" onclick="navigate('portafolio')">
+            <div class="portfolio-card__bg" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%), url('./assets/fotos_web/5--surfside-edificio.jpeg') center/cover no-repeat;"></div>
+            <div class="portfolio-card__tags">
+              <span class="portfolio-card__tag">Pádel</span>
+              <span class="portfolio-card__tag">Punta del Este</span>
+            </div>
+            <div class="portfolio-card__content">
+              <h3 class="portfolio-card__title">Surfside</h3>
+              <p class="portfolio-card__desc">Edificio de Lujo — Canchas panorámicas reforzadas.</p>
+              <div class="portfolio-card__btn">
+                <span>Ver Proyecto</span>
+                <span class="portfolio-card__btn-arrow">↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Grid -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <span class="section-label motion-text-reveal">Nuestras marcas aliadas</span>
+        <h2 class="section-title"><span class="section-title__accent">Los mejores</span> <em>fabricantes del mundo</em></h2>
+        <p class="section-desc motion-text-reveal">Los proveedores que elegimos son líderes en su categoría a nivel internacional. Eso se nota en cada metro cuadrado construido.</p>
+        
+        <div class="partners-container motion-text-reveal">
+          <div class="partners-grid">
+            <div class="partner-logo-box">
+              <img src="./assets/SVG/Real Turf.svg" alt="Real Turf Logo" style="height: 44px;">
+              <div class="partner-logo-name">Real Turf</div>
+              <div class="partner-logo-desc">Pasto Sintético</div>
+            </div>
+            <div class="partner-logo-box">
+              <img src="./assets/SVG/DUROCOLOR.svg" alt="Durocolor Logo" style="height: 40px;">
+              <div class="partner-logo-name">Durocolor</div>
+              <div class="partner-logo-desc">Brasil</div>
+            </div>
+            <div class="partner-logo-box">
+              <img src="./assets/SVG/LAYKOLD.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
+              <div class="partner-logo-name">Laykold</div>
+              <div class="partner-logo-desc">USA</div>
+            </div>
+            <div class="partner-logo-box">
+              <img src="./assets/SVG/PADEL TECH.svg" alt="Padel Tech Logo" style="height: 42px;">
+              <div class="partner-logo-name">Padel Tech</div>
+              <div class="partner-logo-desc">España</div>
+            </div>
+            <div class="partner-logo-box">
+              <img src="./assets/SVG/FORTUNE PADEL.svg" alt="Fortune Padel Logo" style="height: 42px;">
+              <div class="partner-logo-name">Fortune Padel</div>
+              <div class="partner-logo-desc">China</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="page" id="page-nosotros">
+    <!-- Nosotros Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Quiénes somos</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">40 años<br>construyendo<br><em>deporte</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Una empresa uruguaya que convirtió la pasión por el deporte en cuatro décadas de obras, clientes satisfechos y más de 120.000 m² construidos.</p>
+        </div>
+        <div class="page-hero__visual motion-page-hero-visual">
+          <img src="./assets/fotos_web/grass.jpg" alt="Nosotros Deal Sports">
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Intro & Metrics Section -->
+    <section class="ns-section">
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left motion-image-left">
+            <h2 class="ns-intro__title">De la primera cancha a los <em>120.000 m²</em></h2>
+            <div class="ns-intro-visual">
+              <img src="./assets/fotos_web/moraleja-5.png" alt="Obra de Deal Sports en Uruguay">
+            </div>
+          </div>
+          <div class="ns-intro__right motion-image-left">
+            <div class="ns-quote-card">
+              <div class="ns-quote-icon">“</div>
+              <p class="ns-quote-text motion-text-reveal">Cada proyecto que entregamos lleva el respaldo de una empresa que conoce cada tipo de suelo, cada variable climática y cada exigencia técnica del deporte en Uruguay.</p>
+            </div>
+            <div class="ns-intro-visual">
+              <img src="./assets/fotos_web/DJI_0693.JPG" alt="Instalaciones deportivas Deal Sports">
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics Grid acting as a bridge -->
+        <div class="ns-metrics-grid">
+          <div class="ns-metric-item">
+            <div class="ns-metric-val">40</div>
+            <div class="ns-metric-label">Años de actividad</div>
+          </div>
+          <div class="ns-metric-item">
+            <div class="ns-metric-val">120K</div>
+            <div class="ns-metric-label">M² construidos</div>
+          </div>
+          <div class="ns-metric-item">
+            <div class="ns-metric-val">19</div>
+            <div class="ns-metric-label">Departamentos</div>
+          </div>
+          <div class="ns-metric-item">
+            <div class="ns-metric-val">5</div>
+            <div class="ns-metric-label">Marcas globales</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Timeline Cards Section -->
+    <section class="ns-section ns-">
+      <div class="container">
+        <div class="ns-section-header">
+          <h2 class="ns-section-title">Nuestra historia</h2>
+        </div>
+        <div class="ns-timeline-grid">
+          <!-- Item 1 -->
+          <div class="ns-timeline-card">
+            <div class="ns-timeline-card__header">
+              <span class="ns-timeline-card__badge">1984</span>
+              <span class="ns-timeline-card__step">01</span>
+            </div>
+            <h3 class="ns-timeline-card__title">El punto de partida</h3>
+            <p class="ns-timeline-card__text motion-text-reveal">Deal Sports nació con una convicción simple: que los tenistas uruguayos merecían acceder a instalaciones deportivas de primer nivel, construidas con los mismos estándares que las canchas profesionales del mundo.</p>
+          </div>
+          <!-- Item 2 -->
+          <div class="ns-timeline-card">
+            <div class="ns-timeline-card__header">
+              <span class="ns-timeline-card__badge">Años 90</span>
+              <span class="ns-timeline-card__step">02</span>
+            </div>
+            <h3 class="ns-timeline-card__title">Crecimiento al interior</h3>
+            <p class="ns-timeline-card__text motion-text-reveal">La empresa crece desde Maldonado hacia el interior del país y amplía su cartera de servicios y clientes. Se incorporan nuevas superficies y se establecen los primeros vínculos con proveedores internacionales.</p>
+          </div>
+          <!-- Item 3 -->
+          <div class="ns-timeline-card">
+            <div class="ns-timeline-card__header">
+              <span class="ns-timeline-card__badge">2000s</span>
+              <span class="ns-timeline-card__step">03</span>
+            </div>
+            <h3 class="ns-timeline-card__title">Marcas mundiales</h3>
+            <p class="ns-timeline-card__text motion-text-reveal">Deal Sports establece acuerdos de representación exclusiva con fabricantes líderes: Padel Tech (España), Durocolor (Brasil), Laykold (USA), Real turf (España), Fortune Sports (China). La calidad internacional llega a Uruguay en todo su espectro deportivo.</p>
+          </div>
+          <!-- Item 4 -->
+          <div class="ns-timeline-card">
+            <div class="ns-timeline-card__header">
+              <span class="ns-timeline-card__badge">2015-hoy</span>
+              <span class="ns-timeline-card__step">04</span>
+            </div>
+            <h3 class="ns-timeline-card__title">Líderes de mercado</h3>
+            <p class="ns-timeline-card__text motion-text-reveal">Deal Sports se posiciona como el referente en construcción de complejos multideporte y asesoramiento de grandes emprendimientos urbanísticos. Superando los 120.000 m2 construidos en todo el país en los últimos 5 años.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="ns-section">
+      <div class="container">
+        <div class="ns-section-header">
+          <h2 class="ns-section-title">Lo que <em>guía nuestras obras</em></h2>
+        </div>
+        <div class="ns-values-grid">
+          <!-- Valor 01 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 01</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Calidad</h3>
+            <p class="ns-value-card__desc">No negociamos la calidad. Cada material está seleccionado por su performance y durabilidad.</p>
+          </div>
+          <!-- Valor 02 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 02</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Compromiso</h3>
+            <p class="ns-value-card__desc">Cumplimos los plazos y los presupuestos acordados. Tu proyecto es nuestra responsabilidad.</p>
+          </div>
+          <!-- Valor 03 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 03</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Experiencia técnica</h3>
+            <p class="ns-value-card__desc">Conocemos cada tipo de superficie, cada variable climática y cada exigencia del deporte en Uruguay.</p>
+          </div>
+          <!-- Valor 04 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 04</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Asesoramiento</h3>
+            <p class="ns-value-card__desc">Acompañamos al cliente desde la idea inicial hasta la cancha terminada y más allá.</p>
+          </div>
+          <!-- Valor 05 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 05</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Confianza</h3>
+            <p class="ns-value-card__desc">40 años de clientes que vuelven y nos recomiendan son la mejor carta de presentación.</p>
+          </div>
+          <!-- Valor 06 -->
+          <div class="ns-value-card motion-card-reveal">
+            <div class="ns-value-card__header">
+              <span class="ns-value-card__badge">Valor 06</span>
+              <div class="ns-value-card__icon motion-icon-response motion-icon-response">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="ns-value-card__title">Cobertura total</h3>
+            <p class="ns-value-card__desc">De Montevideo al interior, atendemos proyectos en todos los departamentos del Uruguay.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="page" id="page-padel">
+    <section class="page-hero">
+      <div class="page-hero__decor glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Canchas de <em>Padel</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Representantes oficiales de Padel Tech (España) y Fortune Padel (China) en Uruguay. La mejor tecnología global, instalada por los mejores profesionales.</p>
+          <div class="motion-page-hero-sub" style="margin-top: -8px;">
+            <p style="font-size:16px;color:var(--text-body);line-height:1.75;margin-bottom:24px">El padel es hoy el deporte de mayor crecimiento en Uruguay. Somos representantes exclusivos de dos de los fabricantes más reconocidos del mundo — lo que significa acceso a la mejor tecnología, a precios competitivos, con servicio local.</p>
+            <button class="btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+          </div>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/padel.jpeg" alt="Canchas de Padel">
+      </div>
+    </section>
+
+    <!-- Brands Details -->
+    <section class="section">
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <span class="section-label  motion-text-reveal">Nuestros fabricantes</span>
+        <h2 class="section-title">Las marcas que <em>representamos</em></h2>
+        
+        <div class="grid-2" style="margin-top: 40px;">
+          <div class="option-box  motion-card-reveal" data-delay="1">
+            <h3 class="card__title" style="color: var(--brand-teal)">Padel Tech</h3>
+            <p style="font-size: 13px; font-weight: 600; color: var(--brand-orange); text-transform: uppercase; margin-bottom: 16px;">Madrid, España</p>
+            <p class="option-desc motion-text-reveal">Más de 3.000 canchas instaladas en más de 40 países. Fabricación en acero galvanizado de alta resistencia, vidrio templado certificado FIP y FEP. La cancha que usan los mejores jugadores del mundo.</p>
+          </div>
+          <div class="option-box  motion-card-reveal" data-delay="2">
+            <h3 class="card__title" style="color: var(--brand-teal)">Fortune Padel</h3>
+            <p style="font-size: 13px; font-weight: 600; color: var(--brand-orange); text-transform: uppercase; margin-bottom: 16px;">China</p>
+            <p class="option-desc motion-text-reveal">Ingeniería de precisión con precios competitivos. La opción ideal para proyectos con múltiples canchas, fraccionamientos residenciales o complejos que quieren escalar su oferta sin sacrificar calidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Court Models -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label  motion-text-reveal">Modelos disponibles</span>
+        <h2 class="section-title">Tipos de <em>cancha</em></h2>
+        
+        <div class="grid-4" style="margin-top: 40px;">
+          <div class="option-box  motion-card-reveal" data-delay="1">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Cancha Clásica</h3></div>
+            <p class="option-desc motion-text-reveal">Estructura con pilares centrales, paneles de malla anti-lesiones. Ideal para uso recreativo. Disponible para exterior e interior.</p>
+          </div>
+          <div class="option-box  motion-card-reveal" data-delay="2">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Cancha Panorámica</h3></div>
+            <p class="option-desc motion-text-reveal">Sin pilares centrales, vidrio templado en toda la periferia. Mayor visibilidad. El más elegido para hoteles y complejos premium.</p>
+          </div>
+          <div class="option-box  motion-card-reveal" data-delay="3">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Cancha Cubierta</h3></div>
+            <p class="option-desc motion-text-reveal">Estructura techada para uso indoor o zonas con lluvia frecuente. Permite jugar durante todo el año sin depender del clima.</p>
+          </div>
+          <div class="option-box  motion-card-reveal" data-delay="4">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Cancha de Competición</h3></div>
+            <p class="option-desc motion-text-reveal">Dimensiones reglamentarias FIP/FEP. Iluminación certificada, vidrio homologado, pasto certificado. Para clubes y torneos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: CANCHAS DE TENIS
+       ========================================== -->
+  <div class="page" id="page-tenis">
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Canchas de <em>Tenis</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Todas las superficies, para todos los jugadores. 40 años construyendo canchas de tenis en Uruguay con los mejores estándares.</p>
+            <p class="page-hero__sub motion-page-hero-sub" style="font-size:16px;color:var(--text-body);line-height:1.75;margin-bottom:24px">El tenis fue el punto de partida de Deal Sports hace cuatro décadas. Ofrecemos todas las superficies reglamentarias con materiales de primer nivel y garantía de obra.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/tenis_guy-2.jpeg" alt="Cancha de Tenis">
+      </div>
+    </section>
+
+    <!-- Surfaces Detail -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label  motion-text-reveal">Superficies disponibles</span>
+        <h2 class="section-title">¿Qué tipo de <em>cancha querés?</em></h2>
+        
+        <div class="grid-3" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+          <div class="option-box motion-card-reveal" data-delay="1">
+            <img src="./assets/fotos_web/resina-asfaltica.jpg" alt="Carpeta Asfáltica" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Carpeta Asfáltica y Resinas Acrílicas</h3></div>
+            <p class="option-desc motion-text-reveal">Estos sistemas son de acrílico de alto rendimiento, con 3 o 4 capas, y ofrecen una superficie antideslizante, resistente y duradera. Las pistas duras tradicionales de Deal Sports cuentan con capas superiores de calidad US Open que brindan un rendimiento de Grand Slam, utilizando resinas de primer nivel. Requieren el menor mantenimiento. (tenis, multideportiva)</p>
+          </div>
+          <div class="option-box motion-card-reveal" data-delay="2">
+            <img src="./assets/fotos_web/pasto-sintetico.jpg" alt="Pasto Sintético" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Pasto Sintético</h3></div>
+            <p class="option-desc motion-text-reveal">Fibra artificial de última generación (Real Turf). Durabilidad superior, muy bajo mantenimiento. Comportamiento similar al pasto natural. Deal Sports Tenis Rust ofrece una calidad de Juego y entrenamiento para un nivel confortable y seguro. Requieren un mantenimiento medio. (tenis, futbol, Hockey, golf, padel)</p>
+          </div>
+          <div class="option-box motion-card-reveal" data-delay="3">
+            <img src="./assets/fotos_web/Polvo-de-ladrillo.jpg" alt="Polvo de Ladrillo" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Polvo de Ladrillo</h3></div>
+            <p class="option-desc motion-text-reveal">Las canchas de polvo de ladrillo (también conocidas como arcilla o tierra batida) son la superficie más popular y tradicional en Sudamérica para jugar al tenis. Ofrecen un juego más lento, permiten el deslizamiento controlado y reducen el impacto en las articulaciones en comparación con el cemento. Mantenimiento intensivo. (tenis)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marcas Aliadas Tenis -->
+    <section class="section section--tinted">
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 40px;">
+          <div style="flex: 1; min-width: 300px;">
+            <span class="section-label motion-text-reveal">Nuestras marcas aliadas</span>
+            <h2 class="section-title"><span class="section-title__accent">Los mejores</span> <em>fabricantes del mundo</em></h2>
+            <p class="section-desc motion-text-reveal" style="text-align: left; margin-bottom: 0;">Los proveedores que elegimos son líderes en su categoría a nivel internacional. Eso se nota en cada metro cuadrado construido.</p>
+          </div>
+          
+          <div class="partners-grid" style="display: flex; gap: 20px; flex-wrap: wrap; flex: 2; min-width: 300px; justify-content: flex-start;">
+            <div class="partner-logo-box" style="flex: 1; min-width: 200px; max-width: 280px;">
+              <img src="./assets/SVG/DUROCOLOR.svg" alt="Durocolor Logo" style="height: 40px;">
+              <div class="partner-logo-name">Durocolor</div>
+              <div class="partner-logo-desc">Brasil</div>
+            </div>
+            <div class="partner-logo-box" style="flex: 1; min-width: 200px; max-width: 280px;">
+              <img src="./assets/SVG/LAYKOLD.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
+              <div class="partner-logo-name">Laykold</div>
+              <div class="partner-logo-desc">USA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: FÚTBOL SINTÉTICO
+       ========================================== -->
+  <div class="page" id="page-futbol">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Fútbol <em>Sintético</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Césped artificial de alta performance. Poco mantenimiento, mucho juego, todo el año.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Pedir presupuesto <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/futbol.jpg" alt="Cancha de Fútbol">
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left  motion-image-left">
+            <h2 class="ns-intro__title">La evolución del <em>fútbol amateur</em></h2>
+            <p style="font-size:19px;color:var(--text-title);line-height:1.75;margin-top:20px;">
+              El césped sintético transformó la forma en que se practica el fútbol en Uruguay. Hoy la enorme mayoría de las canchas en edificios, fraccionamientos y clubes son de pasto sintético — y con razón.
+            </p>
+          </div>
+          <div class="ns-intro__right  motion-image-left" data-delay="1">
+            <div class="ns-quote-card" style="margin-top:0">
+              <div class="ns-quote-icon">“</div>
+              <p class="ns-quote-text motion-text-reveal" style="font-size:16px;">
+                Deal Sports trabaja con Real Turf, uno de los proveedores más reconocidos del mercado, para garantizar superficies que cumplen con los estándares internacionales más exigentes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: PUTTING GREEN
+       ========================================== -->
+  <div class="page" id="page-putting">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Putting Green <em>& Chip</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Llevá el golf a tu casa, hotel o fraccionamiento. Diseño personalizado con pasto sintético de alta fidelidad.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Consultar <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/golf.jpeg" alt="Putting Green">
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left  motion-image-left">
+            <h2 class="ns-intro__title">El juego corto, <em>en casa</em></h2>
+            <p style="font-size:19px;color:var(--text-title);line-height:1.75;margin-top:20px;">
+              Un putting green de calidad no es exclusivo de los grandes clubes. Con el pasto sintético adecuado y un diseño inteligente, es posible recrear la experiencia del green con una fidelidad sorprendente.
+            </p>
+          </div>
+          <div class="ns-intro__right  motion-image-left" data-delay="1">
+            <div class="ns-quote-card" style="margin-top:0">
+              <div class="ns-quote-icon">“</div>
+              <p class="ns-quote-text motion-text-reveal" style="font-size:16px;">
+                Deal Sports diseña y construye putting greens y zonas de chip a medida, adaptando ondulaciones, contornos y velocidad de rodaje a cada espacio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: BASKETBALL & PICKLEBALL
+       ========================================== -->
+  <div class="page" id="page-basket">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Canchas <em>Polideportivas</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Un espacio para múltiples deportes. La solución más eficiente para edificios, colegios, clubs and complejos.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/basket.jpeg" alt="Cancha de Basket">
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left  motion-image-left">
+            <h2 class="ns-intro__title">Múltiples deportes, <em>un solo espacio</em></h2>
+            <p style="font-size:19px;color:var(--text-title);line-height:1.75;margin-top:20px;">
+              Las canchas polideportivas son la solución ideal donde el espacio es limitado pero las ganas de practicar son muchas. En una misma superficie podés jugar basketball, pickleball, volleyball, handball y fútbol de salón.
+            </p>
+          </div>
+          <div class="ns-intro__right  motion-image-left" data-delay="1">
+            <div class="option-box motion-card-reveal" style="margin-top:0; border-left: 4px solid var(--brand-teal) !important;">
+              <h3 class="option-name" style="color: var(--brand-teal); font-size: 18px; margin-bottom: 12px;">Pickleball — El deporte del momento</h3>
+              <p class="option-desc motion-text-reveal" style="font-size: 14.5px; line-height: 1.65;">
+                El pickleball es el deporte de mayor crecimiento en el mundo. Se juega en una cancha de 13,41 × 6,10 m — en el espacio de una cancha de tenis entran dos o tres de pickleball. Ideal para edificios, hoteles y fraccionamientos que quieren sumar una actividad para todas las edades.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: SKATE
+       ========================================== -->
+  <div class="page" id="page-skate">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Pistas de <em>Skate</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Diseño y construcción de pistas de skate en hormigón pulido y rampas de alta performance para parques públicos y residencias.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/skate.jpeg" alt="Skatepark">
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left  motion-image-left">
+            <h2 class="ns-intro__title">Hormigón pulido y <em>diseño seguro</em></h2>
+            <p style="font-size:19px;color:var(--text-title);line-height:1.75;margin-top:20px;">
+              El skate es hoy un deporte olímpico con una enorme comunidad en Uruguay.
+            </p>
+          </div>
+          <div class="ns-intro__right  motion-image-left" data-delay="1">
+            <div class="ns-quote-card" style="margin-top:0">
+              <div class="ns-quote-icon">“</div>
+              <p class="ns-quote-text motion-text-reveal" style="font-size:16px;">
+                Diseñamos pistas urbanas y residenciales utilizando transiciones suaves y hormigón de alta resistencia pulido a mano para garantizar la seguridad y durabilidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: HOCKEY
+       ========================================== -->
+  <div class="page" id="page-hockey">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Superficies deportivas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Canchas de <em>Hockey</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Superficies de césped sintético con o sin arena para la práctica profesional y recreativa de hockey sobre césped.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <img class="surface-hero-image motion-page-hero-visual" src="./assets/images/hockey.jpg" alt="Cancha de Hockey">
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section">
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="ns-intro-grid">
+          <div class="ns-intro__left  motion-image-left">
+            <h2 class="ns-intro__title">Césped especializado de <em>alto rendimiento</em></h2>
+            <p style="font-size:19px;color:var(--text-title);line-height:1.75;margin-top:20px;">
+              Construimos canchas de hockey reglamentarias con césped sintético especializado de última tecnología (Real Turf).
+            </p>
+          </div>
+          <div class="ns-intro__right  motion-image-left" data-delay="1">
+            <div class="ns-quote-card" style="margin-top:0">
+              <div class="ns-quote-icon">“</div>
+              <p class="ns-quote-text motion-text-reveal" style="font-size:16px;">
+                Garantiza el rodamiento rápido y preciso de la bocha y reduce el riesgo de lesiones por fricción.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ==========================================
+       PAGE: SERVICIOS
+       ========================================== -->
+  <div class="page" id="page-servicios">
+    <section class="page-hero">
+      <div class="page-hero__decor glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Servicios complementarios</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Más allá de <em>la cancha</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Cerramientos, iluminación LED y asesoramiento de obra. Un solo proveedor para tu proyecto deportivo integral.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitar asesoramiento <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <div class="page-hero__visual motion-page-hero-visual">
+          <img src="./assets/fotos_web/magnific_recreate_cDJ8YJP0eP.jpeg" alt="Construcción deportiva">
+        </div>
+      </div>
+    </section>
+
+    <!-- Services list cards -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="grid-4 services-grid">
+          <div class="option-box  motion-card-reveal" data-delay="1">
+            <figure class="service-card__media">
+              <img src="./assets/fotos_web/A052E286-68F3-416C-849D-7354113F3216.jpg" alt="Cerramientos para canchas deportivas">
+            </figure>
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Cerramientos</h3></div>
+            <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Malla metálica, vidrio templado o policarbonato. Para canchas individuales y cerramientos perimetrales de complejos completos.</p>
+            <ul style="font-size:14px;color:var(--text-body);display:flex;flex-direction:column;gap:10px;list-style:disc;padding-left:20px">
+              <li>Malla metálica — económica y duradera</li>
+              <li>Vidrio templado — premium, máxima visibilidad</li>
+              <li>Policarbonato — resistente y liviano</li>
+              <li>Cerramientos perimetrales de complejos</li>
+            </ul>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="2">
+            <figure class="service-card__media">
+              <img src="./assets/fotos_web/542F906D-481A-4409-AEFE-C7B8C6A3E004.jpg" alt="Iluminación LED para canchas deportivas">
+            </figure>
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Iluminación LED</h3></div>
+            <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Diseño lumínico, instalación y puesta en marcha. Reducción de hasta 70% en consumo energético respecto a la iluminación halógena.</p>
+            <ul style="font-size:14px;color:var(--text-body);display:flex;flex-direction:column;gap:10px;list-style:disc;padding-left:20px">
+              <li>Cálculo de uniformidad lumínica por deporte</li>
+              <li>Focos LED de alta eficiencia y larga vida</li>
+              <li>Instalación eléctrica completa bajo normas</li>
+              <li>+50.000 horas de vida útil estimada</li>
+            </ul>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="3">
+            <figure class="service-card__media">
+              <img src="./assets/fotos_web/DJI_0709.JPG" alt="Asesoramiento de obra deportiva">
+            </figure>
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Asesoramiento de obra</h3></div>
+            <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Desde la idea hasta la cancha terminada. Evaluación del terreno, planificación del espacio y selección de materiales según tu proyecto.</p>
+            <ul style="font-size:14px;color:var(--text-body);display:flex;flex-direction:column;gap:10px;list-style:disc;padding-left:20px">
+              <li>Evaluación técnica del terreno</li>
+              <li>Diseño de distribución de canchas</li>
+              <li>Selección de materiales y proveedores</li>
+              <li>Gestión de importación y logística</li>
+            </ul>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="4">
+            <figure class="service-card__media">
+              <img src="./assets/fotos_web/IMG_0432.jpeg" alt="Mantenimiento de superficies deportivas">
+            </figure>
+            <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Mantenimiento</h3></div>
+            <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Servicio post-venta para extender la vida útil de tu inversión. Reparación de superficies, renovación de líneas y revisión de estructuras.</p>
+            <ul style="font-size:14px;color:var(--text-body);display:flex;flex-direction:column;gap:10px;list-style:disc;padding-left:20px">
+              <li>Inspección y diagnóstico periódico</li>
+              <li>Reparación de superficies deterioradas</li>
+              <li>Renovación de pintura y líneas</li>
+              <li>Revisión de estructuras y cerramientos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: PROVEEDORES
+       ========================================== -->
+  <div class="page" id="page-proveedores">
+    <section class="page-hero">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container">
+        <div class="page-hero__content">
+          <div class="page-hero__badge motion-page-hero-badge">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Marcas aliadas</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title">Proveedores de <em>clase mundial</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub">Los mejores fabricantes del mundo, disponibles en Uruguay a través de Deal Sports.</p>
+            <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Consultar representaciones <span class="btn-arrow-circle">↗</span></button>
+        </div>
+        <div class="page-hero__visual motion-page-hero-visual">
+          <img src="./assets/images/fifa1.jpg" alt="Calidad certificada">
+        </div>
+      </div>
+    </section>
+
+    <!-- Providers Grid Details -->
+    <section class="section  motion-bg-shift">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="grid-5">
+          <div class="option-box  motion-card-reveal" data-delay="1" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 16px;">
+                <img src="./assets/SVG/PADEL TECH.svg" alt="Padel Tech Logo" style="height: 36px; width: auto; object-fit: contain;">
+              </div>
+              <h3 class="card__title" style="margin-bottom: 4px;">Padel Tech</h3>
+              <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Madrid, España</p>
+              <p class="option-desc motion-text-reveal">Más de 3.000 canchas instaladas en 40+ países. Fabricación en acero galvanizado, vidrio templado certificado FIP y FEP. La referencia mundial en canchas de padel.</p>
+            </div>
+            <div style="margin-top: 20px;"><span class="btn-primary" style="padding: 6px 16px; border-radius: 100px; font-size: 11px; text-transform: uppercase; font-family: var(--font-display); cursor: default;">Representante</span></div>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="2" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 16px;">
+                <img src="./assets/SVG/FORTUNE PADEL.svg" alt="Fortune Padel Logo" style="height: 36px; width: auto; object-fit: contain;">
+              </div>
+              <h3 class="card__title" style="margin-bottom: 4px;">Fortune Padel</h3>
+              <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">China</p>
+              <p class="option-desc motion-text-reveal">Fabricante de alto volumen con excelente relación calidad-precio. Canchas panorámicas y clásicas para proyectos de escala media y alta.</p>
+            </div>
+            <div style="margin-top: 20px;"><span class="btn-primary" style="padding: 6px 16px; border-radius: 100px; font-size: 11px; text-transform: uppercase; font-family: var(--font-display); cursor: default;">Representante</span></div>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="3" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 16px;">
+                <img src="./assets/SVG/Real Turf.svg" alt="Real Turf Logo" style="height: 36px; width: auto; object-fit: contain;">
+              </div>
+              <h3 class="card__title" style="margin-bottom: 4px;">Real Turf</h3>
+              <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Pasto sintético</p>
+              <p class="option-desc motion-text-reveal">Césped artificial de alta performance específico para padel, tenis y fútbol. Certificado para uso deportivo intensivo con estándares internacionales.</p>
+            </div>
+            <div style="margin-top: 20px;"><span class="btn-primary" style="padding: 6px 16px; border-radius: 100px; font-size: 11px; text-transform: uppercase; font-family: var(--font-display); cursor: default;">Proveedor Oficial</span></div>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="4" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 16px;">
+                <img src="./assets/SVG/DUROCOLOR.svg" alt="Durocolor Logo" style="height: 36px; width: auto; object-fit: contain;">
+              </div>
+              <h3 class="card__title" style="margin-bottom: 4px;">Durocolor</h3>
+              <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Brasil</p>
+              <p class="option-desc motion-text-reveal">Referente en resinas acrílicas para deporte en Sudamérica. Excelente durabilidad, amplia gama de colores y fácil aplicación.</p>
+            </div>
+            <div style="margin-top: 20px;"><span class="btn-primary" style="padding: 6px 16px; border-radius: 100px; font-size: 11px; text-transform: uppercase; font-family: var(--font-display); cursor: default;">Proveedor</span></div>
+          </div>
+
+          <div class="option-box  motion-card-reveal" data-delay="5" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 16px;">
+                <img src="./assets/SVG/LAYKOLD.svg" alt="Laykold Logo" style="height: 25px; width: auto; object-fit: contain;">
+              </div>
+              <h3 class="card__title" style="margin-bottom: 4px;">Laykold</h3>
+              <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Estados Unidos</p>
+              <p class="option-desc motion-text-reveal">Sinónimo de excelencia en superficies de tenis. Sus productos revisten las canchas más icónicas del circuito profesional mundial.</p>
+            </div>
+            <div style="margin-top: 20px;"><span class="btn-primary" style="padding: 6px 16px; border-radius: 100px; font-size: 11px; text-transform: uppercase; font-family: var(--font-display); cursor: default;">Representante</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: PORTAFOLIO
+       ========================================== -->
+  <div class="page" id="page-portafolio">
+    <section class="page-hero" style="display: flex !important; align-items: center !important; justify-content: center !important; text-align: center !important;">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; width: 100% !important;">
+        <div class="page-hero__content" style="align-items: center !important; text-align: center !important; margin: 0 auto !important; max-width: 900px !important;">
+          <div class="page-hero__badge motion-page-hero-badge" style="margin: 0 auto !important;">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Nuestros proyectos</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title" style="text-align: center !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important;">+120.000 m² de<br class="desktop-only"> <em>obras realizadas</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub" style="text-align: center !important; max-width: 620px !important; margin-left: auto !important; margin-right: auto !important;">Cada cancha tiene una historia. Descubrí algunos de nuestros<br class="desktop-only"> proyectos en Uruguay.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio items and categories filter -->
+    <section class="section">
+      <div class="container">
+        <div class="project-filters" style="margin-bottom: 40px;">
+          <!-- FILTROS POR DEPORTE -->
+          <div class="project-filters-row project-filters-row--sports">
+            <button class="filter-btn filter-sport active" data-filter="all">Todos <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="padel">Padel <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="tenis">Tenis <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="futbol">Fútbol <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="golf">Putting Green <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="basket">Basket & Pickleball <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="skate">Skate <span class="filter-count"></span></button>
+            <button class="filter-btn filter-sport" data-filter="hockey">Hockey <span class="filter-count"></span></button>
+          </div>
+
+          <!-- FILTROS POR TIPO DE OBRA -->
+          <div class="project-filters-row project-filters-row--types">
+            <button class="filter-btn filter-type active" data-filter="all">Todas las obras <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="club">Club <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="particular">Particular <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="edificio">Edificio <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="urbanizacion">Urbanización <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="colegio">Colegio <span class="filter-count"></span></button>
+            <button class="filter-btn filter-type" data-filter="complejo">Complejo <span class="filter-count"></span></button>
+          </div>
+        </div>
+
+        <!-- TOOLBAR (Contador, Dropdown, Modos de Vista) -->
+        <div class="portfolio-toolbar">
+          <div class="portfolio-toolbar__left">
+            <span id="portfolio-results-text">Cargando proyectos...</span>
+          </div>
+          <div class="portfolio-toolbar__right">
+            <select id="portfolio-sort" class="portfolio-select" aria-label="Ordenar proyectos">
+              <option value="recent">Más recientes</option>
+              <option value="az">A-Z</option>
+            </select>
+            
+            <div class="portfolio-view-toggles">
+              <button class="view-mode-btn active" data-view="gallery" aria-label="Galería">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              </button>
+              <button class="view-mode-btn" data-view="masonry" aria-label="Masonry">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="7"></rect><rect x="3" y="14" width="18" height="7"></rect></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-grid-dynamic view-gallery" id="portfolio-grid-dynamic">
+          <!-- Rendered via JS -->
+        </div>
+
+
+        <div style="text-align:center;margin-top:60px" data-delay="1">
+          <p style="font-size:16px;color:var(--text-title);font-weight:600;margin-bottom:8px">Fotos reales de proyectos finalizados</p>
+          <p style="font-size:14px;color:var(--text-muted)">Galería de instalaciones completas construidas en Uruguay</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       PAGE: CONTACTO
+       ========================================== -->
+  <div class="page" id="page-contacto">
+    <section class="page-hero" style="display: flex !important; align-items: center !important; justify-content: center !important; text-align: center !important;">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; width: 100% !important;">
+        <div class="page-hero__content" style="align-items: center !important; text-align: center !important; margin: 0 auto !important; max-width: 900px !important;">
+          <div class="page-hero__badge motion-page-hero-badge" style="margin: 0 auto !important;">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Contacto</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title" style="text-align: center !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important;">Hablemos de<br class="desktop-only"> <em>tu proyecto</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub" style="text-align: center !important; max-width: 700px !important; margin-left: auto !important; margin-right: auto !important;">Contanos qué tenés en mente y te respondemos en menos de <br class="desktop-only">24 horas, sin cargo y sin compromiso.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead form and contacts sidebar -->
+    <section class="section">
+      <div class="glass-glow glass-glow--teal glow-top-left motion-decorative"></div>
+      <div class="glass-glow glass-glow--orange glow-bottom-right motion-decorative"></div>
+      <div class="container">
+        <div class="contact-layout">
+          <div>
+            <span class="section-label motion-text-reveal">Formulario de consulta</span>
+            <h2 class="section-title" style="margin-bottom:12px">Solicitá tu <em>presupuesto</em></h2>
+            <p style="font-size:16px;color:var(--text-body);margin-bottom:40px;line-height:1.7">En Deal Sports cada proyecto empieza con una conversación. No importa si tenés todo definido o si estás en la etapa de idea — te asesoramos con gusto.</p>
+            
+            <div id="form-container" class="form-box">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Nombre completo *</label>
+                  <input type="text" id="form-name" class="form-input" placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Empresa / Institución</label>
+                  <input type="text" id="form-company" class="form-input" placeholder="Opcional">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Teléfono *</label>
+                  <input type="tel" id="form-phone" class="form-input" placeholder="+598 99 000 000">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email *</label>
+                  <input type="email" id="form-email" class="form-input" placeholder="tu@email.com">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Departamento *</label>
+                  <select id="form-dept" class="form-select">
+                    <option value="">Seleccioná...</option>
+                    <option>Montevideo</option>
+                    <option>Canelones</option>
+                    <option>Maldonado</option>
+                    <option>Colonia</option>
+                    <option>San José</option>
+                    <option>Soriano</option>
+                    <option>Florida</option>
+                    <option>Lavalleja</option>
+                    <option>Treinta y Tres</option>
+                    <option>Cerro Largo</option>
+                    <option>Rivera</option>
+                    <option>Tacuarembó</option>
+                    <option>Salto</option>
+                    <option>Paysandú</option>
+                    <option>Río Negro</option>
+                    <option>Durazno</option>
+                    <option>Flores</option>
+                    <option>Rocha</option>
+                    <option>Artigas</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tipo de superficie *</label>
+                  <select id="form-surface" class="form-select">
+                    <option value="">Seleccioná...</option>
+                    <option>Padel</option>
+                    <option>Tenis</option>
+                    <option>Fútbol Sintético</option>
+                    <option>Pickleball</option>
+                    <option>Putting Green / Golf</option>
+                    <option>Basketball</option>
+                    <option>Polideportiva</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Metraje aproximado</label>
+                <input type="text" id="form-size" class="form-input" placeholder="Ej: 500 m², una cancha, no sé aún...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Descripción del proyecto *</label>
+                <textarea id="form-message" class="form-textarea" rows="5" placeholder="Contanos tu proyecto con el mayor detalle posible: tipo de espacio, uso previsto, plazos..."></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">¿Cómo nos conociste?</label>
+                <select id="form-source" class="form-select">
+                  <option value="">Seleccioná...</option>
+                  <option>Google / Buscador</option>
+                  <option>Recomendación de un conocido</option>
+                  <option>Redes sociales</option>
+                  <option>Ya era cliente</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <button class="form-submit" onclick="submitForm()">ENVIAR MI CONSULTA →</button>
+            </div>
+
+            <!-- Success screen -->
+            <div id="form-success" style="display:none; background: rgba(230, 238, 237, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(3, 85, 83, 0.25); border-radius: var(--r-md); padding: 60px 40px; text-align: center; box-shadow: 0 15px 35px rgba(3, 85, 83, 0.05);">
+              <div style="margin-bottom:24px;display:flex;justify-content:center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--brand-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3 style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--brand-teal);text-transform:uppercase;margin-bottom:16px">¡Consulta recibida!</h3>
+              <p style="font-size:18px;color:var(--text-title);line-height:1.75">Un asesor de Deal Sports se va a comunicar con vos en menos de 24 horas hábiles. ¡Muchas gracias por elegirnos!</p>
+            </div>
+          </div>
+
+          <div class="contact-sidebar">
+            <div class="contact-card">
+              <h3 class="contact-card__title">Contacto directo</h3>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Teléfono</div>
+                  <div class="contact-info-value">+598 96 001 740</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Email</div>
+                  <div class="contact-info-value">info@dealsports.net</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Horarios</div>
+                  <div class="contact-info-value">Lun–Vie 8:00–18:00 · Sáb 9:00–13:00</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Cobertura</div>
+                  <div class="contact-info-value">Todo Uruguay</div>
+                </div>
+              </div>
+            </div>
+            
+            <button class="whatsapp-btn motion-text-reveal motion-magnet" onclick="window.open('https://wa.me/59896001740', '_blank')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              ESCRIBINOS POR WHATSAPP
+            </button>
+            <div style="margin-top:24px; padding:24px; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1.5px solid rgba(255, 255, 255, 0.6); border-radius: var(--r-sm); text-align: center">
+              <p style="font-size:13px;color:var(--text-body);line-height:1.6">Tu información es confidencial y segura. No compartimos tus datos con terceros.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
+       SHARED CALL TO ACTION (CTA)
+       ========================================== -->
+  <section class="cta-band motion-bg-shift">
+    <div class="container cta-band__content motion-bg-shift">
+      <h2 class="cta-band__title motion-bg-shift">¿Tenés un proyecto en mente?</h2>
+      <p class="cta-band__sub motion-text-reveal motion-bg-shift">Te asesoramos sin cargo. Contanos tu idea y te respondemos con un presupuesto detallado en menos de 24 horas.</p>
+      <div class="cta-band__actions motion-bg-shift">
+        <button class="btn btn-accent motion-text-reveal motion-magnet" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
+        <button class="btn btn-outline-white motion-text-reveal motion-magnet" onclick="navigate('portafolio')">Ver proyectos realizados <span class="btn-arrow-circle">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SHARED PREMIUM FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__col-brand">
+          <img src="./assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 52px; width: auto; object-fit: contain; margin-bottom: 20px;">
+          <p class="footer__desc motion-text-reveal">Construyendo deporte en Uruguay desde hace 40 años. Más de 120.000 m² de superficies deportivas realizadas en todo el país con la mejor calidad.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-btn motion-text-reveal motion-magnet" aria-label="Facebook">FB</a>
+            <a href="#" class="footer__social-btn motion-text-reveal motion-magnet" aria-label="Instagram">IG</a>
+            <a href="#" class="footer__social-btn motion-text-reveal motion-magnet" aria-label="LinkedIn">LN</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Superficies</div>
+          <div class="footer__links">
+            <span class="footer__link" onclick="navigate('tenis')">Tenis</span>
+            <span class="footer__link" onclick="navigate('padel')">Padel</span>
+            <span class="footer__link" onclick="navigate('futbol')">Fútbol Sintético</span>
+            <span class="footer__link" onclick="navigate('putting')">Putting Green</span>
+            <span class="footer__link" onclick="navigate('basket')">Basketball & Pickleball</span>
+            <span class="footer__link" onclick="navigate('skate')">Skateparks</span>
+            <span class="footer__link" onclick="navigate('hockey')">Canchas de Hockey</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Empresa</div>
+          <div class="footer__links">
+            <span class="footer__link" onclick="navigate('nosotros')">Nosotros</span>
+            <span class="footer__link" onclick="navigate('servicios')">Servicios</span>
+            <span class="footer__link" onclick="navigate('proveedores')">Proveedores</span>
+            <span class="footer__link" onclick="navigate('portafolio')">Proyectos</span>
+            <span class="footer__link" onclick="navigate('contacto')">Contacto</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Contacto</div>
+          <div class="footer__links">
+            <span class="footer__link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; color: var(--brand-orange);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              +598 96 001 740
+            </span>
+            <span class="footer__link" onclick="window.open('https://wa.me/59896001740', '_blank')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; color: var(--brand-orange);"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              WhatsApp
+            </span>
+            <span class="footer__link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; color: var(--brand-orange);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              info@dealsports.net
+            </span>
+            <span class="footer__link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; color: var(--brand-orange);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Ruta 10 esq. Los Suspiros, La Barra, Punta del Este, Uruguay
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 Deal Sports. Todos los derechos reservados. Diseño web por <a href="https://fedesign.uk" target="_blank" rel="noopener noreferrer">fedesign.uk</a>.</span>
+        <span class="footer__domain">dealsports.net</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       SPA ROUTING JAVASCRIPT
+       ========================================== -->
+  <script>
+    // Navigation routing function
+    function navigate(page) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+      });
+      // Show target page
+      const target = document.getElementById('page-' + page);
+      if (target) {
+        target.classList.add('active');
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      }
+
+      // Update nav links active class
+      document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.remove('active');
+      });
+      const navEl = document.getElementById('nav-' + page);
+      if (navEl) navEl.classList.add('active');
+
+      // Keep surfaces parent nav link highlighted if on a sports page
+      const sportPages = ['padel', 'tenis', 'futbol', 'putting', 'basket', 'skate', 'hockey'];
+      if (sportPages.includes(page)) {
+        document.getElementById('nav-superficies')?.classList.add('active');
+      }
+
+      // Automatically close mobile menu after clicking
+      const mainNav = document.getElementById('main-nav');
+      if (mainNav.classList.contains('header__nav--open')) {
+        mainNav.classList.remove('header__nav--open');
+      }
+
+      // Update header transparency style immediately
+      updateHeaderStyle();
+
+      // Trigger animations for the target page
+      if (typeof window.initPageAnimations === 'function') {
+        window.initPageAnimations(page);
+      }
+    }
+
+    // Helper to update sticky header visual states dynamically
+    function updateHeaderStyle() {
+      const header = document.getElementById('main-header');
+      const logoImg = document.getElementById('header-logo-img');
+      const isHome = document.getElementById('page-home').classList.contains('active');
+      
+      // Update Logo
+      if (logoImg) {
+        if (isHome && window.scrollY <= 50) {
+          logoImg.src = "./assets/logo/logo.svg";
+        } else {
+          logoImg.src = "./assets/logo/log.svg";
+        }
+      }
+
+      if (window.scrollY > 50) {
+        header.classList.add('header--scrolled');
+        if (isHome) {
+          header.classList.remove('header--transparent');
+        }
+      } else {
+        header.classList.remove('header--scrolled');
+        if (isHome) {
+          header.classList.add('header--transparent');
+        } else {
+          header.classList.remove('header--transparent');
+        }
+      }
+    }
+
+    // Scroll listener for sticky header styling
+    window.addEventListener('scroll', updateHeaderStyle);
+    // Initialize header styling state on load
+    window.addEventListener('DOMContentLoaded', updateHeaderStyle);
+
+    // Mobile menu toggle logic
+    const menuToggleBtn = document.getElementById('menu-toggle-btn');
+    const mainNav = document.getElementById('main-nav');
+    menuToggleBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('header__nav--open');
+    });
+
+    // CSS styling injector for mobile menu toggle behavior
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+      @media (max-width: 768px) {
+        .header__nav--open {
+          display: flex !important;
+          flex-direction: column;
+          position: absolute;
+          top: var(--nav-h);
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.98);
+          border-bottom: 1px solid var(--bd-color);
+          padding: 20px 30px;
+          gap: 15px;
+          box-shadow: var(--shadow-lg);
+        }
+        .header__nav--open .nav-dropdown-menu {
+          position: static;
+          transform: none;
+          opacity: 1;
+          visibility: visible;
+          box-shadow: none;
+          border: none;
+          padding-left: 20px;
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Portfolio items category filtering logic
+    function filterPortfolio(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.portfolio-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Contact form submission validation and UI toggle
+    function submitForm() {
+      // Get field values
+      const name = document.getElementById('form-name').value.trim();
+      const phone = document.getElementById('form-phone').value.trim();
+      const email = document.getElementById('form-email').value.trim();
+      const dept = document.getElementById('form-dept').value;
+      const surface = document.getElementById('form-surface').value;
+      const message = document.getElementById('form-message').value.trim();
+
+      // Check required fields
+      if (!name || !phone || !email || !dept || !surface || !message) {
+        alert("Por favor completa todos los campos requeridos marcados con (*)");
+        return;
+      }
+
+      // Hide form container and show success message
+      document.getElementById('form-container').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
+
+    // Nav-home active state on initial load
+    document.getElementById('nav-home').classList.add('active');
+    updateHeaderStyle();
+
+    // Accordion toggle helper
+    function toggleAccordion(header) {
+      const item = header.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      document.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('active');
+      });
+      
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+
+    // Scroll Reveal Observer Setup
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-visible');
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.05,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    function initRevealOnScroll() {
+      document.querySelectorAll('.').forEach(el => {
+        revealObserver.observe(el);
+      });
+    }
+
+    // Wrap navigate to run animation triggers on page transition
+    const originalNavigate = navigate;
+    navigate = function(page) {
+      originalNavigate(page);
+      
+      // Reset reveal classes for elements on the newly active page so they animate again
+      const targetPage = document.getElementById('page-' + page);
+      if (targetPage) {
+        targetPage.querySelectorAll('.').forEach(el => {
+          el.classList.remove('animate-visible');
+          // Fast-reveal if already in view, otherwise observe
+          const rect = el.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top < window.innerHeight) {
+            // Wait slightly for transition visibility before animating
+            setTimeout(() => {
+              el.classList.add('animate-visible');
+            }, 100);
+          } else {
+            revealObserver.observe(el);
+          }
+        });
+      }
+    };
+
+    // Run on initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      initRevealOnScroll();
+      // Animate visible home items immediately
+      setTimeout(() => {
+        document.querySelectorAll('#page-home .').forEach(el => {
+          el.classList.add('animate-visible');
+        });
+      }, 150);
+    });
+  </script>
+  <script src="lenis.min.js"></script>
+  <script src="gsap.min.js"></script>
+  <script src="ScrollTrigger.min.js"></script>
+  <script src="motion.js"></script>
+  <script src="proyectos.js"></script>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">
+    <button class="ds-lightbox__close" id="ds-lightbox-close" aria-label="Cerrar galería">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button class="ds-lightbox__nav ds-lightbox__nav--prev" id="ds-lightbox-prev" aria-label="Imagen anterior">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="ds-lightbox__nav ds-lightbox__nav--next" id="ds-lightbox-next" aria-label="Siguiente imagen">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="ds-lightbox__content">
+      <img src="" alt="" id="ds-lightbox-img" class="ds-lightbox__img">
+      <div class="ds-lightbox__info">
+        <h4 id="ds-lightbox-title" class="ds-lightbox__title"></h4>
+        <span id="ds-lightbox-counter" class="ds-lightbox__counter"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
