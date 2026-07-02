@@ -4917,7 +4917,7 @@ button {
    ========================================================================== */
 .logo-marquee-section {
   background: transparent;
-  padding: 80px 0;
+  padding: 20px 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -4953,8 +4953,8 @@ button {
 
 /* Logos */
 .marquee-logo {
-  max-height: 90px;
-  max-width: 329px;
+  max-height: 108px;
+  max-width: 395px;
   object-fit: contain;
   filter: brightness(1);
   flex-shrink: 0;
@@ -4963,7 +4963,7 @@ button {
 /* Mobile */
 @media (max-width: 768px) {
   .logo-marquee-section {
-    padding: 60px 0;
+    padding: 20px 0;
     gap: 40px;
   }
   .logo-marquee__track {
@@ -4977,9 +4977,9 @@ button {
     animation-duration: 35s;
   }
   .marquee-logo {
-    height: 70px;
+    height: 84px;
     width: auto;
-    max-width: 240px;
+    max-width: 288px;
   }
 }
 
