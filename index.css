@@ -2292,6 +2292,16 @@ button {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  background: rgba(0, 0, 0, 0.30);
+  border-radius: 16px;
+  padding: 40px 48px;
+}
+
+@media (max-width: 768px) {
+  .hero--centered .hero__container {
+    padding: 28px 20px;
+    border-radius: 12px;
+  }
 }
 
 .hero--centered .hero__title {
