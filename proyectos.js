@@ -104,15 +104,6 @@ const projects = [
     "date": "2025-01-02"
   },
   {
-    "id": "proj-11",
-    "title": "Elbio Strauch",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/20---Elbio-Strauch-particular-tenis.jpg",
-    "featured": false,
-    "date": "2025-01-03"
-  },
-  {
     "id": "proj-12",
     "title": "Aura",
     "sport": "padel",
@@ -210,15 +201,6 @@ const projects = [
     "image": "./assets/fotos_web/32---tenis-cliente-particular.jpg",
     "featured": false,
     "date": "2025-01-05"
-  },
-  {
-    "id": "proj-23",
-    "title": "Von Zanden",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/4---Von-zanden-particular-tenis.jpg",
-    "featured": false,
-    "date": "2025-01-06"
   },
   {
     "id": "proj-24",
