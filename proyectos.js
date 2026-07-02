@@ -14,6 +14,7 @@ function resolveImageUrl(url) {
 
 function mapProject(p) {
   return {
+    _id:         p.id,
     id:          'proj-' + p.id,
     title:       p.titulo,
     sport:       p.sport,
@@ -274,6 +275,8 @@ let currentFilteredProjects = [];
 
 let lightboxIndex = 0;
 let lightboxActive = false;
+let lightboxPhotos = [];   // fotos del proyecto actual
+let lightboxPhotoIndex = 0;
 
 // --- CARGA DESDE API ---
 async function fetchProyectos() {
@@ -481,41 +484,66 @@ function bindLightbox() {
   });
 }
 
-function openLightbox(index) {
+async function openLightbox(index) {
   if (currentFilteredProjects.length === 0) return;
-  lightboxIndex = index;
-  lightboxActive = true;
-  document.body.style.overflow = 'hidden'; 
+  lightboxIndex      = index;
+  lightboxPhotoIndex = 0;
+  lightboxActive     = true;
+  document.body.style.overflow = 'hidden';
 
+  const proj    = currentFilteredProjects[index];
   const lightbox = document.getElementById('ds-lightbox');
+
+  // Mostrar portada de inmediato mientras carga el resto
+  lightboxPhotos = [{ url: proj.image, alt: proj.title }];
   updateLightboxImage();
   lightbox.classList.add('active');
+
+  // Fetch de todas las fotos del proyecto
+  try {
+    const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${proj._id}`);
+    const json = await res.json();
+    const fotos = (json.data?.fotos || []);
+    if (fotos.length) {
+      lightboxPhotos = fotos.map(f => ({ url: resolveImageUrl(f.url), alt: proj.title }));
+      updateLightboxImage();
+    }
+  } catch (_) { /* mantiene la portada */ }
 }
 
 function closeLightbox() {
   lightboxActive = false;
   document.body.style.overflow = '';
-  const lightbox = document.getElementById('ds-lightbox');
-  lightbox.classList.remove('active');
+  document.getElementById('ds-lightbox').classList.remove('active');
 }
 
 function navigateLightbox(dir) {
-  lightboxIndex += dir;
-  if (lightboxIndex < 0) lightboxIndex = currentFilteredProjects.length - 1;
-  if (lightboxIndex >= currentFilteredProjects.length) lightboxIndex = 0;
+  lightboxPhotoIndex += dir;
+  if (lightboxPhotoIndex < 0) lightboxPhotoIndex = lightboxPhotos.length - 1;
+  if (lightboxPhotoIndex >= lightboxPhotos.length) lightboxPhotoIndex = 0;
   updateLightboxImage();
 }
 
 function updateLightboxImage() {
-  const imgElement = document.getElementById('ds-lightbox-img');
-  const titleElement = document.getElementById('ds-lightbox-title');
-  const counterElement = document.getElementById('ds-lightbox-counter');
-  
+  const imgEl     = document.getElementById('ds-lightbox-img');
+  const titleEl   = document.getElementById('ds-lightbox-title');
+  const counterEl = document.getElementById('ds-lightbox-counter');
+  const prevBtn   = document.getElementById('ds-lightbox-prev');
+  const nextBtn   = document.getElementById('ds-lightbox-next');
+
+  const foto = lightboxPhotos[lightboxPhotoIndex];
   const proj = currentFilteredProjects[lightboxIndex];
-  imgElement.src = proj.image;
-  imgElement.alt = proj.alt;
-  titleElement.textContent = proj.title;
-  counterElement.textContent = `${lightboxIndex + 1} / ${currentFilteredProjects.length}`;
+
+  imgEl.src   = foto.url;
+  imgEl.alt   = foto.alt;
+  titleEl.textContent   = proj.title;
+  counterEl.textContent = lightboxPhotos.length > 1
+    ? `${lightboxPhotoIndex + 1} / ${lightboxPhotos.length}`
+    : '';
+
+  // Ocultar flechas si solo hay una foto
+  if (prevBtn) prevBtn.style.display = lightboxPhotos.length > 1 ? '' : 'none';
+  if (nextBtn) nextBtn.style.display = lightboxPhotos.length > 1 ? '' : 'none';
 }
 
 function formatCategory(val) {
