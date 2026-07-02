@@ -437,7 +437,7 @@
         <h2 class="section-title">Proyectos <em>Destacados</em></h2>
         <p class="section-desc motion-text-reveal">Conocé algunas de nuestras instalaciones más representativas construidas a lo largo de todo Uruguay.</p>
         
-        <div class="dark-grid" id="ds-featured-grid"></div>
+        <div id="ds-featured-grid"></div>
       </div>
     </section>
 
@@ -1480,6 +1480,81 @@
   </div>
 
   <!-- ==========================================
+       PÁGINA PROYECTO DESTACADO
+       ========================================== -->
+  <div class="page" id="page-proyecto">
+
+    <!-- Hero header del proyecto -->
+    <section class="proy-hero">
+      <div class="container">
+        <button class="proy-back" onclick="navigate('portafolio')">&#8592; Proyectos</button>
+        <div id="proy-loading" style="padding:60px 0;text-align:center;color:var(--text-light)">Cargando...</div>
+        <div id="proy-content" style="display:none">
+          <div class="proy-meta-row">
+            <span class="proy-sport-badge" id="proy-sport-tag"></span>
+            <span class="proy-meta-item" id="proy-depto"></span>
+            <span class="proy-meta-item proy-year" id="proy-year"></span>
+          </div>
+          <h1 class="proy-titulo" id="proy-titulo"></h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galería de fotos -->
+    <section class="section" id="proy-gallery-section" style="padding-top:0">
+      <div class="container">
+        <div class="proy-gallery" id="proy-gallery"></div>
+      </div>
+    </section>
+
+    <!-- Descripción -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <p class="proy-desc" id="proy-desc"></p>
+      </div>
+    </section>
+
+    <!-- Lightbox fullscreen -->
+    <div class="proy-lightbox" id="proy-lightbox" style="display:none" onclick="if(event.target===this)closeProyLightbox()">
+      <button class="proy-lb-close" onclick="closeProyLightbox()">&#x2715;</button>
+      <button class="proy-lb-btn proy-lb-btn--prev" id="proy-lb-prev" onclick="proyGalleryIdx=Math.max(0,proyGalleryIdx-1);updateProyLightbox()">&#8592;</button>
+      <img class="proy-lb-img" id="proy-lb-img" src="" alt="">
+      <button class="proy-lb-btn proy-lb-btn--next" id="proy-lb-next" onclick="proyGalleryIdx=Math.min(proyGalleryPhotos.length-1,proyGalleryIdx+1);updateProyLightbox()">&#8594;</button>
+      <div class="proy-lb-counter" id="proy-lb-counter"></div>
+    </div>
+
+    <!-- Otros proyectos destacados -->
+    <div id="otros-fc-wrap">
+      <section class="section section--dark">
+        <div class="container">
+          <span class="section-label">Galería de Obras</span>
+          <h2 class="section-title">Otros proyectos <em>destacados</em></h2>
+          <div class="fc-container" style="margin-top:32px">
+            <button class="fc-arrow fc-arrow--prev" id="otros-fc-prev">&#8592;</button>
+            <div class="fc-viewport" id="otros-fc-viewport">
+              <div class="fc-track" id="otros-fc-track"></div>
+            </div>
+            <button class="fc-arrow fc-arrow--next" id="otros-fc-next">&#8594;</button>
+          </div>
+          <div class="fc-dots" id="otros-fc-dots" style="margin-top:20px"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-band">
+      <div class="container cta-band__content">
+        <h2 class="cta-band__title">¿Tenés un proyecto en mente?</h2>
+        <p class="cta-band__sub">Te asesoramos sin cargo. Contanos tu idea y te respondemos con un presupuesto detallado en menos de 24 horas.</p>
+        <div class="cta-band__actions">
+          <button class="btn btn-accent motion-magnet" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">&#8599;</span></button>
+          <button class="btn btn-outline-white motion-magnet" onclick="navigate('portafolio')">Ver todos los proyectos <span class="btn-arrow-circle">&#8599;</span></button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================
        SHARED CALL TO ACTION (CTA)
        ========================================== -->
   <section class="cta-band motion-bg-shift">
@@ -1595,6 +1670,10 @@
       const sportPages = ['padel', 'tenis', 'futbol', 'putting', 'basket', 'skate', 'hockey'];
       if (sportPages.includes(page)) {
         document.getElementById('nav-superficies')?.classList.add('active');
+      }
+      // Project detail: highlight portafolio nav
+      if (page === 'proyecto') {
+        document.getElementById('nav-portafolio')?.classList.add('active');
       }
 
       // Automatically close mobile menu after clicking

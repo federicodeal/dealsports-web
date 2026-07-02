@@ -289,35 +289,198 @@ async function fetchProyectos() {
   }
 }
 
-async function renderFeaturedHome() {
-  const grid = document.getElementById('ds-featured-grid');
-  if (!grid) return;
-  const featured = projects.filter(p => p.featured).slice(0, 3);
-  if (!featured.length) return;
+// ── LABELS ──────────────────────────────────────────────────────
+const SPORT_LABEL = { padel:'Pádel', tenis:'Tenis', futbol:'Fútbol', golf:'Golf', basket:'Basket', skate:'Skate', hockey:'Hockey' };
+const TYPE_LABEL  = { edificio:'Edificio', particular:'Particular', urbanizacion:'Urbanización', complejo:'Complejo', colegio:'Colegio', club:'Club' };
 
-  const SPORT_LABEL = { padel:'Pádel', tenis:'Tenis', futbol:'Fútbol', golf:'Golf', basket:'Basket', skate:'Skate', hockey:'Hockey' };
-  const TYPE_LABEL  = { edificio:'Edificio', particular:'Particular', urbanizacion:'Urbanización', complejo:'Complejo', colegio:'Colegio', club:'Club' };
+// ── FEATURED CAROUSEL ────────────────────────────────────────────
+let fcAutoTimer = null;
 
-  grid.innerHTML = featured.map(p => `
-    <div class="portfolio-card" onclick="navigate('portafolio')">
-      <div class="portfolio-card__bg" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%), url('${p.image}') center/cover no-repeat;"></div>
-      <div class="portfolio-card__tags">
-        <span class="portfolio-card__tag">${SPORT_LABEL[p.sport] || p.sport}</span>
-        ${p.departamento ? `<span class="portfolio-card__tag">${p.departamento}</span>` : ''}
-      </div>
-      <div class="portfolio-card__content">
-        <h3 class="portfolio-card__title">${p.title}</h3>
-        ${p.descripcion ? `<p class="portfolio-card__desc">${p.descripcion}</p>` : `<p class="portfolio-card__desc">${TYPE_LABEL[p.type] || p.type}</p>`}
-        <div class="portfolio-card__btn">
-          <span>Ver Proyecto</span>
-          <span class="portfolio-card__btn-arrow">↗</span>
+function buildCarouselCards(list, onclick) {
+  return list.map(p => `
+    <div class="fc-slide">
+      <div class="portfolio-card" onclick="${onclick}(${p._id})">
+        <div class="portfolio-card__bg" style="background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 100%),url('${p.image}') center/cover no-repeat;"></div>
+        <div class="portfolio-card__tags">
+          <span class="portfolio-card__tag">${SPORT_LABEL[p.sport] || p.sport}</span>
+          ${p.departamento ? `<span class="portfolio-card__tag">${p.departamento}</span>` : ''}
+        </div>
+        <div class="portfolio-card__content">
+          <h3 class="portfolio-card__title">${p.title}</h3>
+          ${p.descripcion
+            ? `<p class="portfolio-card__desc">${p.descripcion.length > 90 ? p.descripcion.slice(0,90)+'…' : p.descripcion}</p>`
+            : `<p class="portfolio-card__desc">${TYPE_LABEL[p.type] || p.type}</p>`}
+          <div class="portfolio-card__btn"><span>Ver Proyecto</span><span class="portfolio-card__btn-arrow">↗</span></div>
         </div>
       </div>
     </div>
   `).join('');
 }
 
-// --- DOM ELEMENTS ---
+function initCarousel(viewportId, trackId, dotsId, prevId, nextId, count, autoAdvance) {
+  const viewport = document.getElementById(viewportId);
+  const track    = document.getElementById(trackId);
+  const dotsEl   = document.getElementById(dotsId);
+  if (!viewport || !track) return;
+
+  // Build dots
+  if (dotsEl) {
+    dotsEl.innerHTML = Array.from({length: count}, (_, i) =>
+      `<button class="fc-dot${i===0?' active':''}" data-i="${i}"></button>`
+    ).join('');
+  }
+
+  let cur = 0;
+  const isMobile = () => window.innerWidth < 768;
+  const perPage  = () => isMobile() ? 1 : 3;
+
+  function slideWidth() {
+    const slide = track.querySelector('.fc-slide');
+    if (!slide) return 0;
+    const gap = parseInt(getComputedStyle(track).gap) || 30;
+    return slide.offsetWidth + gap;
+  }
+
+  function goTo(idx) {
+    const pp = perPage();
+    const max = Math.max(0, count - pp);
+    cur = Math.max(0, Math.min(idx, max));
+    track.style.transform = `translateX(-${cur * slideWidth()}px)`;
+    if (dotsEl) dotsEl.querySelectorAll('.fc-dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+    const prevEl = document.getElementById(prevId);
+    const nextEl = document.getElementById(nextId);
+    if (prevEl) prevEl.disabled = cur === 0;
+    if (nextEl) nextEl.disabled = cur >= max;
+  }
+
+  document.getElementById(prevId)?.addEventListener('click', () => { goTo(cur - 1); resetAuto(); });
+  document.getElementById(nextId)?.addEventListener('click', () => { goTo(cur + 1); resetAuto(); });
+  dotsEl?.querySelectorAll('.fc-dot').forEach(d =>
+    d.addEventListener('click', () => { goTo(+d.dataset.i); resetAuto(); })
+  );
+  window.addEventListener('resize', () => goTo(cur));
+
+  function resetAuto() {
+    if (!autoAdvance) return;
+    clearInterval(fcAutoTimer);
+    fcAutoTimer = setInterval(() => {
+      const pp = perPage();
+      goTo(cur + pp >= count ? 0 : cur + 1);
+    }, 5000);
+  }
+
+  goTo(0);
+  resetAuto();
+}
+
+async function renderFeaturedHome() {
+  const grid = document.getElementById('ds-featured-grid');
+  if (!grid) return;
+  const featured = projects.filter(p => p.featured);
+  if (!featured.length) return;
+
+  grid.innerHTML = `
+    <div class="fc-container">
+      <button class="fc-arrow fc-arrow--prev" id="fc-prev">&#8592;</button>
+      <div class="fc-viewport">
+        <div class="fc-track" id="fc-track">
+          ${buildCarouselCards(featured, 'navigateToProject')}
+        </div>
+      </div>
+      <button class="fc-arrow fc-arrow--next" id="fc-next">&#8594;</button>
+    </div>
+    <div class="fc-dots" id="fc-dots"></div>
+  `;
+
+  initCarousel('fc-viewport', 'fc-track', 'fc-dots', 'fc-prev', 'fc-next', featured.length, true);
+}
+
+// ── PROJECT DETAIL ────────────────────────────────────────────────
+let proyGalleryPhotos = [];
+let proyGalleryIdx    = 0;
+
+async function navigateToProject(id) {
+  const loadEl    = document.getElementById('proy-loading');
+  const contentEl = document.getElementById('proy-content');
+  if (loadEl)    loadEl.style.display = 'block';
+  if (contentEl) contentEl.style.display = 'none';
+  navigate('proyecto');
+
+  try {
+    const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`);
+    const json = await res.json();
+    renderProjectDetail(json.data);
+  } catch(e) {
+    if (loadEl) loadEl.textContent = 'Error cargando el proyecto.';
+  }
+}
+
+function renderProjectDetail(p) {
+  if (!p) return;
+  proyGalleryPhotos = (p.fotos || []).map(f => resolveImageUrl(f.url));
+  proyGalleryIdx    = 0;
+
+  document.getElementById('proy-titulo').textContent  = p.titulo || '';
+  document.getElementById('proy-sport-tag').textContent = SPORT_LABEL[p.sport] || p.sport || '';
+  document.getElementById('proy-depto').textContent   = p.departamento || '';
+  document.getElementById('proy-year').textContent    = p.fecha ? new Date(p.fecha).getFullYear() : '';
+  document.getElementById('proy-desc').textContent    = p.descripcion || '';
+
+  // Gallery grid
+  const galleryEl = document.getElementById('proy-gallery');
+  if (galleryEl) {
+    galleryEl.innerHTML = proyGalleryPhotos.map((url, i) => `
+      <div class="proy-photo" onclick="openProyLightbox(${i})">
+        <img src="${url}" alt="${p.titulo} foto ${i+1}" loading="lazy">
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('proy-loading').style.display  = 'none';
+  document.getElementById('proy-content').style.display  = 'block';
+
+  // Otros destacados
+  const otros = projects.filter(q => q.featured && q._id !== p.id);
+  const otrosTrack = document.getElementById('otros-fc-track');
+  const otrosWrap  = document.getElementById('otros-fc-wrap');
+  if (otrosTrack && otros.length) {
+    otrosTrack.innerHTML = buildCarouselCards(otros, 'navigateToProject');
+    if (otrosWrap) otrosWrap.style.display = '';
+    initCarousel('otros-fc-viewport', 'otros-fc-track', 'otros-fc-dots', 'otros-fc-prev', 'otros-fc-next', otros.length, false);
+  } else if (otrosWrap) {
+    otrosWrap.style.display = 'none';
+  }
+
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+function openProyLightbox(idx) {
+  proyGalleryIdx = idx;
+  updateProyLightbox();
+  document.getElementById('proy-lightbox').style.display = 'flex';
+  document.addEventListener('keydown', onLightboxKey);
+}
+
+function closeProyLightbox() {
+  document.getElementById('proy-lightbox').style.display = 'none';
+  document.removeEventListener('keydown', onLightboxKey);
+}
+
+function onLightboxKey(e) {
+  if (e.key === 'ArrowLeft')  { proyGalleryIdx = Math.max(0, proyGalleryIdx - 1); updateProyLightbox(); }
+  if (e.key === 'ArrowRight') { proyGalleryIdx = Math.min(proyGalleryPhotos.length - 1, proyGalleryIdx + 1); updateProyLightbox(); }
+  if (e.key === 'Escape')     closeProyLightbox();
+}
+
+function updateProyLightbox() {
+  document.getElementById('proy-lb-img').src = proyGalleryPhotos[proyGalleryIdx];
+  document.getElementById('proy-lb-counter').textContent = `${proyGalleryIdx + 1} / ${proyGalleryPhotos.length}`;
+  document.getElementById('proy-lb-prev').disabled = proyGalleryIdx === 0;
+  document.getElementById('proy-lb-next').disabled = proyGalleryIdx === proyGalleryPhotos.length - 1;
+}
+
+// ── DOM INIT ──────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
   projects = await fetchProyectos();
   currentFilteredProjects = [...projects];
