@@ -2,8 +2,33 @@
  * Deal Sports - Proyectos Gallery Logic
  */
 
-// --- DATA ---
-const projects = [
+// --- API ---
+const ERP_API = 'https://dserp-production.up.railway.app/api';
+
+function resolveImageUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http')) return url;
+  if (url.startsWith('/assets/')) return url; // relativo al sitio Vercel
+  return ERP_API.replace('/api', '') + url;   // subidas al ERP (Railway)
+}
+
+function mapProject(p) {
+  return {
+    id:          'proj-' + p.id,
+    title:       p.titulo,
+    sport:       p.sport,
+    type:        p.type,
+    image:       resolveImageUrl(p.portada_url),
+    featured:    p.featured == 1,
+    date:        p.fecha || '2025-01-01',
+    alt:         p.titulo,
+    departamento: p.departamento || '',
+    descripcion: p.descripcion || '',
+  };
+}
+
+// --- DATA (cargado desde API) ---
+let projects = [
   {
     "id": "proj-0",
     "title": "Veramansa",
@@ -245,13 +270,57 @@ let activeSport = 'all';
 let activeType = 'all';
 let currentSort = 'recent';
 let currentViewMode = 'gallery';
-let currentFilteredProjects = [...projects];
+let currentFilteredProjects = [];
 
 let lightboxIndex = 0;
 let lightboxActive = false;
 
+// --- CARGA DESDE API ---
+async function fetchProyectos() {
+  try {
+    const res = await fetch(`${ERP_API}/web/proyectos.php`);
+    const json = await res.json();
+    return (json.data || []).map(mapProject);
+  } catch (_) {
+    return [];
+  }
+}
+
+async function renderFeaturedHome() {
+  const grid = document.getElementById('ds-featured-grid');
+  if (!grid) return;
+  const featured = projects.filter(p => p.featured).slice(0, 3);
+  if (!featured.length) return;
+
+  const SPORT_LABEL = { padel:'Pádel', tenis:'Tenis', futbol:'Fútbol', golf:'Golf', basket:'Basket', skate:'Skate', hockey:'Hockey' };
+  const TYPE_LABEL  = { edificio:'Edificio', particular:'Particular', urbanizacion:'Urbanización', complejo:'Complejo', colegio:'Colegio', club:'Club' };
+
+  grid.innerHTML = featured.map(p => `
+    <div class="portfolio-card" onclick="navigate('portafolio')">
+      <div class="portfolio-card__bg" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%), url('${p.image}') center/cover no-repeat;"></div>
+      <div class="portfolio-card__tags">
+        <span class="portfolio-card__tag">${SPORT_LABEL[p.sport] || p.sport}</span>
+        ${p.departamento ? `<span class="portfolio-card__tag">${p.departamento}</span>` : ''}
+      </div>
+      <div class="portfolio-card__content">
+        <h3 class="portfolio-card__title">${p.title}</h3>
+        ${p.descripcion ? `<p class="portfolio-card__desc">${p.descripcion}</p>` : `<p class="portfolio-card__desc">${TYPE_LABEL[p.type] || p.type}</p>`}
+        <div class="portfolio-card__btn">
+          <span>Ver Proyecto</span>
+          <span class="portfolio-card__btn-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
 // --- DOM ELEMENTS ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  projects = await fetchProyectos();
+  currentFilteredProjects = [...projects];
+
+  renderFeaturedHome();
+
   if (!document.getElementById("portfolio-grid-dynamic")) return;
   initGallery();
 });
@@ -261,7 +330,7 @@ function initGallery() {
   bindSorting();
   bindViewModes();
   bindLightbox();
-  
+
   applyFiltersAndRender();
 }
 
