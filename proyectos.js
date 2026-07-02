@@ -3,13 +3,13 @@
  */
 
 // --- API ---
-const ERP_API = 'https://dserp-production.up.railway.app/api';
+const ERP_API = 'https://dserp-production.up.railway.app/backend/api';
 
 function resolveImageUrl(url) {
   if (!url) return '';
   if (url.startsWith('http')) return url;
   if (url.startsWith('/assets/')) return url; // relativo al sitio Vercel
-  return ERP_API.replace('/api', '') + url;   // subidas al ERP (Railway)
+  return ERP_API.replace('/backend/api', '') + url;   // subidas al ERP (Railway)
 }
 
 function mapProject(p) {
