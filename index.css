@@ -4953,8 +4953,8 @@ button {
 
 /* Logos */
 .marquee-logo {
-  max-height: 108px;
-  max-width: 395px;
+  max-height: 130px;
+  max-width: 474px;
   object-fit: contain;
   filter: brightness(1);
   flex-shrink: 0;
@@ -4977,9 +4977,9 @@ button {
     animation-duration: 35s;
   }
   .marquee-logo {
-    height: 84px;
+    height: 100px;
     width: auto;
-    max-width: 288px;
+    max-width: 346px;
   }
 }
 
