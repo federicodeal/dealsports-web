@@ -2292,7 +2292,7 @@ button {
   margin: 0 auto;
   position: relative;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.30);
+  background: rgba(0, 0, 0, 0.40);
   border-radius: 16px;
   padding: 40px 48px;
 }
