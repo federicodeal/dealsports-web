@@ -400,7 +400,11 @@ let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
 async function navigateToProject(id) {
-  navigate('proyecto');
+  try {
+    navigate('proyecto');
+  } catch(navErr) {
+    console.error('navigate error:', navErr);
+  }
 
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
@@ -408,13 +412,17 @@ async function navigateToProject(id) {
   if (contentEl) contentEl.style.display = 'none';
 
   try {
-    const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`, { signal: controller.signal });
+    clearTimeout(timeout);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     if (!json.data) throw new Error('Proyecto no encontrado');
     renderProjectDetail(json.data);
   } catch(e) {
-    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Error: ' + e.message; }
+    const msg = e.name === 'AbortError' ? 'Tiempo de espera agotado, intentá de nuevo' : 'Error: ' + e.message;
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = msg; }
   }
 }
 
