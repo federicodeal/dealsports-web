@@ -400,31 +400,34 @@ let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
 async function navigateToProject(id) {
+  navigate('proyecto');
+
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
-  if (loadEl)    loadEl.style.display = 'block';
+  if (loadEl)    { loadEl.style.display = 'block'; loadEl.textContent = 'Cargando...'; }
   if (contentEl) contentEl.style.display = 'none';
-  navigate('proyecto');
 
   try {
     const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
+    if (!json.data) throw new Error('Proyecto no encontrado');
     renderProjectDetail(json.data);
   } catch(e) {
-    if (loadEl) loadEl.textContent = 'Error cargando el proyecto.';
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Error: ' + e.message; }
   }
 }
 
 function renderProjectDetail(p) {
-  if (!p) return;
   proyGalleryPhotos = (p.fotos || []).map(f => resolveImageUrl(f.url));
   proyGalleryIdx    = 0;
 
-  document.getElementById('proy-titulo').textContent  = p.titulo || '';
-  document.getElementById('proy-sport-tag').textContent = SPORT_LABEL[p.sport] || p.sport || '';
-  document.getElementById('proy-depto').textContent   = p.departamento || '';
-  document.getElementById('proy-year').textContent    = p.fecha ? new Date(p.fecha).getFullYear() : '';
-  document.getElementById('proy-desc').textContent    = p.descripcion || '';
+  const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setTxt('proy-titulo',   p.titulo || '');
+  setTxt('proy-sport-tag', SPORT_LABEL[p.sport] || p.sport || '');
+  setTxt('proy-depto',    p.departamento || '');
+  setTxt('proy-year',     p.fecha ? new Date(p.fecha).getFullYear() : '');
+  setTxt('proy-desc',     p.descripcion || '');
 
   // Gallery grid
   const galleryEl = document.getElementById('proy-gallery');
