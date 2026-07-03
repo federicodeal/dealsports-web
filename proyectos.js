@@ -399,28 +399,48 @@ async function renderFeaturedHome() {
 let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
+function _dbg(msg) {
+  let el = document.getElementById('_dbg');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = '_dbg';
+    el.style.cssText = 'position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.85);color:#0f0;padding:10px 14px;z-index:99999;font:12px monospace;border-radius:8px;max-width:340px;pointer-events:none';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  console.log('[NAV]', msg);
+}
+
 async function navigateToProject(id) {
+  _dbg('1 navigate(' + id + ')');
   try {
     navigate('proyecto');
+    _dbg('2 navigate OK');
   } catch(navErr) {
-    console.error('navigate error:', navErr);
+    _dbg('2 navigate ERR: ' + navErr.message);
   }
 
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
+  _dbg('3 loadEl=' + (loadEl ? 'OK' : 'NULL'));
   if (loadEl)    { loadEl.style.display = 'block'; loadEl.textContent = 'Cargando...'; }
   if (contentEl) contentEl.style.display = 'none';
 
   try {
+    _dbg('4 fetching id=' + id + '...');
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`, { signal: controller.signal });
     clearTimeout(timeout);
+    _dbg('5 fetch ' + res.status);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
+    _dbg('6 data=' + (json.data ? 'OK' : 'NULL'));
     if (!json.data) throw new Error('Proyecto no encontrado');
     renderProjectDetail(json.data);
+    _dbg('7 render OK');
   } catch(e) {
+    _dbg('ERR ' + e.name + ': ' + e.message);
     const msg = e.name === 'AbortError' ? 'Tiempo de espera agotado, intentá de nuevo' : 'Error: ' + e.message;
     if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = msg; }
   }
