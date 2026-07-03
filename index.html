@@ -1642,8 +1642,16 @@
        SPA ROUTING JAVASCRIPT
        ========================================== -->
   <script>
+    // Track whether navigate() was triggered by popstate (back/forward)
+    let _poppingState = false;
+
     // Navigation routing function
-    function navigate(page) {
+    function navigate(page, pushHistory) {
+      // Push browser history entry so back button works within the SPA
+      if (!_poppingState && pushHistory !== false) {
+        history.pushState({ page }, '', '#' + page);
+      }
+
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => {
         p.classList.remove('active');
@@ -1690,6 +1698,19 @@
         window.initPageAnimations(page);
       }
     }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (e) => {
+      const page = e.state?.page || 'home';
+      _poppingState = true;
+      navigate(page);
+      _poppingState = false;
+    });
+
+    // Set initial history state on load (replace, not push, so back goes to previous external site)
+    window.addEventListener('DOMContentLoaded', () => {
+      history.replaceState({ page: 'home' }, '', '#home');
+    });
 
     // Helper to update sticky header visual states dynamically
     function updateHeaderStyle() {
@@ -1873,7 +1894,7 @@
   <script src="gsap.min.js"></script>
   <script src="scrolltrigger.min.js"></script>
   <script src="motion.js"></script>
-  <script src="proyectos.js?v=106"></script>
+  <script src="proyectos.js?v=107"></script>
 
   <!-- LIGHTBOX MODAL -->
   <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">
