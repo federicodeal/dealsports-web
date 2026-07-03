@@ -1465,9 +1465,12 @@ button {
 }
 .proy-lb-img {
   max-width: 90vw;
-  max-height: 88vh;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   border-radius: 4px;
+  display: block;
 }
 .proy-lb-close {
   position: absolute;
