@@ -382,7 +382,7 @@ async function renderFeaturedHome() {
   grid.innerHTML = `
     <div class="fc-container">
       <button class="fc-arrow fc-arrow--prev" id="fc-prev">&#8592;</button>
-      <div class="fc-viewport">
+      <div class="fc-viewport" id="fc-viewport">
         <div class="fc-track" id="fc-track">
           ${buildCarouselCards(featured, 'navigateToProject')}
         </div>
