@@ -1836,6 +1836,11 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+.partner-logo-box:hover {
+  opacity: 0.75;
 }
 
 .partner-logo-box img {
