@@ -295,10 +295,25 @@ function readCachedProyectos() {
   try { return JSON.parse(localStorage.getItem(PROY_CACHE_KEY)) || null; } catch (_) { return null; }
 }
 
+// Sección "Obras realizadas" de cada página de superficie: links a las fichas de ese deporte.
+// scripts/build-pages.py genera el mismo HTML en el deploy para que Google vea los links.
+function renderObrasPorDeporte() {
+  document.querySelectorAll('.surface-obras').forEach(sec => {
+    const obras = projects.filter(p => p.sport === sec.dataset.sport);
+    sec.hidden = obras.length === 0;
+    sec.querySelector('.obras-list').innerHTML = obras.map(p => `
+      <a class="obra-link" href="${projectUrl(p._id)}" onclick="navigateToProject(${p._id}); return false;">
+        <span class="obra-link__title">${p.title}</span>
+        <span class="obra-link__meta">${[TYPE_LABEL[p.type], p.departamento].filter(Boolean).join(' · ')}</span>
+      </a>`).join('');
+  });
+}
+
 function renderProjects(list) {
   projects = list;
   currentFilteredProjects = [...projects];
   renderFeaturedHome();
+  renderObrasPorDeporte();
   if (document.getElementById("portfolio-grid-dynamic")) applyFiltersAndRender();
   const fichaId = document.getElementById('proy-content')?.dataset.id;
   if (fichaId && document.getElementById('page-proyecto').classList.contains('active')) renderOtrosDestacados(fichaId);

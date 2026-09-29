@@ -5299,3 +5299,11 @@ button {
 
 /* Texto solo para lectores de pantalla y buscadores */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* "Obras realizadas" en cada página de superficie */
+.obras-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 32px; }
+.obra-link { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border: 1px solid var(--bd-color); border-radius: var(--r-md); background: rgba(255, 255, 255, 0.6); color: var(--text-title); text-decoration: none; transition: var(--trans); }
+.obra-link:hover { border-color: var(--brand-teal); transform: translateY(-2px); }
+.obra-link__title { font-family: var(--font-display); font-weight: 700; }
+.obra-link__meta { font-size: 14px; color: var(--text-body); }
+.obra-link__meta:empty { display: none; }

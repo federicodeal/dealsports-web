@@ -131,7 +131,7 @@
     "knowsAbout": ["Canchas de tenis", "Canchas de pádel", "Fútbol sintético", "Canchas de hockey", "Canchas de basketball y pickleball", "Skateparks", "Putting greens"]
   }
   </script>
-  <link rel="stylesheet" href="/index.css?v=2.4">
+  <link rel="stylesheet" href="/index.css?v=2.5">
   <style>
     /* Immediate Layout Grid Fail-safe */
     .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
@@ -243,7 +243,7 @@
             <span class="hero-title__word">experiencia</span>
           </span>
         </h1>
-        <p class="hero__sub motion-hero-sub">Somos una empresa líder en construcción de superficies deportivas en Uruguay. Tennis, Padel, Futbol Pickleball, Golf Greens y mas, para Barrios, Clubes, Chacras y Particulares.</p>
+        <p class="hero__sub motion-hero-sub">Somos una empresa líder en construcción de superficies deportivas en Uruguay. Tenis, Pádel, Fútbol, Pickleball, Golf Greens y más, para Barrios, Clubes, Chacras y Particulares.</p>
         <div class="hero__actions motion-hero-actions">
           <button class="btn btn-accent motion-text-reveal motion-magnet" onclick="navigate('contacto')">Solicitá tu presupuesto <span class="btn-arrow-circle">↗</span></button>
           <button class="btn btn-outline-white motion-text-reveal motion-magnet" onclick="navigate('portafolio')">Ver proyectos realizados <span class="btn-arrow-circle">↗</span></button>
@@ -879,6 +879,62 @@
         </div>
       </div>
     </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="padel" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de canchas de <em>pádel</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre canchas de <em>pádel</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué marcas de canchas de pádel instalan?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Somos representantes oficiales en Uruguay de Padel Tech (Madrid, España) y Fortune Padel (China). Padel Tech fabrica en acero galvanizado con vidrio templado certificado FIP y FEP; Fortune Padel es la opción de precio competitivo para proyectos de varias canchas, fraccionamientos y complejos.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué modelo de cancha de pádel me conviene?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del uso. La clásica es ideal para uso recreativo; la panorámica, sin pilares centrales, es la más elegida por hoteles y complejos; la cubierta permite jugar todo el año sin depender del clima, y la de competición cumple las dimensiones reglamentarias FIP/FEP para clubes y torneos.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Construyen canchas de pádel en todo Uruguay?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Trabajamos en todos los departamentos, con importación directa y transporte de estructuras, vidrios y césped a cualquier punto del país, y equipos de instalación propios.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta una cancha de pádel?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del modelo, del terreno y de la ubicación. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- ==========================================
@@ -954,6 +1010,62 @@
         </div>
       </div>
     </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="tenis" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de canchas de <em>tenis</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre canchas de <em>tenis</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué superficie de tenis conviene: polvo de ladrillo, sintético o dura?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  El polvo de ladrillo es la superficie más tradicional en Sudamérica y ofrece un juego más lento. El pasto sintético (Real Turf) requiere muy poco mantenimiento y se comporta de forma similar al pasto natural. La carpeta asfáltica con resinas acrílicas es una superficie dura, antideslizante y duradera, de 3 o 4 capas.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Hacen mantenimiento y reparación de canchas de tenis?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Ofrecemos servicio post-venta: inspección periódica, reparación de superficies deterioradas, renovación de pintura y líneas, y revisión de estructuras y cerramientos.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Las canchas tienen garantía?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Trabajamos con materiales de primer nivel y garantía de obra. No tercerizamos: las obras las hacen nuestros propios equipos de instaladores.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta construir una cancha de tenis?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende de la superficie, del estado del terreno y de la ubicación. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- ==========================================
@@ -996,6 +1108,62 @@
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="futbol" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de canchas de <em>fútbol sintético</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre canchas de <em>fútbol sintético</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué césped sintético usan?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Trabajamos con Real Turf, uno de los proveedores más reconocidos del mercado, con superficies que cumplen los estándares internacionales más exigentes.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Por qué elegir pasto sintético para fútbol?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Porque requiere poco mantenimiento y permite jugar todo el año. Por eso hoy la gran mayoría de las canchas en edificios, fraccionamientos y clubes de Uruguay son de pasto sintético.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿También hacen cerramientos e iluminación?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Instalamos cerramientos de malla metálica, vidrio templado o policarbonato, e iluminación LED con diseño lumínico por deporte, así tenés un solo proveedor para toda la obra.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta una cancha de fútbol sintético?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del tamaño, del terreno y de la ubicación. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
         </div>
       </div>
     </section>
@@ -1044,6 +1212,53 @@
         </div>
       </div>
     </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="golf" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de <em>putting greens</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre <em>putting greens</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Dónde se puede instalar un putting green?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  En casas, hoteles y fraccionamientos. Diseñamos cada green a medida del espacio disponible, y también zonas de chip para practicar el juego corto.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Se puede personalizar el diseño?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Adaptamos ondulaciones, contornos y velocidad de rodaje a cada espacio, con pasto sintético de alta fidelidad.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta un putting green?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del tamaño y del diseño. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- ==========================================
@@ -1060,7 +1275,7 @@
             <span class="page-hero__badge-text">Superficies deportivas</span>
           </div>
           <h1 class="page-hero__title motion-page-hero-title">Canchas <em>Polideportivas</em></h1>
-          <p class="page-hero__sub motion-page-hero-sub">Un espacio para múltiples deportes. La solución más eficiente para edificios, colegios, clubs and complejos.</p>
+          <p class="page-hero__sub motion-page-hero-sub">Un espacio para múltiples deportes. La solución más eficiente para edificios, colegios, clubes y complejos.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
         <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/basket.webp" alt="Cancha de Basket">
@@ -1086,6 +1301,62 @@
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="basket" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de canchas <em>polideportivas</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre canchas <em>polideportivas</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué deportes se pueden jugar en una cancha polideportiva?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  En una misma superficie se puede jugar basketball, pickleball, volleyball, handball y fútbol de salón. Es la solución ideal cuando el espacio es limitado.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto espacio ocupa una cancha de pickleball?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Una cancha de pickleball mide 13,41 × 6,10 m: en el espacio de una cancha de tenis entran dos o tres. Es ideal para edificios, hoteles y fraccionamientos que quieren sumar una actividad para todas las edades.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Para qué proyectos conviene una polideportiva?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Para edificios, colegios, clubes y complejos que quieren ofrecer varios deportes en un solo espacio. También instalamos cerramientos e iluminación LED.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta una cancha polideportiva?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del tamaño, de los deportes que se quieran marcar y del terreno. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
         </div>
       </div>
     </section>
@@ -1134,6 +1405,53 @@
         </div>
       </div>
     </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="skate" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de <em>skateparks</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre <em>skateparks</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Con qué material construyen las pistas de skate?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Con hormigón de alta resistencia pulido a mano y transiciones suaves, para garantizar seguridad y durabilidad.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Hacen skateparks públicos y privados?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Diseñamos y construimos pistas urbanas para parques públicos y pistas residenciales para casas y fraccionamientos.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta un skatepark?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del diseño y del tamaño. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- ==========================================
@@ -1176,6 +1494,62 @@
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Obras realizadas de este deporte: la completan proyectos.js (en el navegador) y
+         scripts/build-pages.py (en el HTML, para Google). Oculta si no hay proyectos. -->
+    <section class="section surface-obras" data-sport="hockey" style="padding-top:0" hidden>
+      <div class="container">
+        <span class="section-label">Obras realizadas</span>
+        <h2 class="section-title">Proyectos de canchas de <em>hockey</em> que <em>construimos</em></h2>
+        <div class="obras-list"></div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section surface-faq" style="padding-top:0">
+      <div class="container" style="max-width:900px">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas sobre canchas de <em>hockey</em></h2>
+        <div class="accordion-list">
+              <div class="accordion-item active">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Construyen canchas de hockey reglamentarias?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Sí. Construimos canchas de hockey reglamentarias con césped sintético especializado de Real Turf, para la práctica profesional y recreativa.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Césped con arena o sin arena?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Construimos con ambas opciones. Te asesoramos según el nivel de juego y el uso que va a tener la cancha.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Qué ventajas tiene el césped especializado para hockey?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Garantiza un rodamiento rápido y preciso de la bocha y reduce el riesgo de lesiones por fricción.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                  <h3 class="accordion-title">¿Cuánto cuesta una cancha de hockey?</h3>
+                  <div class="accordion-toggle">▼</div>
+                </div>
+                <div class="accordion-body">
+                  Depende del tamaño, del tipo de césped y del terreno. Contanos tu proyecto y te enviamos un presupuesto detallado, sin cargo, en menos de 24 horas.
+                </div>
+              </div>
         </div>
       </div>
     </section>
@@ -2085,7 +2459,7 @@
   <script src="/gsap.min.js"></script>
   <script src="/scrolltrigger.min.js"></script>
   <script src="/motion.js?v=3"></script>
-  <script src="/proyectos.js?v=111"></script>
+  <script src="/proyectos.js?v=112"></script>
 
   <!-- LIGHTBOX MODAL -->
   <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">

@@ -6,6 +6,8 @@ crea /canchas-de-padel/index.html, /nosotros/index.html, etc. con:
   - esa página ya visible (clase "active") y su link del menú marcado,
   - su <title>, meta description, canonical y Open Graph (datos de #page-meta),
   - las imágenes de esa página con src, y las de la home diferidas (data-src),
+  - la sección "Obras realizadas" de cada superficie con links a las fichas de proyecto
+    (lee la API del ERP; si no responde, las secciones quedan ocultas y las completa el JS),
 y regenera sitemap.xml con todas las páginas indexables.
 
 Uso local para previsualizar: python3 scripts/build-pages.py && python3 -m http.server
@@ -16,10 +18,41 @@ import html
 import json
 import os
 import re
+import urllib.request
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 SITE = 'https://dealsports.net'
 SPORT_PAGES = {'padel', 'tenis', 'futbol', 'putting', 'basket', 'skate', 'hockey'}
+TYPE_LABEL = {'edificio': 'Edificio', 'particular': 'Particular', 'urbanizacion': 'Urbanización',
+              'complejo': 'Complejo', 'colegio': 'Colegio', 'club': 'Club'}
+
+
+def fetch_proyectos():
+    try:
+        req = urllib.request.Request(SITE + '/backend/api/web/proyectos.php', headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return json.load(r).get('data') or []
+    except Exception as e:  # sin proyectos el sitio igual funciona: los completa el JS
+        print('aviso: no se pudo leer la API de proyectos:', e)
+        return []
+
+
+def fill_obras(s, proyectos):
+    """Completa cada <section class="... surface-obras" data-sport="X" hidden> con sus proyectos."""
+    def f(m):
+        sport = m.group(2)
+        obras = [p for p in proyectos if p.get('sport') == sport]
+        if not obras:
+            return m.group(0)
+        links = ''.join(
+            '<a class="obra-link" href="/proyectos/{id}{slug}/" onclick="navigateToProject({id}); return false;">'
+            '<span class="obra-link__title">{t}</span><span class="obra-link__meta">{meta}</span></a>'.format(
+                id=p['id'], slug=('-' + p['slug']) if p.get('slug') else '', t=html.escape(p['titulo']),
+                meta=html.escape(' · '.join(x for x in [TYPE_LABEL.get(p.get('type')), p.get('departamento')] if x)))
+            for p in obras)
+        return m.group(1) + ' style="padding-top:0">' + m.group(3) + links + m.group(4)
+    return re.sub(r'(<section class="section surface-obras" data-sport="([a-z]+)") style="padding-top:0" hidden>'
+                  r'(.*?<div class="obras-list">)(</div>)', f, s, flags=re.S)
 
 
 def page_block(s, page):
@@ -47,8 +80,8 @@ def set_attr(s, pattern, value):
     return new
 
 
-def build_page(src, page, meta):
-    s = src
+def build_page(src, page, meta, proyectos):
+    s = fill_obras(src, proyectos)
     # Página visible: sacar "active" de la home y ponérselo a esta
     s = s.replace('class="page active" id="page-home"', 'class="page" id="page-home"', 1)
     s = re.sub(r'class="page" id="page-%s"' % page, 'class="page active" id="page-%s"' % page, s, count=1)
@@ -81,6 +114,7 @@ def build_page(src, page, meta):
 
 def main():
     src = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
+    proyectos = fetch_proyectos()
     meta_all = json.loads(re.search(r'<script type="application/json" id="page-meta">(.*?)</script>', src, re.S).group(1))
 
     for page, meta in meta_all.items():
@@ -93,7 +127,7 @@ def main():
             os.makedirs(out_dir, exist_ok=True)
             out_file = os.path.join(out_dir, 'index.html')
         with open(out_file, 'w', encoding='utf-8') as f:
-            f.write(build_page(src, page, meta))
+            f.write(build_page(src, page, meta, proyectos))
         print('ok ', meta['path'])
 
     today = datetime.date.today().isoformat()
