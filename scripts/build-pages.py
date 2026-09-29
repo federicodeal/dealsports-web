@@ -18,6 +18,7 @@ import html
 import json
 import os
 import re
+import time
 import urllib.request
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
@@ -28,13 +29,20 @@ TYPE_LABEL = {'edificio': 'Edificio', 'particular': 'Particular', 'urbanizacion'
 
 
 def fetch_proyectos():
-    try:
-        req = urllib.request.Request(SITE + '/backend/api/web/proyectos.php', headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=20) as r:
-            return json.load(r).get('data') or []
-    except Exception as e:  # sin proyectos el sitio igual funciona: los completa el JS
-        print('aviso: no se pudo leer la API de proyectos:', e)
-        return []
+    # El CDN de Hostinger a veces responde 403 a los servidores de GitHub: se reintenta con
+    # encabezados de navegador. Si igual falla, el sitio funciona: los completa el JS.
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 '
+                             '(KHTML, like Gecko) Chrome/130.0 Safari/537.36',
+               'Accept': 'application/json,text/plain,*/*', 'Accept-Language': 'es-UY,es;q=0.9'}
+    for intento in range(1, 5):
+        try:
+            req = urllib.request.Request(SITE + '/backend/api/web/proyectos.php', headers=headers)
+            with urllib.request.urlopen(req, timeout=20) as r:
+                return json.load(r).get('data') or []
+        except Exception as e:
+            print(f'aviso: API de proyectos, intento {intento}: {e}')
+            time.sleep(5 * intento)
+    return []
 
 
 def fill_obras(s, proyectos):
