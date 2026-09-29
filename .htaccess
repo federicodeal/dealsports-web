@@ -1,0 +1,5 @@
+# Una sola versión del sitio para Google: www.dealsports.net → dealsports.net (301).
+# /admin y /backend tienen su propio .htaccess con RewriteEngine, así que estas reglas no los afectan.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.dealsports\.net$ [NC]
+RewriteRule ^(.*)$ https://dealsports.net/$1 [R=301,L]
