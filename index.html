@@ -131,7 +131,7 @@
     "knowsAbout": ["Canchas de tenis", "Canchas de pádel", "Fútbol sintético", "Canchas de hockey", "Canchas de basketball y pickleball", "Skateparks", "Putting greens"]
   }
   </script>
-  <link rel="stylesheet" href="/index.css?v=2.5">
+  <link rel="stylesheet" href="/index.css?v=2.6">
   <style>
     /* Immediate Layout Grid Fail-safe */
     .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
@@ -205,21 +205,16 @@
   <div class="page active" id="page-home">
     <section class="hero hero--centered motion-hero">
       <div class="hero__media motion-hero-media">
-        <!-- 
-          Nota sobre el video de fondo:
-          YouTube impone ciertas limitaciones nativas. Aunque se usan parámetros para ocultar controles (controls=0, modestbranding=1, etc.), YouTube puede mostrar brevemente el título, avatar o el botón "Ver más tarde" al inicio. 
-          Para lograr un fondo visual 100% limpio y profesional (sin ningún elemento superpuesto), la mejor alternativa es usar un archivo de video propio (.mp4) alojado en el servidor junto con la etiqueta <video autoplay muted loop playsinline>.
-        -->
-        <iframe
+        <!-- Video de fondo propio (assets/videos/hero.mp4, 720p sin audio). Se carga solo en
+             pantallas grandes, después del load y con la home visible (ver loadHeroVideo). -->
+        <video
           class="hero__video-bg desktop-only-video"
           id="hero-video"
-          title="Video de Deal Sports"
-          data-src="https://www.youtube.com/embed/Sul7ocbsnHc?autoplay=1&mute=1&loop=1&playlist=Sul7ocbsnHc&controls=0&disablekb=1&fs=0&rel=0&playsinline=1&modestbranding=1&vq=hd1080"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
+          data-src="/assets/videos/hero.mp4"
+          poster="/assets/videos/hero-poster.webp"
+          muted loop playsinline preload="none"
           aria-hidden="true"
-        ></iframe>
+        ></video>
         <div class="hero__decor-bg"></div>
       </div>
       <div class="container hero__container motion-hero-content">
@@ -2430,13 +2425,14 @@
     }
 
     // Video del hero: solo en pantallas grandes (en móvil está oculto), recién después del
-    // load y solo si la home está visible, para no demorar la primera pantalla con ~5 MB de YouTube.
+    // load y solo si la home está visible, para no demorar la primera pantalla con los 3,8 MB del video.
     function loadHeroVideo() {
       const v = document.getElementById('hero-video');
       if (v && !v.getAttribute('src') && document.readyState === 'complete'
           && document.getElementById('page-home').classList.contains('active')
           && window.matchMedia('(min-width: 769px)').matches) {
         v.src = v.dataset.src;
+        v.play().catch(() => {});   // autoplay silencioso; si el navegador lo bloquea queda el póster
       }
     }
     window.addEventListener('load', loadHeroVideo);

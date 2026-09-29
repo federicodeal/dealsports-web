@@ -5307,3 +5307,6 @@ button {
 .obra-link__title { font-family: var(--font-display); font-weight: 700; }
 .obra-link__meta { font-size: 14px; color: var(--text-body); }
 .obra-link__meta:empty { display: none; }
+
+/* Video propio del hero (antes iframe de YouTube) */
+video.hero__video-bg { object-fit: cover; }
