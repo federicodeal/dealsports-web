@@ -29,3 +29,4 @@ jobs:
             nginx.conf
             admin/**
             backend/**
+            scripts/**

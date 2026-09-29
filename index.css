@@ -2694,7 +2694,7 @@ button {
   aspect-ratio: 3/4;
   border: 1.5px solid var(--bd-color);
   box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, rgba(3, 85, 83, 0.85) 0%, rgba(12, 19, 18, 0.9) 100%), url('./assets/images/highlight_sports.png') no-repeat center/cover;
+  background: linear-gradient(135deg, rgba(3, 85, 83, 0.85) 0%, rgba(12, 19, 18, 0.9) 100%), url('./assets/images/highlight_sports.webp') no-repeat center/cover;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
