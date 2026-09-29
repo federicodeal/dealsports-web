@@ -3,13 +3,25 @@
  */
 
 // --- API ---
-const ERP_API = `${location.protocol}//${location.hostname}/backend/api`;
+const ERP_API = `${location.origin}/backend/api`;
 
 function resolveImageUrl(url) {
   if (!url) return '';
   if (url.startsWith('http')) return url;
   if (url.startsWith('/assets/')) return url; // relativo al propio sitio
   return ERP_API.replace('/backend/api', '') + url;   // subidas al ERP
+}
+
+// Miniatura para tarjetas y grillas (la foto completa queda para el lightbox).
+// Locales: assets/fotos_web/thumbs/*.webp (se generan con scripts/thumbs.sh).
+// Cloudinary: se pide redimensionada y en formato automático agregando la transformación a la URL.
+function thumbUrl(url) {
+  if (!url) return '';
+  if (url.includes('res.cloudinary.com/') && url.includes('/upload/')) {
+    return url.replace('/upload/', '/upload/w_800,c_limit,f_auto,q_auto/');
+  }
+  const m = url.match(/^(.*\/assets\/fotos_web\/)([^/]+)\.(jpe?g|png)$/i);
+  return m ? `${m[1]}thumbs/${m[2]}.webp` : url;
 }
 
 function mapProject(p) {
@@ -20,6 +32,7 @@ function mapProject(p) {
     sport:       p.sport,
     type:        p.type,
     image:       resolveImageUrl(p.portada_url),
+    thumb:       thumbUrl(resolveImageUrl(p.portada_url)),
     featured:    p.featured == 1,
     date:        p.fecha || '2025-01-01',
     alt:         p.titulo,
@@ -29,242 +42,7 @@ function mapProject(p) {
 }
 
 // --- DATA (cargado desde API) ---
-let projects = [
-  {
-    "id": "proj-0",
-    "title": "Veramansa",
-    "sport": "tenis",
-    "type": "edificio",
-    "image": "./assets/fotos_web/1--veramansa-tenis-edificio.jpg",
-    "featured": true,
-    "date": "2025-01-01"
-  },
-  {
-    "id": "proj-1",
-    "title": "Dovat",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/10-dovat-particular-tenis.jpg",
-    "featured": true,
-    "date": "2025-01-02"
-  },
-  {
-    "id": "proj-2",
-    "title": "Soriano",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/11-soriano-particular.jpg",
-    "featured": true,
-    "date": "2025-01-03"
-  },
-  {
-    "id": "proj-3",
-    "title": "Reserva Montoya",
-    "sport": "tenis",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/12--reserva-montoya-tenis- urbanizacion.jpg",
-    "featured": true,
-    "date": "2025-01-04"
-  },
-  {
-    "id": "proj-4",
-    "title": "Tomas",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/14--tomas-particular tenis.jpg",
-    "featured": true,
-    "date": "2025-01-05"
-  },
-  {
-    "id": "proj-5",
-    "title": "Venetian",
-    "sport": "tenis",
-    "type": "edificio",
-    "image": "./assets/fotos_web/15----venetian-tenis-edificio.jpg",
-    "featured": false,
-    "date": "2025-01-06"
-  },
-  {
-    "id": "proj-6",
-    "title": "Reserva Montoya",
-    "sport": "golf",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/16--reserva-montoya-golf-- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-07"
-  },
-  {
-    "id": "proj-7",
-    "title": "Reserva Montoya",
-    "sport": "padel",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/17---reserva-montoya-padel-- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-08"
-  },
-  {
-    "id": "proj-8",
-    "title": "Solanas",
-    "sport": "tenis",
-    "type": "complejo",
-    "image": "./assets/fotos_web/18---solanas-tenis-complejo.jpg",
-    "featured": false,
-    "date": "2025-01-09"
-  },
-  {
-    "id": "proj-9",
-    "title": "Indigo",
-    "sport": "tenis",
-    "type": "edificio",
-    "image": "./assets/fotos_web/19--indigo-edificio-tenis.jpg",
-    "featured": false,
-    "date": "2025-01-01"
-  },
-  {
-    "id": "proj-10",
-    "title": "Horneros",
-    "sport": "basket",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/2--horneros-pickleball-urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-02"
-  },
-  {
-    "id": "proj-12",
-    "title": "Aura",
-    "sport": "padel",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/21--aura-padel-- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-04"
-  },
-  {
-    "id": "proj-13",
-    "title": "Aura",
-    "sport": "golf",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/22--aura-golf- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-05"
-  },
-  {
-    "id": "proj-14",
-    "title": "Laguna Estates",
-    "sport": "tenis",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/23--laguna-estates-tenis- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-06"
-  },
-  {
-    "id": "proj-15",
-    "title": "Proyecto Deal Sports",
-    "sport": "basket",
-    "type": "particular",
-    "image": "./assets/fotos_web/24--particular-pickleball.jpg",
-    "featured": false,
-    "date": "2025-01-07"
-  },
-  {
-    "id": "proj-16",
-    "title": "Distrito 52",
-    "sport": "padel",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/25---distrito-52-tenis-padel- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-08"
-  },
-  {
-    "id": "proj-17",
-    "title": "Distrito 52",
-    "sport": "futbol",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/26---distrito-52-futbol- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-09"
-  },
-  {
-    "id": "proj-18",
-    "title": "Reserva Montoya",
-    "sport": "skate",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/28---reserva-montoya-skate- urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-01"
-  },
-  {
-    "id": "proj-19",
-    "title": "Aldeana",
-    "sport": "tenis",
-    "type": "edificio",
-    "image": "./assets/fotos_web/29---edificio-aldeana-tenis.jpg",
-    "featured": false,
-    "date": "2025-01-02"
-  },
-  {
-    "id": "proj-20",
-    "title": "Reserva",
-    "sport": "futbol",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/3--reserva-futbol-urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-03"
-  },
-  {
-    "id": "proj-21",
-    "title": "North Schools Multi Cancha",
-    "sport": "hockey",
-    "type": "colegio",
-    "image": "./assets/fotos_web/31---north-schools-hockey-multi-cancha-colegio.jpg",
-    "featured": false,
-    "date": "2025-01-04"
-  },
-  {
-    "id": "proj-22",
-    "title": "Cliente",
-    "sport": "tenis",
-    "type": "particular",
-    "image": "./assets/fotos_web/32---tenis-cliente-particular.jpg",
-    "featured": false,
-    "date": "2025-01-05"
-  },
-  {
-    "id": "proj-24",
-    "title": "Surfside",
-    "sport": "tenis",
-    "type": "edificio",
-    "image": "./assets/fotos_web/5--surfside-edificio.jpeg",
-    "featured": false,
-    "date": "2025-01-07"
-  },
-  {
-    "id": "proj-25",
-    "title": "Los Pinos",
-    "sport": "basket",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/7--pickleball-los-pinos-urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-08"
-  },
-  {
-    "id": "proj-26",
-    "title": "Posada Luz",
-    "sport": "tenis",
-    "type": "urbanizacion",
-    "image": "./assets/fotos_web/8--posada luz-tenis-urbanizacion.jpg",
-    "featured": false,
-    "date": "2025-01-09"
-  },
-  {
-    "id": "proj-27",
-    "title": "Veramansa Polideportiva",
-    "sport": "basket",
-    "type": "edificio",
-    "image": "./assets/fotos_web/9-veramansa-polideportiva-edificio.jpg",
-    "featured": false,
-    "date": "2025-01-01"
-  }
-];
+let projects = [];
 
 // --- STATE ---
 let activeSport = 'all';
@@ -300,7 +78,7 @@ function buildCarouselCards(list, onclick) {
   return list.map(p => `
     <div class="fc-slide">
       <div class="portfolio-card" onclick="${onclick}(${p._id})">
-        <div class="portfolio-card__bg" style="background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 100%),url('${p.image}') center/cover no-repeat;"></div>
+        <div class="portfolio-card__bg" style="background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 100%),url('${p.thumb}') center/cover no-repeat;"></div>
         <div class="portfolio-card__tags">
           <span class="portfolio-card__tag">${SPORT_LABEL[p.sport] || p.sport}</span>
           ${p.departamento ? `<span class="portfolio-card__tag">${p.departamento}</span>` : ''}
@@ -438,7 +216,7 @@ function renderProjectDetail(p) {
   if (galleryEl) {
     galleryEl.innerHTML = proyGalleryPhotos.map((url, i) => `
       <div class="proy-photo" onclick="openProyLightbox(${i})">
-        <img src="${url}" alt="${p.titulo} foto ${i+1}" loading="lazy">
+        <img src="${thumbUrl(url)}" alt="${p.titulo} foto ${i+1}" loading="lazy">
       </div>
     `).join('');
   }
@@ -490,24 +268,37 @@ function updateProyLightbox() {
 }
 
 // ── DOM INIT ──────────────────────────────────────────────────────
-document.addEventListener("DOMContentLoaded", async () => {
-  projects = await fetchProyectos();
-  currentFilteredProjects = [...projects];
+// La última lista se guarda en el navegador: en visitas siguientes el carrusel y el
+// portafolio se dibujan al instante y la API solo se consulta para actualizar.
+const PROY_CACHE_KEY = 'ds_proyectos_v1';
 
-  renderFeaturedHome();
-
-  if (!document.getElementById("portfolio-grid-dynamic")) return;
-  initGallery();
-});
-
-function initGallery() {
-  bindFilters();
-  bindSorting();
-  bindViewModes();
-  bindLightbox();
-
-  applyFiltersAndRender();
+function readCachedProyectos() {
+  try { return JSON.parse(localStorage.getItem(PROY_CACHE_KEY)) || null; } catch (_) { return null; }
 }
+
+function renderProjects(list) {
+  projects = list;
+  currentFilteredProjects = [...projects];
+  renderFeaturedHome();
+  if (document.getElementById("portfolio-grid-dynamic")) applyFiltersAndRender();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  if (document.getElementById("portfolio-grid-dynamic")) {
+    bindFilters();
+    bindSorting();
+    bindViewModes();
+    bindLightbox();
+  }
+
+  const cached = readCachedProyectos();
+  if (cached && cached.length) renderProjects(cached);
+
+  const fresh = await fetchProyectos();
+  if (!fresh.length) return;   // API caída: queda lo que había en caché
+  if (!cached || JSON.stringify(cached) !== JSON.stringify(fresh)) renderProjects(fresh);
+  try { localStorage.setItem(PROY_CACHE_KEY, JSON.stringify(fresh)); } catch (_) {}
+});
 
 // --- FILTERING & RENDERING ---
 function bindFilters() {
@@ -620,7 +411,7 @@ function applyFiltersAndRender() {
     const card = document.createElement('div');
     card.className = 'portfolio-item dynamic-card';
     card.innerHTML = `
-      <div class="portfolio-item__bg" style="background: url('${proj.image}') center/cover no-repeat;"></div>
+      <div class="portfolio-item__bg" style="background: url('${proj.thumb}') center/cover no-repeat;"></div>
       <div class="portfolio-item__overlay">
         <h3 class="portfolio-item__title">${proj.title}</h3>
         <p class="portfolio-item__type">${formatCategory(proj.sport)} · ${formatType(proj.type)}</p>
