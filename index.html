@@ -2270,9 +2270,11 @@
       // Página 404 servida por el servidor: se queda como está (y en la URL pedida)
       if (active === '404') { applyPageMeta('404'); return; }
 
-      // Detalle de proyecto: /proyectos/12-nombre/ (o el formato viejo /proyecto/?id=12)
-      const m = location.pathname.match(/^\/proyectos\/(\d+)(?:-[^/]*)?\/?$/);
-      const id = m ? m[1] : (location.pathname.startsWith('/proyecto/') ? new URLSearchParams(location.search).get('id') : null);
+      // Detalle de proyecto: /proyectos/<slug>/ (la arma el servidor y trae su id en
+      // #proy-content[data-id]) o el formato viejo /proyecto/?id=12
+      const ficha = /^\/proyectos\/[^/]+\/?$/.test(location.pathname)
+        ? document.getElementById('proy-content')?.dataset.id : null;
+      const id = ficha || (location.pathname.startsWith('/proyecto/') ? new URLSearchParams(location.search).get('id') : null);
       if (id) {
         history.replaceState({ page: 'proyecto', id }, '', location.pathname + location.search);
         document.addEventListener('DOMContentLoaded', () => navigateToProject(id, false));
@@ -2459,7 +2461,7 @@
   <script src="/gsap.min.js"></script>
   <script src="/scrolltrigger.min.js"></script>
   <script src="/motion.js?v=3"></script>
-  <script src="/proyectos.js?v=112"></script>
+  <script src="/proyectos.js?v=113"></script>
 
   <!-- LIGHTBOX MODAL -->
   <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">

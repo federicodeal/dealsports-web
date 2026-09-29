@@ -178,10 +178,10 @@ async function renderFeaturedHome() {
 let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
-// URL de la ficha: /proyectos/12-nombre-del-proyecto/ (la arma el servidor con el mismo slug)
+// URL de la ficha: /proyectos/<slug>/ (el slug lo genera el ERP, único por proyecto)
 function projectUrl(id) {
   const p = projects.find(q => String(q._id) === String(id));
-  return `/proyectos/${id}${p && p.slug ? '-' + p.slug : ''}/`;
+  return p && p.slug ? `/proyectos/${p.slug}/` : `/proyecto/?id=${id}`;
 }
 
 async function navigateToProject(id, pushHistory) {

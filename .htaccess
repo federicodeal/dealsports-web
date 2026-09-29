@@ -4,9 +4,11 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.dealsports\.net$ [NC]
 RewriteRule ^(.*)$ https://dealsports.net/$1 [R=301,L]
 
-# Ficha de cada proyecto (/proyectos/12-nombre/): la arma el ERP desde la base con título,
+# Ficha de cada proyecto (/proyectos/<slug>/): la arma el ERP desde la base con título,
 # descripción y fotos, para que Google la lea sin JavaScript. /proyectos/ sola es el portafolio.
-RewriteRule ^proyectos/([0-9]+)(-[^/]*)?/?$ backend/web/ficha_proyecto.php?id=$1 [L,QSA]
+# Las URLs viejas con id (/proyectos/12-nombre/) las redirige el mismo PHP.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^proyectos/([^/]+)/?$ backend/web/ficha_proyecto.php?seg=$1 [L,QSA]
 
 # Sitemap de proyectos, generado desde la base
 RewriteRule ^sitemap-proyectos\.xml$ backend/web/sitemap_proyectos.php [L]

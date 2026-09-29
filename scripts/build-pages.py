@@ -45,9 +45,9 @@ def fill_obras(s, proyectos):
         if not obras:
             return m.group(0)
         links = ''.join(
-            '<a class="obra-link" href="/proyectos/{id}{slug}/" onclick="navigateToProject({id}); return false;">'
+            '<a class="obra-link" href="/proyectos/{slug}/" onclick="navigateToProject({id}); return false;">'
             '<span class="obra-link__title">{t}</span><span class="obra-link__meta">{meta}</span></a>'.format(
-                id=p['id'], slug=('-' + p['slug']) if p.get('slug') else '', t=html.escape(p['titulo']),
+                id=p['id'], slug=p.get('slug') or p['id'], t=html.escape(p['titulo']),
                 meta=html.escape(' · '.join(x for x in [TYPE_LABEL.get(p.get('type')), p.get('departamento')] if x)))
             for p in obras)
         return m.group(1) + ' style="padding-top:0">' + m.group(3) + links + m.group(4)
