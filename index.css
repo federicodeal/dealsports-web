@@ -5293,3 +5293,9 @@ button {
 .hero-title__word--em {
   color: var(--brand-orange) !important;
 }
+
+/* Links reales del menú y el footer (antes eran <span>): mismo aspecto que antes */
+:where(a.nav-link, a.nav-dropdown-item, a.footer__link, a.header__logo) { color: inherit; text-decoration: none; }
+
+/* Texto solo para lectores de pantalla y buscadores */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

@@ -8,9 +8,9 @@
   <meta name="description" content="Construimos canchas de tenis, pádel, fútbol sintético, hockey, basket, skateparks y putting greens en todo Uruguay. 40 años de experiencia. Pedí tu presupuesto sin cargo.">
   <link rel="canonical" href="https://dealsports.net/">
   <meta name="theme-color" content="#0b5452">
-  <link rel="icon" href="./assets/logo/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="./assets/logo/favicon-180.png" type="image/png">
-  <link rel="apple-touch-icon" href="./assets/logo/favicon-180.png">
+  <link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/logo/favicon-180.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/logo/favicon-180.png">
 
   <!-- Open Graph / vista previa al compartir (WhatsApp, Facebook, LinkedIn) -->
   <meta property="og:type" content="website">
@@ -25,6 +25,83 @@
   <meta property="og:image:alt" content="Vista aérea de canchas de tenis, pádel, basket y skatepark construidas por Deal Sports">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Rutas, títulos y descripciones de cada página. Lo usan el router y scripts/build-pages.py -->
+  <script type="application/json" id="page-meta">
+{
+    "home": {
+      "path": "/",
+      "title": "Deal Sports — Construcción de Superficies Deportivas en Uruguay",
+      "description": "Construimos canchas de tenis, pádel, fútbol sintético, hockey, basket, skateparks y putting greens en todo Uruguay. 40 años de experiencia. Pedí tu presupuesto sin cargo."
+    },
+    "nosotros": {
+      "path": "/nosotros/",
+      "title": "Nosotros: 40 años construyendo deporte en Uruguay | Deal Sports",
+      "description": "Empresa uruguaya con cuatro décadas construyendo canchas y más de 120.000 m² de superficies deportivas en todo el país."
+    },
+    "tenis": {
+      "path": "/canchas-de-tenis/",
+      "title": "Construcción de canchas de tenis en Uruguay | Deal Sports",
+      "description": "Canchas de tenis de polvo de ladrillo, carpeta asfáltica y pasto sintético. 40 años construyendo canchas de tenis en Uruguay con los mejores estándares."
+    },
+    "padel": {
+      "path": "/canchas-de-padel/",
+      "title": "Construcción de canchas de pádel en Uruguay | Deal Sports",
+      "description": "Representantes oficiales de Padel Tech (España) y Fortune Padel en Uruguay. Diseño, construcción e instalación de canchas de pádel."
+    },
+    "futbol": {
+      "path": "/futbol-sintetico/",
+      "title": "Canchas de fútbol sintético en Uruguay | Deal Sports",
+      "description": "Césped artificial de alta performance para canchas de fútbol: poco mantenimiento y juego todo el año. Pedí tu presupuesto sin cargo."
+    },
+    "putting": {
+      "path": "/putting-green/",
+      "title": "Putting greens de pasto sintético en Uruguay | Deal Sports",
+      "description": "Putting green y zona de chip para casas, hoteles y fraccionamientos, con diseño personalizado y pasto sintético de alta fidelidad."
+    },
+    "basket": {
+      "path": "/canchas-polideportivas/",
+      "title": "Canchas polideportivas, basketball y pickleball en Uruguay | Deal Sports",
+      "description": "Canchas polideportivas para basketball, pickleball y más deportes. La solución más eficiente para edificios, colegios, clubes y complejos."
+    },
+    "skate": {
+      "path": "/skateparks/",
+      "title": "Construcción de skateparks en Uruguay | Deal Sports",
+      "description": "Diseño y construcción de pistas de skate en hormigón pulido y rampas de alta performance para parques públicos y residencias."
+    },
+    "hockey": {
+      "path": "/canchas-de-hockey/",
+      "title": "Canchas de hockey de césped sintético en Uruguay | Deal Sports",
+      "description": "Superficies de césped sintético con o sin arena para la práctica profesional y recreativa de hockey sobre césped."
+    },
+    "servicios": {
+      "path": "/servicios/",
+      "title": "Cerramientos, iluminación LED y asesoramiento de obra | Deal Sports",
+      "description": "Más allá de la cancha: cerramientos, iluminación LED, asesoramiento y mantenimiento de superficies deportivas. Un solo proveedor para tu proyecto."
+    },
+    "proveedores": {
+      "path": "/proveedores/",
+      "title": "Marcas y proveedores: Laykold, Real Turf, Padel Tech y más | Deal Sports",
+      "description": "Representantes y proveedores oficiales de Laykold, Real Turf, Durocolor, Padel Tech y Fortune Padel en Uruguay."
+    },
+    "portafolio": {
+      "path": "/proyectos/",
+      "title": "Proyectos realizados en todo Uruguay | Deal Sports",
+      "description": "Canchas de tenis, pádel, fútbol, hockey y más construidas por Deal Sports en edificios, clubes, colegios y casas particulares de todo Uruguay."
+    },
+    "contacto": {
+      "path": "/contacto/",
+      "title": "Contacto y presupuesto | Deal Sports",
+      "description": "Contanos tu proyecto y te respondemos en menos de 24 horas, sin cargo y sin compromiso. También por WhatsApp al +598 96 001 740."
+    },
+    "proyecto": {
+      "path": "/proyecto/",
+      "title": "Proyecto | Deal Sports",
+      "description": "Proyecto de construcción deportiva realizado por Deal Sports en Uruguay.",
+      "noindex": true
+    }
+  }
+  </script>
+
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
   {
@@ -36,11 +113,19 @@
     "logo": "https://dealsports.net/assets/logo/log.svg",
     "image": "https://dealsports.net/assets/og/deal-sports-og.jpg",
     "telephone": "+598 96 001 740",
+    "email": "info@dealsports.net",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ruta 10 esq. Los Suspiros",
+      "addressLocality": "La Barra",
+      "addressRegion": "Maldonado",
+      "addressCountry": "UY"
+    },
     "areaServed": { "@type": "Country", "name": "Uruguay" },
     "knowsAbout": ["Canchas de tenis", "Canchas de pádel", "Fútbol sintético", "Canchas de hockey", "Canchas de basketball y pickleball", "Skateparks", "Putting greens"]
   }
   </script>
-  <link rel="stylesheet" href="index.css?v=2.2">
+  <link rel="stylesheet" href="/index.css?v=2.3">
   <style>
     /* Immediate Layout Grid Fail-safe */
     .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
@@ -71,33 +156,33 @@
   <header class="header header--transparent" id="main-header">
     <div class="container header__inner">
       <!-- Vector Logo -->
-      <div class="header__logo" onclick="navigate('home')">
-        <img id="header-logo-img" src="./assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 34px; width: auto; object-fit: contain; transition: var(--trans);">
-      </div>
+      <a href="/" class="header__logo" onclick="navigate('home'); return false;" aria-label="Deal Sports, inicio">
+        <img id="header-logo-img" src="/assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 34px; width: auto; object-fit: contain; transition: var(--trans);">
+      </a>
 
       <!-- Navigation Links -->
       <nav class="header__nav" id="main-nav">
-        <span class="nav-link active" onclick="navigate('home')" id="nav-home">Inicio</span>
-        <span class="nav-link" onclick="navigate('nosotros')" id="nav-nosotros">Nosotros</span>
+        <a href="/" class="nav-link active" onclick="navigate('home'); return false;" id="nav-home">Inicio</a>
+        <a href="/nosotros/" class="nav-link" onclick="navigate('nosotros'); return false;" id="nav-nosotros">Nosotros</a>
         
         <!-- Dropdown Surfaces -->
         <div class="nav-dropdown">
           <span class="nav-link" id="nav-superficies">Superficies ▾</span>
           <div class="nav-dropdown-menu">
-            <span class="nav-dropdown-item" onclick="navigate('tenis')">Canchas de Tenis</span>
-            <span class="nav-dropdown-item" onclick="navigate('padel')">Canchas de Padel</span>
-            <span class="nav-dropdown-item" onclick="navigate('futbol')">Fútbol Sintético</span>
-            <span class="nav-dropdown-item" onclick="navigate('putting')">Putting Green & Chip</span>
-            <span class="nav-dropdown-item" onclick="navigate('basket')">Basketball & Pickleball</span>
-            <span class="nav-dropdown-item" onclick="navigate('skate')">Skateparks</span>
-            <span class="nav-dropdown-item" onclick="navigate('hockey')">Canchas de Hockey</span>
+            <a href="/canchas-de-tenis/" class="nav-dropdown-item" onclick="navigate('tenis'); return false;">Canchas de Tenis</a>
+            <a href="/canchas-de-padel/" class="nav-dropdown-item" onclick="navigate('padel'); return false;">Canchas de Padel</a>
+            <a href="/futbol-sintetico/" class="nav-dropdown-item" onclick="navigate('futbol'); return false;">Fútbol Sintético</a>
+            <a href="/putting-green/" class="nav-dropdown-item" onclick="navigate('putting'); return false;">Putting Green & Chip</a>
+            <a href="/canchas-polideportivas/" class="nav-dropdown-item" onclick="navigate('basket'); return false;">Basketball & Pickleball</a>
+            <a href="/skateparks/" class="nav-dropdown-item" onclick="navigate('skate'); return false;">Skateparks</a>
+            <a href="/canchas-de-hockey/" class="nav-dropdown-item" onclick="navigate('hockey'); return false;">Canchas de Hockey</a>
           </div>
         </div>
 
-        <span class="nav-link" onclick="navigate('servicios')" id="nav-servicios">Servicios</span>
-        <span class="nav-link" onclick="navigate('proveedores')" id="nav-proveedores">Proveedores</span>
-        <span class="nav-link" onclick="navigate('portafolio')" id="nav-portafolio">Proyectos</span>
-        <span class="nav-link nav-link--mobile-contact" onclick="navigate('contacto')" id="nav-contacto">Presupuesto</span>
+        <a href="/servicios/" class="nav-link" onclick="navigate('servicios'); return false;" id="nav-servicios">Servicios</a>
+        <a href="/proveedores/" class="nav-link" onclick="navigate('proveedores'); return false;" id="nav-proveedores">Proveedores</a>
+        <a href="/proyectos/" class="nav-link" onclick="navigate('portafolio'); return false;" id="nav-portafolio">Proyectos</a>
+        <a href="/contacto/" class="nav-link nav-link--mobile-contact" onclick="navigate('contacto'); return false;" id="nav-contacto">Presupuesto</a>
       </nav>
 
       <!-- CTA Nav Button -->
@@ -213,7 +298,7 @@
           <div class="overview-visual" aria-label="Tenista frente a una cancha deportiva construida por Deal Sports">
             <img loading="lazy"
               class="overview-visual__image"
-              src="./assets/images/tenis-home.webp"
+              src="/assets/images/tenis-home.webp"
               alt="Tenista frente a una cancha polideportiva construida por Deal Sports"
             >
           </div>
@@ -227,25 +312,25 @@
       <div class="logo-marquee logo-marquee--left">
         <div class="logo-marquee__track">
           <!-- Set 1 -->
-          <img src="./marquee/artboard 1 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 1 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 1.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
           <!-- Duplicado para loop -->
-          <img src="./marquee/artboard 1 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 1 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 1.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 3.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 1.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 3.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
         </div>
       </div>
 
@@ -253,25 +338,25 @@
       <div class="logo-marquee logo-marquee--right">
         <div class="logo-marquee__track">
           <!-- Set 1 -->
-          <img src="./marquee/artboard 4 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 4 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 4.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
           <!-- Duplicado para loop -->
-          <img src="./marquee/artboard 4 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 4 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 4.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 5.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
-          <img src="./marquee/artboard 6.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 4.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 5.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6 copy 2.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6 copy.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
+          <img src="/marquee/artboard 6.webp" alt="Logo de cliente" loading="lazy" class="marquee-logo">
         </div>
       </div>
     </section>
@@ -359,7 +444,7 @@
           <!-- Left: Large Image Container -->
           <div class="villa-visual">
             <span class="villa-badge">40 Años de Trayectoria</span>
-            <img loading="lazy" src="./assets/fotos_web/solanas.webp" alt="Construcción Deal Sports">
+            <img loading="lazy" src="/assets/fotos_web/solanas.webp" alt="Construcción Deal Sports">
           </div>
           <!-- Right: Accordion Details -->
           <div>
@@ -489,27 +574,27 @@
         <div class="partners-container motion-text-reveal">
           <div class="partners-grid">
             <a class="partner-logo-box" href="https://www.realturf.com" target="_blank" rel="noopener">
-              <img loading="lazy" src="./assets/svg/real turf.svg" alt="Real Turf Logo" style="height: 44px;">
+              <img loading="lazy" src="/assets/svg/real turf.svg" alt="Real Turf Logo" style="height: 44px;">
               <div class="partner-logo-name">Real Turf</div>
               <div class="partner-logo-desc">España</div>
             </a>
             <a class="partner-logo-box" href="https://www.durocolor.com.br" target="_blank" rel="noopener">
-              <img loading="lazy" src="./assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 40px;">
+              <img loading="lazy" src="/assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 40px;">
               <div class="partner-logo-name">Durocolor</div>
               <div class="partner-logo-desc">Brasil</div>
             </a>
             <a class="partner-logo-box" href="https://www.laykold.com" target="_blank" rel="noopener">
-              <img loading="lazy" src="./assets/svg/laykold.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
+              <img loading="lazy" src="/assets/svg/laykold.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
               <div class="partner-logo-name">Laykold</div>
               <div class="partner-logo-desc">USA</div>
             </a>
             <a class="partner-logo-box" href="https://www.padeltech.com" target="_blank" rel="noopener">
-              <img loading="lazy" src="./assets/svg/padel tech.svg" alt="Padel Tech Logo" style="height: 42px;">
+              <img loading="lazy" src="/assets/svg/padel tech.svg" alt="Padel Tech Logo" style="height: 42px;">
               <div class="partner-logo-name">Padel Tech</div>
               <div class="partner-logo-desc">España</div>
             </a>
             <a class="partner-logo-box" href="https://www.fotunepadel.com" target="_blank" rel="noopener">
-              <img loading="lazy" src="./assets/svg/fortune padel.svg" alt="Fortune Padel Logo" style="height: 42px;">
+              <img loading="lazy" src="/assets/svg/fortune padel.svg" alt="Fortune Padel Logo" style="height: 42px;">
               <div class="partner-logo-name">Fortune Padel</div>
               <div class="partner-logo-desc">China</div>
             </a>
@@ -533,7 +618,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Una empresa uruguaya que convirtió la pasión por el deporte en cuatro décadas de obras, clientes satisfechos y más de 120.000 m² construidos.</p>
         </div>
         <div class="page-hero__visual motion-page-hero-visual">
-          <img loading="lazy" data-src="./assets/fotos_web/grass.webp" alt="Nosotros Deal Sports">
+          <img loading="lazy" data-src="/assets/fotos_web/grass.webp" alt="Nosotros Deal Sports">
         </div>
       </div>
     </section>
@@ -545,7 +630,7 @@
           <div class="ns-intro__left motion-image-left">
             <h2 class="ns-intro__title">De la primera cancha a los <em>120.000 m²</em></h2>
             <div class="ns-intro-visual">
-              <img loading="lazy" data-src="./assets/fotos_web/moraleja-5.webp" alt="Obra de Deal Sports en Uruguay">
+              <img loading="lazy" data-src="/assets/fotos_web/moraleja-5.webp" alt="Obra de Deal Sports en Uruguay">
             </div>
           </div>
           <div class="ns-intro__right motion-image-left">
@@ -554,7 +639,7 @@
               <p class="ns-quote-text motion-text-reveal">Cada proyecto que entregamos lleva el respaldo de una empresa que conoce cada tipo de suelo, cada variable climática y cada exigencia técnica del deporte en Uruguay.</p>
             </div>
             <div class="ns-intro-visual">
-              <img loading="lazy" data-src="./assets/fotos_web/dji_0693.webp" alt="Instalaciones deportivas Deal Sports">
+              <img loading="lazy" data-src="/assets/fotos_web/dji_0693.webp" alt="Instalaciones deportivas Deal Sports">
             </div>
           </div>
         </div>
@@ -736,7 +821,7 @@
             <button class="btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
           </div>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/padel.webp" alt="Canchas de Padel">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/padel.webp" alt="Canchas de Padel">
       </div>
     </section>
 
@@ -807,7 +892,7 @@
             <p class="page-hero__sub motion-page-hero-sub" style="font-size:16px;color:var(--text-body);line-height:1.75;margin-bottom:24px">El tenis fue el punto de partida de Deal Sports hace cuatro décadas. Ofrecemos todas las superficies reglamentarias con materiales de primer nivel y garantía de obra.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/tenis_guy-2.webp" alt="Cancha de Tenis">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/tenis_guy-2.webp" alt="Cancha de Tenis">
       </div>
     </section>
 
@@ -819,17 +904,17 @@
         
         <div class="grid-3" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
           <div class="option-box motion-card-reveal" data-delay="1">
-            <img loading="lazy" data-src="./assets/fotos_web/resina-asfaltica.webp" alt="Carpeta Asfáltica" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <img loading="lazy" data-src="/assets/fotos_web/resina-asfaltica.webp" alt="Carpeta Asfáltica" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Carpeta Asfáltica y Resinas Acrílicas</h3></div>
             <p class="option-desc motion-text-reveal">Estos sistemas son de acrílico de alto rendimiento, con 3 o 4 capas, y ofrecen una superficie antideslizante, resistente y duradera. Las pistas duras tradicionales de Deal Sports cuentan con capas superiores de calidad US Open que brindan un rendimiento de Grand Slam, utilizando resinas de primer nivel. Requieren el menor mantenimiento. (tenis, multideportiva)</p>
           </div>
           <div class="option-box motion-card-reveal" data-delay="2">
-            <img loading="lazy" data-src="./assets/fotos_web/pasto-sintetico.webp" alt="Pasto Sintético" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <img loading="lazy" data-src="/assets/fotos_web/pasto-sintetico.webp" alt="Pasto Sintético" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Pasto Sintético</h3></div>
             <p class="option-desc motion-text-reveal">Fibra artificial de última generación (Real Turf). Durabilidad superior, muy bajo mantenimiento. Comportamiento similar al pasto natural. Deal Sports Tenis Rust ofrece una calidad de Juego y entrenamiento para un nivel confortable y seguro. Requieren un mantenimiento medio. (tenis, futbol, Hockey, golf, padel)</p>
           </div>
           <div class="option-box motion-card-reveal" data-delay="3">
-            <img loading="lazy" data-src="./assets/fotos_web/polvo-de-ladrillo.webp" alt="Polvo de Ladrillo" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
+            <img loading="lazy" data-src="/assets/fotos_web/polvo-de-ladrillo.webp" alt="Polvo de Ladrillo" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 50px;">
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name">Polvo de Ladrillo</h3></div>
             <p class="option-desc motion-text-reveal">Las canchas de polvo de ladrillo (también conocidas como arcilla o tierra batida) son la superficie más popular y tradicional en Sudamérica para jugar al tenis. Ofrecen un juego más lento, permiten el deslizamiento controlado y reducen el impacto en las articulaciones en comparación con el cemento. Mantenimiento intensivo. (tenis)</p>
           </div>
@@ -850,12 +935,12 @@
           
           <div class="partners-grid" style="display: flex; gap: 20px; flex-wrap: wrap; flex: 2; min-width: 300px; justify-content: flex-start;">
             <div class="partner-logo-box" style="flex: 1; min-width: 200px; max-width: 280px;">
-              <img loading="lazy" data-src="./assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 40px;">
+              <img loading="lazy" data-src="/assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 40px;">
               <div class="partner-logo-name">Durocolor</div>
               <div class="partner-logo-desc">Brasil</div>
             </div>
             <div class="partner-logo-box" style="flex: 1; min-width: 200px; max-width: 280px;">
-              <img loading="lazy" data-src="./assets/svg/laykold.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
+              <img loading="lazy" data-src="/assets/svg/laykold.svg" alt="Laykold Logo" style="height: 18px; margin-top: 13px; margin-bottom: 27px;">
               <div class="partner-logo-name">Laykold</div>
               <div class="partner-logo-desc">USA</div>
             </div>
@@ -882,7 +967,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Césped artificial de alta performance. Poco mantenimiento, mucho juego, todo el año.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Pedir presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/futbol.webp" alt="Cancha de Fútbol">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/futbol.webp" alt="Cancha de Fútbol">
       </div>
     </section>
 
@@ -927,7 +1012,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Llevá el golf a tu casa, hotel o fraccionamiento. Diseño personalizado con pasto sintético de alta fidelidad.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Consultar <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/golf.webp" alt="Putting Green">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/golf.webp" alt="Putting Green">
       </div>
     </section>
 
@@ -972,7 +1057,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Un espacio para múltiples deportes. La solución más eficiente para edificios, colegios, clubs and complejos.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/basket.webp" alt="Cancha de Basket">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/basket.webp" alt="Cancha de Basket">
       </div>
     </section>
 
@@ -1017,7 +1102,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Diseño y construcción de pistas de skate en hormigón pulido y rampas de alta performance para parques públicos y residencias.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/skate.webp" alt="Skatepark">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/skate.webp" alt="Skatepark">
       </div>
     </section>
 
@@ -1062,7 +1147,7 @@
           <p class="page-hero__sub motion-page-hero-sub">Superficies de césped sintético con o sin arena para la práctica profesional y recreativa de hockey sobre césped.</p>
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitá presupuesto <span class="btn-arrow-circle">↗</span></button>
         </div>
-        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="./assets/images/hockey.webp" alt="Cancha de Hockey">
+        <img loading="lazy" class="surface-hero-image motion-page-hero-visual" data-src="/assets/images/hockey.webp" alt="Cancha de Hockey">
       </div>
     </section>
 
@@ -1108,7 +1193,7 @@
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Solicitar asesoramiento <span class="btn-arrow-circle">↗</span></button>
         </div>
         <div class="page-hero__visual motion-page-hero-visual">
-          <img loading="lazy" data-src="./assets/fotos_web/magnific_recreate_cdj8yjp0ep.webp" alt="Construcción deportiva">
+          <img loading="lazy" data-src="/assets/fotos_web/magnific_recreate_cdj8yjp0ep.webp" alt="Construcción deportiva">
         </div>
       </div>
     </section>
@@ -1121,7 +1206,7 @@
         <div class="grid-4 services-grid">
           <div class="option-box  motion-card-reveal" data-delay="1">
             <figure class="service-card__media">
-              <img loading="lazy" data-src="./assets/fotos_web/a052e286-68f3-416c-849d-7354113f3216.webp" alt="Cerramientos para canchas deportivas">
+              <img loading="lazy" data-src="/assets/fotos_web/a052e286-68f3-416c-849d-7354113f3216.webp" alt="Cerramientos para canchas deportivas">
             </figure>
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Cerramientos</h3></div>
             <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Malla metálica, vidrio templado o policarbonato. Para canchas individuales y cerramientos perimetrales de complejos completos.</p>
@@ -1135,7 +1220,7 @@
 
           <div class="option-box  motion-card-reveal" data-delay="2">
             <figure class="service-card__media">
-              <img loading="lazy" data-src="./assets/fotos_web/542f906d-481a-4409-aefe-c7b8c6a3e004.webp" alt="Iluminación LED para canchas deportivas">
+              <img loading="lazy" data-src="/assets/fotos_web/542f906d-481a-4409-aefe-c7b8c6a3e004.webp" alt="Iluminación LED para canchas deportivas">
             </figure>
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Iluminación LED</h3></div>
             <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Diseño lumínico, instalación y puesta en marcha. Reducción de hasta 70% en consumo energético respecto a la iluminación halógena.</p>
@@ -1149,7 +1234,7 @@
 
           <div class="option-box  motion-card-reveal" data-delay="3">
             <figure class="service-card__media">
-              <img loading="lazy" data-src="./assets/fotos_web/dji_0709.webp" alt="Asesoramiento de obra deportiva">
+              <img loading="lazy" data-src="/assets/fotos_web/dji_0709.webp" alt="Asesoramiento de obra deportiva">
             </figure>
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Asesoramiento de obra</h3></div>
             <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Desde la idea hasta la cancha terminada. Evaluación del terreno, planificación del espacio y selección de materiales según tu proyecto.</p>
@@ -1163,7 +1248,7 @@
 
           <div class="option-box  motion-card-reveal" data-delay="4">
             <figure class="service-card__media">
-              <img loading="lazy" data-src="./assets/fotos_web/img_0432.webp" alt="Mantenimiento de superficies deportivas">
+              <img loading="lazy" data-src="/assets/fotos_web/img_0432.webp" alt="Mantenimiento de superficies deportivas">
             </figure>
             <div class="option-header"><div class="option-dot"></div><h3 class="option-name" style="font-size: 20px;">Mantenimiento</h3></div>
             <p class="option-desc motion-text-reveal" style="margin-bottom: 20px;">Servicio post-venta para extender la vida útil de tu inversión. Reparación de superficies, renovación de líneas y revisión de estructuras.</p>
@@ -1196,7 +1281,7 @@
             <button class="btn motion-page-hero-btn btn-primary" onclick="navigate('contacto')">Consultar representaciones <span class="btn-arrow-circle">↗</span></button>
         </div>
         <div class="page-hero__visual motion-page-hero-visual">
-          <img loading="lazy" data-src="./assets/images/fifa1.webp" alt="Calidad certificada">
+          <img loading="lazy" data-src="/assets/images/fifa1.webp" alt="Calidad certificada">
         </div>
       </div>
     </section>
@@ -1210,7 +1295,7 @@
           <div class="option-box  motion-card-reveal" data-delay="1" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="margin-bottom: 16px;">
-                <img loading="lazy" data-src="./assets/svg/padel tech.svg" alt="Padel Tech Logo" style="height: 36px; width: auto; object-fit: contain;">
+                <img loading="lazy" data-src="/assets/svg/padel tech.svg" alt="Padel Tech Logo" style="height: 36px; width: auto; object-fit: contain;">
               </div>
               <h3 class="card__title" style="margin-bottom: 4px;">Padel Tech</h3>
               <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Madrid, España</p>
@@ -1222,7 +1307,7 @@
           <div class="option-box  motion-card-reveal" data-delay="2" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="margin-bottom: 16px;">
-                <img loading="lazy" data-src="./assets/svg/fortune padel.svg" alt="Fortune Padel Logo" style="height: 36px; width: auto; object-fit: contain;">
+                <img loading="lazy" data-src="/assets/svg/fortune padel.svg" alt="Fortune Padel Logo" style="height: 36px; width: auto; object-fit: contain;">
               </div>
               <h3 class="card__title" style="margin-bottom: 4px;">Fortune Padel</h3>
               <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">China</p>
@@ -1234,7 +1319,7 @@
           <div class="option-box  motion-card-reveal" data-delay="3" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="margin-bottom: 16px;">
-                <img loading="lazy" data-src="./assets/svg/real turf.svg" alt="Real Turf Logo" style="height: 36px; width: auto; object-fit: contain;">
+                <img loading="lazy" data-src="/assets/svg/real turf.svg" alt="Real Turf Logo" style="height: 36px; width: auto; object-fit: contain;">
               </div>
               <h3 class="card__title" style="margin-bottom: 4px;">Real Turf</h3>
               <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Pasto sintético</p>
@@ -1246,7 +1331,7 @@
           <div class="option-box  motion-card-reveal" data-delay="4" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="margin-bottom: 16px;">
-                <img loading="lazy" data-src="./assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 36px; width: auto; object-fit: contain;">
+                <img loading="lazy" data-src="/assets/svg/durocolor.svg" alt="Durocolor Logo" style="height: 36px; width: auto; object-fit: contain;">
               </div>
               <h3 class="card__title" style="margin-bottom: 4px;">Durocolor</h3>
               <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Brasil</p>
@@ -1258,7 +1343,7 @@
           <div class="option-box  motion-card-reveal" data-delay="5" style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="margin-bottom: 16px;">
-                <img loading="lazy" data-src="./assets/svg/laykold.svg" alt="Laykold Logo" style="height: 25px; width: auto; object-fit: contain;">
+                <img loading="lazy" data-src="/assets/svg/laykold.svg" alt="Laykold Logo" style="height: 25px; width: auto; object-fit: contain;">
               </div>
               <h3 class="card__title" style="margin-bottom: 4px;">Laykold</h3>
               <p style="font-size: 12px; color: var(--brand-orange); font-weight: 600; text-transform: uppercase; margin-bottom: 16px;">Estados Unidos</p>
@@ -1275,6 +1360,7 @@
        PAGE: PORTAFOLIO
        ========================================== -->
   <div class="page" id="page-portafolio">
+    <h1 class="sr-only">Proyectos de canchas deportivas realizados por Deal Sports en Uruguay</h1>
 
     <!-- Portfolio items and categories filter -->
     <section class="section">
@@ -1615,7 +1701,7 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__col-brand">
-          <img loading="lazy" src="./assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 52px; width: auto; object-fit: contain; margin-bottom: 20px;">
+          <img loading="lazy" src="/assets/logo/logo.svg" alt="Deal Sports Logo" style="height: 52px; width: auto; object-fit: contain; margin-bottom: 20px;">
           <p class="footer__desc motion-text-reveal">Construyendo deporte en Uruguay desde hace 40 años. Más de 120.000 m² de superficies deportivas realizadas en todo el país con la mejor calidad.</p>
           <div class="footer__socials">
             <a href="#" class="footer__social-btn motion-text-reveal motion-magnet" aria-label="Facebook">FB</a>
@@ -1627,24 +1713,24 @@
         <div>
           <div class="footer__col-title">Superficies</div>
           <div class="footer__links">
-            <span class="footer__link" onclick="navigate('tenis')">Tenis</span>
-            <span class="footer__link" onclick="navigate('padel')">Padel</span>
-            <span class="footer__link" onclick="navigate('futbol')">Fútbol Sintético</span>
-            <span class="footer__link" onclick="navigate('putting')">Putting Green</span>
-            <span class="footer__link" onclick="navigate('basket')">Basketball & Pickleball</span>
-            <span class="footer__link" onclick="navigate('skate')">Skateparks</span>
-            <span class="footer__link" onclick="navigate('hockey')">Canchas de Hockey</span>
+            <a href="/canchas-de-tenis/" class="footer__link" onclick="navigate('tenis'); return false;">Tenis</a>
+            <a href="/canchas-de-padel/" class="footer__link" onclick="navigate('padel'); return false;">Padel</a>
+            <a href="/futbol-sintetico/" class="footer__link" onclick="navigate('futbol'); return false;">Fútbol Sintético</a>
+            <a href="/putting-green/" class="footer__link" onclick="navigate('putting'); return false;">Putting Green</a>
+            <a href="/canchas-polideportivas/" class="footer__link" onclick="navigate('basket'); return false;">Basketball & Pickleball</a>
+            <a href="/skateparks/" class="footer__link" onclick="navigate('skate'); return false;">Skateparks</a>
+            <a href="/canchas-de-hockey/" class="footer__link" onclick="navigate('hockey'); return false;">Canchas de Hockey</a>
           </div>
         </div>
 
         <div>
           <div class="footer__col-title">Empresa</div>
           <div class="footer__links">
-            <span class="footer__link" onclick="navigate('nosotros')">Nosotros</span>
-            <span class="footer__link" onclick="navigate('servicios')">Servicios</span>
-            <span class="footer__link" onclick="navigate('proveedores')">Proveedores</span>
-            <span class="footer__link" onclick="navigate('portafolio')">Proyectos</span>
-            <span class="footer__link" onclick="navigate('contacto')">Contacto</span>
+            <a href="/nosotros/" class="footer__link" onclick="navigate('nosotros'); return false;">Nosotros</a>
+            <a href="/servicios/" class="footer__link" onclick="navigate('servicios'); return false;">Servicios</a>
+            <a href="/proveedores/" class="footer__link" onclick="navigate('proveedores'); return false;">Proveedores</a>
+            <a href="/proyectos/" class="footer__link" onclick="navigate('portafolio'); return false;">Proyectos</a>
+            <a href="/contacto/" class="footer__link" onclick="navigate('contacto'); return false;">Contacto</a>
           </div>
         </div>
 
@@ -1682,15 +1768,34 @@
        SPA ROUTING JAVASCRIPT
        ========================================== -->
   <script>
-    // Track whether navigate() was triggered by popstate (back/forward)
-    let _poppingState = false;
+    // Rutas reales por página (/canchas-de-padel/, etc.). Los datos están en #page-meta.
+    const PAGE_META = JSON.parse(document.getElementById('page-meta').textContent);
 
-    // Navigation routing function
-    function navigate(page, pushHistory) {
-      // Push browser history entry so back button works within the SPA
-      if (!_poppingState && pushHistory !== false) {
-        history.pushState({ page }, '', '#' + page);
+    function pageFromPath(path) {
+      const p = path.endsWith('/') ? path : path + '/';
+      return Object.keys(PAGE_META).find(k => PAGE_META[k].path === p) || null;
+    }
+
+    // Título, descripción y canónica de la página visible
+    function applyPageMeta(page) {
+      const m = PAGE_META[page];
+      if (!m) return;
+      const url = 'https://dealsports.net' + m.path;
+      document.title = m.title;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', m.description);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+      document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', m.title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', m.description);
+    }
+
+    // Navigation routing function. url: para páginas con parámetros (detalle de proyecto).
+    function navigate(page, pushHistory, url) {
+      if (!PAGE_META[page]) page = 'home';
+      if (pushHistory !== false) {
+        history.pushState({ page }, '', url || PAGE_META[page].path);
       }
+      applyPageMeta(page);
 
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => {
@@ -1738,6 +1843,7 @@
 
       // Update header transparency style immediately
       updateHeaderStyle();
+      if (page === 'home') loadHeroVideo();
 
       // Trigger animations for the target page
       if (typeof window.initPageAnimations === 'function') {
@@ -1747,16 +1853,34 @@
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', (e) => {
-      const page = e.state?.page || 'home';
-      _poppingState = true;
-      navigate(page);
-      _poppingState = false;
+      const page = e.state?.page || pageFromPath(location.pathname) || 'home';
+      if (page === 'proyecto') {
+        const id = e.state?.id || new URLSearchParams(location.search).get('id');
+        if (id && typeof navigateToProject === 'function') return navigateToProject(id, false);
+      }
+      navigate(page, false);
     });
 
-    // Set initial history state on load (replace, not push, so back goes to previous external site)
-    window.addEventListener('DOMContentLoaded', () => {
-      history.replaceState({ page: 'home' }, '', '#home');
-    });
+    // Página inicial según la URL. Cada ruta tiene su propio HTML (lo genera
+    // scripts/build-pages.py) con esa página ya visible; esto cubre además los links
+    // viejos con #hash (#padel) y el detalle de proyecto (/proyecto/?id=12).
+    (function initRoute() {
+      const legacy = location.hash.slice(1);
+      let page = PAGE_META[legacy] ? legacy : (pageFromPath(location.pathname) || 'home');
+      const active = document.querySelector('.page.active')?.id.replace('page-', '');
+      if (page === 'proyecto') {
+        const id = new URLSearchParams(location.search).get('id');
+        history.replaceState({ page, id }, '', location.pathname + location.search);
+        if (id) {
+          document.addEventListener('DOMContentLoaded', () => navigateToProject(id, false));
+          return;
+        }
+        page = 'portafolio';
+      }
+      history.replaceState({ page }, '', PAGE_META[page].path);
+      if (page !== active) navigate(page, false);
+      else applyPageMeta(page);
+    })();
 
     // Helper to update sticky header visual states dynamically
     function updateHeaderStyle() {
@@ -1767,9 +1891,9 @@
       // Update Logo
       if (logoImg) {
         if (isHome && window.scrollY <= 50) {
-          logoImg.src = "./assets/logo/logo.svg";
+          logoImg.src = "/assets/logo/logo.svg";
         } else {
-          logoImg.src = "./assets/logo/log.svg";
+          logoImg.src = "/assets/logo/log.svg";
         }
       }
 
@@ -1898,17 +2022,18 @@
       }
     }
 
-    // Video del hero: solo en pantallas grandes (en móvil está oculto) y recién después de
-    // que cargó la página, para no demorar la primera pantalla con ~5 MB de YouTube.
-    window.addEventListener('load', () => {
-      const heroVideo = document.getElementById('hero-video');
-      if (heroVideo && window.matchMedia('(min-width: 769px)').matches) {
-        heroVideo.src = heroVideo.dataset.src;
+    // Video del hero: solo en pantallas grandes (en móvil está oculto), recién después del
+    // load y solo si la home está visible, para no demorar la primera pantalla con ~5 MB de YouTube.
+    function loadHeroVideo() {
+      const v = document.getElementById('hero-video');
+      if (v && !v.getAttribute('src') && document.readyState === 'complete'
+          && document.getElementById('page-home').classList.contains('active')
+          && window.matchMedia('(min-width: 769px)').matches) {
+        v.src = v.dataset.src;
       }
-    });
+    }
+    window.addEventListener('load', loadHeroVideo);
 
-    // Nav-home active state on initial load
-    document.getElementById('nav-home').classList.add('active');
     updateHeaderStyle();
 
     // Accordion toggle helper
@@ -1925,11 +2050,11 @@
       }
     }
   </script>
-  <script src="lenis.min.js"></script>
-  <script src="gsap.min.js"></script>
-  <script src="scrolltrigger.min.js"></script>
-  <script src="motion.js?v=2"></script>
-  <script src="proyectos.js?v=109"></script>
+  <script src="/lenis.min.js"></script>
+  <script src="/gsap.min.js"></script>
+  <script src="/scrolltrigger.min.js"></script>
+  <script src="/motion.js?v=3"></script>
+  <script src="/proyectos.js?v=110"></script>
 
   <!-- LIGHTBOX MODAL -->
   <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">

@@ -177,8 +177,9 @@ async function renderFeaturedHome() {
 let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
-async function navigateToProject(id) {
-  navigate('proyecto');
+async function navigateToProject(id, pushHistory) {
+  if (pushHistory !== false) history.pushState({ page: 'proyecto', id }, '', `/proyecto/?id=${id}`);
+  navigate('proyecto', false);
 
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
@@ -194,6 +195,7 @@ async function navigateToProject(id) {
     const json = await res.json();
     if (!json.data) throw new Error('Proyecto no encontrado');
     renderProjectDetail(json.data);
+    document.title = `${json.data.titulo} | Proyectos Deal Sports`;
   } catch(e) {
     const msg = e.name === 'AbortError' ? 'Tiempo de espera agotado, intentá de nuevo' : 'No se pudo cargar el proyecto, intentá de nuevo';
     if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = msg; }

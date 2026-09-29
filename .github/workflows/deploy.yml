@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generar una página HTML por ruta (SEO)
+        run: python3 scripts/build-pages.py
+
       - name: Subir sitio (raíz)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

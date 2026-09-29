@@ -736,23 +736,18 @@ window.initPageAnimations = function(page) {
   }
 };
 
-// Check load states and fire on startup
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
+// Check load states and fire on startup: anima la página que esté visible
+// (cada ruta tiene su propio HTML, así que no siempre es la home)
+function initActivePageAnimations() {
   setTimeout(() => {
-    const homePage = document.getElementById('page-home');
-    if (homePage && homePage.classList.contains('active')) {
-      window.initPageAnimations('home');
-    }
+    const active = document.querySelector('.page.active');
+    if (active) window.initPageAnimations(active.id.replace('page-', ''));
   }, 50);
+}
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  initActivePageAnimations();
 } else {
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const homePage = document.getElementById('page-home');
-      if (homePage && homePage.classList.contains('active')) {
-        window.initPageAnimations('home');
-      }
-    }, 50);
-  });
+  document.addEventListener('DOMContentLoaded', initActivePageAnimations);
 }
 
 function syncMobileButtonArrows() {
