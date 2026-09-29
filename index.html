@@ -27,7 +27,7 @@
 
   <!-- Rutas, títulos y descripciones de cada página. Lo usan el router y scripts/build-pages.py -->
   <script type="application/json" id="page-meta">
-{
+  {
     "home": {
       "path": "/",
       "title": "Deal Sports — Construcción de Superficies Deportivas en Uruguay",
@@ -98,6 +98,12 @@
       "title": "Proyecto | Deal Sports",
       "description": "Proyecto de construcción deportiva realizado por Deal Sports en Uruguay.",
       "noindex": true
+    },
+    "404": {
+      "path": "/404.html",
+      "title": "Página no encontrada | Deal Sports",
+      "description": "La página que buscás no existe.",
+      "noindex": true
     }
   }
   </script>
@@ -125,7 +131,7 @@
     "knowsAbout": ["Canchas de tenis", "Canchas de pádel", "Fútbol sintético", "Canchas de hockey", "Canchas de basketball y pickleball", "Skateparks", "Putting greens"]
   }
   </script>
-  <link rel="stylesheet" href="/index.css?v=2.3">
+  <link rel="stylesheet" href="/index.css?v=2.4">
   <style>
     /* Immediate Layout Grid Fail-safe */
     .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
@@ -1680,6 +1686,27 @@
     </section>
   </div>
 
+  <!-- Página 404 (scripts/build-pages.py genera /404.html con esta página visible) -->
+  <div class="page" id="page-404">
+    <section class="page-hero" style="display:flex !important; align-items:center !important; justify-content:center !important; text-align:center !important;">
+      <div class="page-hero__decor"></div>
+      <div class="container page-hero__container" style="display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; text-align:center !important; width:100% !important;">
+        <div class="page-hero__content" style="align-items:center !important; text-align:center !important; margin:0 auto !important; max-width:900px !important;">
+          <div class="page-hero__badge motion-page-hero-badge" style="margin:0 auto !important;">
+            <span class="page-hero__badge-dot"></span>
+            <span class="page-hero__badge-text">Error 404</span>
+          </div>
+          <h1 class="page-hero__title motion-page-hero-title" style="text-align:center !important; max-width:100% !important; margin-left:auto !important; margin-right:auto !important;">Esta página <em>no existe</em></h1>
+          <p class="page-hero__sub motion-page-hero-sub" style="text-align:center !important; max-width:700px !important; margin-left:auto !important; margin-right:auto !important;">Puede que el link esté mal escrito o que la página se haya movido. Probá desde el inicio o mirá nuestros proyectos.</p>
+          <div style="display:flex !important; gap:16px !important; justify-content:center !important; flex-wrap:wrap !important; margin-top:32px !important;">
+            <a href="/" class="btn btn-primary" onclick="navigate('home'); return false;">Ir al inicio <span class="btn-arrow-circle">↗</span></a>
+            <a href="/proyectos/" class="btn btn-secondary" onclick="navigate('portafolio'); return false;">Ver proyectos <span class="btn-arrow-circle">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- ==========================================
        SHARED CALL TO ACTION (CTA)
        ========================================== -->
@@ -1865,18 +1892,22 @@
     // scripts/build-pages.py) con esa página ya visible; esto cubre además los links
     // viejos con #hash (#padel) y el detalle de proyecto (/proyecto/?id=12).
     (function initRoute() {
+      const active = document.querySelector('.page.active')?.id.replace('page-', '');
+      // Página 404 servida por el servidor: se queda como está (y en la URL pedida)
+      if (active === '404') { applyPageMeta('404'); return; }
+
+      // Detalle de proyecto: /proyectos/12-nombre/ (o el formato viejo /proyecto/?id=12)
+      const m = location.pathname.match(/^\/proyectos\/(\d+)(?:-[^/]*)?\/?$/);
+      const id = m ? m[1] : (location.pathname.startsWith('/proyecto/') ? new URLSearchParams(location.search).get('id') : null);
+      if (id) {
+        history.replaceState({ page: 'proyecto', id }, '', location.pathname + location.search);
+        document.addEventListener('DOMContentLoaded', () => navigateToProject(id, false));
+        return;
+      }
+
       const legacy = location.hash.slice(1);
       let page = PAGE_META[legacy] ? legacy : (pageFromPath(location.pathname) || 'home');
-      const active = document.querySelector('.page.active')?.id.replace('page-', '');
-      if (page === 'proyecto') {
-        const id = new URLSearchParams(location.search).get('id');
-        history.replaceState({ page, id }, '', location.pathname + location.search);
-        if (id) {
-          document.addEventListener('DOMContentLoaded', () => navigateToProject(id, false));
-          return;
-        }
-        page = 'portafolio';
-      }
+      if (page === 'proyecto' || page === '404') page = 'portafolio';
       history.replaceState({ page }, '', PAGE_META[page].path);
       if (page !== active) navigate(page, false);
       else applyPageMeta(page);
@@ -2054,7 +2085,7 @@
   <script src="/gsap.min.js"></script>
   <script src="/scrolltrigger.min.js"></script>
   <script src="/motion.js?v=3"></script>
-  <script src="/proyectos.js?v=110"></script>
+  <script src="/proyectos.js?v=111"></script>
 
   <!-- LIGHTBOX MODAL -->
   <div class="ds-lightbox" id="ds-lightbox" aria-modal="true" role="dialog">

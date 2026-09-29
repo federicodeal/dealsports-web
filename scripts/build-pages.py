@@ -62,6 +62,7 @@ def build_page(src, page, meta):
     # Menú: marcar el link de esta página
     s = s.replace('class="nav-link active" onclick="navigate(\'home\')', 'class="nav-link" onclick="navigate(\'home\')', 1)
     nav_id = 'superficies' if page in SPORT_PAGES else ('portafolio' if page == 'proyecto' else page)
+    # (la 404 no marca ningún link: no existe nav-404)
     s = re.sub(r'class="nav-link([^"]*)"([^>]*id="nav-%s")' % nav_id, r'class="nav-link active\1"\2', s, count=1)
     s = s.replace('<header class="header header--transparent"', '<header class="header"', 1)
 
@@ -85,9 +86,13 @@ def main():
     for page, meta in meta_all.items():
         if meta['path'] == '/':
             continue
-        out_dir = os.path.join(ROOT, meta['path'].strip('/'))
-        os.makedirs(out_dir, exist_ok=True)
-        with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as f:
+        if meta['path'].endswith('.html'):          # /404.html: archivo suelto en la raíz
+            out_file = os.path.join(ROOT, meta['path'].lstrip('/'))
+        else:
+            out_dir = os.path.join(ROOT, meta['path'].strip('/'))
+            os.makedirs(out_dir, exist_ok=True)
+            out_file = os.path.join(out_dir, 'index.html')
+        with open(out_file, 'w', encoding='utf-8') as f:
             f.write(build_page(src, page, meta))
         print('ok ', meta['path'])
 

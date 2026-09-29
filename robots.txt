@@ -4,3 +4,4 @@ Disallow: /admin/
 Disallow: /backend/
 
 Sitemap: https://dealsports.net/sitemap.xml
+Sitemap: https://dealsports.net/sitemap-proyectos.xml

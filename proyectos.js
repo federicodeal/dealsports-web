@@ -38,6 +38,7 @@ function mapProject(p) {
     alt:         p.titulo,
     departamento: p.departamento || '',
     descripcion: p.descripcion || '',
+    slug:        p.slug || '',
   };
 }
 
@@ -177,14 +178,24 @@ async function renderFeaturedHome() {
 let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
+// URL de la ficha: /proyectos/12-nombre-del-proyecto/ (la arma el servidor con el mismo slug)
+function projectUrl(id) {
+  const p = projects.find(q => String(q._id) === String(id));
+  return `/proyectos/${id}${p && p.slug ? '-' + p.slug : ''}/`;
+}
+
 async function navigateToProject(id, pushHistory) {
-  if (pushHistory !== false) history.pushState({ page: 'proyecto', id }, '', `/proyecto/?id=${id}`);
+  if (pushHistory !== false) history.pushState({ page: 'proyecto', id }, '', projectUrl(id));
   navigate('proyecto', false);
 
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
-  if (loadEl)    { loadEl.style.display = 'block'; loadEl.textContent = 'Cargando...'; }
-  if (contentEl) contentEl.style.display = 'none';
+  // Si el servidor ya mandó esta ficha armada (ver ficha_proyecto.php), no mostrar "Cargando..."
+  const yaArmada  = contentEl && contentEl.dataset.id === String(id);
+  if (!yaArmada) {
+    if (loadEl)    { loadEl.style.display = 'block'; loadEl.textContent = 'Cargando...'; }
+    if (contentEl) contentEl.style.display = 'none';
+  }
 
   try {
     const controller = new AbortController();
@@ -225,9 +236,17 @@ function renderProjectDetail(p) {
 
   document.getElementById('proy-loading').style.display  = 'none';
   document.getElementById('proy-content').style.display  = 'block';
+  document.getElementById('proy-content').dataset.id    = String(p.id);
 
-  // Otros destacados
-  const otros = projects.filter(q => q.featured && q._id !== p.id);
+  renderOtrosDestacados(p.id);
+
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// Carrusel "Otros proyectos destacados" de la ficha. Se vuelve a dibujar cuando llega la
+// lista de proyectos, porque al entrar directo a una ficha puede no estar cargada todavía.
+function renderOtrosDestacados(currentId) {
+  const otros = projects.filter(q => q.featured && String(q._id) !== String(currentId));
   const otrosTrack = document.getElementById('otros-fc-track');
   const otrosWrap  = document.getElementById('otros-fc-wrap');
   if (otrosTrack && otros.length) {
@@ -237,8 +256,6 @@ function renderProjectDetail(p) {
   } else if (otrosWrap) {
     otrosWrap.style.display = 'none';
   }
-
-  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 // ── LIGHTBOX ──────────────────────────────────────────────────────
@@ -283,6 +300,8 @@ function renderProjects(list) {
   currentFilteredProjects = [...projects];
   renderFeaturedHome();
   if (document.getElementById("portfolio-grid-dynamic")) applyFiltersAndRender();
+  const fichaId = document.getElementById('proy-content')?.dataset.id;
+  if (fichaId && document.getElementById('page-proyecto').classList.contains('active')) renderOtrosDestacados(fichaId);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
