@@ -1447,7 +1447,10 @@
                   <option>Otro</option>
                 </select>
               </div>
-              <button class="form-submit" onclick="submitForm()">ENVIAR MI CONSULTA →</button>
+              <!-- Honeypot anti-spam: oculto para personas, los bots lo completan -->
+              <input type="text" id="form-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+              <p id="form-error" style="display:none;color:#b3261e;font-size:15px;line-height:1.6;margin:0 0 16px"></p>
+              <button class="form-submit" id="form-submit" onclick="submitForm()">ENVIAR MI CONSULTA →</button>
             </div>
 
             <!-- Success screen -->
@@ -1833,24 +1836,58 @@
     }
 
     // Contact form submission validation and UI toggle
-    function submitForm() {
-      // Get field values
-      const name = document.getElementById('form-name').value.trim();
-      const phone = document.getElementById('form-phone').value.trim();
-      const email = document.getElementById('form-email').value.trim();
-      const dept = document.getElementById('form-dept').value;
-      const surface = document.getElementById('form-surface').value;
-      const message = document.getElementById('form-message').value.trim();
+    async function submitForm() {
+      const val = id => document.getElementById(id).value.trim();
+      const data = {
+        nombre:       val('form-name'),
+        empresa:      val('form-company'),
+        telefono:     val('form-phone'),
+        email:        val('form-email'),
+        departamento: val('form-dept'),
+        superficie:   val('form-surface'),
+        metraje:      val('form-size'),
+        mensaje:      val('form-message'),
+        origen:       val('form-source'),
+        website:      val('form-website'),
+      };
+      const errorEl = document.getElementById('form-error');
+      const btn     = document.getElementById('form-submit');
+      const showError = html => { errorEl.innerHTML = html; errorEl.style.display = 'block'; };
+      errorEl.style.display = 'none';
 
       // Check required fields
-      if (!name || !phone || !email || !dept || !surface || !message) {
-        alert("Por favor completa todos los campos requeridos marcados con (*)");
+      if (!data.nombre || !data.telefono || !data.email || !data.departamento || !data.superficie || !data.mensaje) {
+        showError('Por favor completá todos los campos marcados con (*).');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+        showError('Revisá el email, parece que no es válido.');
         return;
       }
 
-      // Hide form container and show success message
-      document.getElementById('form-container').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      btn.disabled = true;
+      btn.textContent = 'ENVIANDO...';
+      try {
+        const res  = await fetch('/backend/api/web/contacto.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) throw new Error(json.message || 'HTTP ' + res.status);
+
+        // Hide form container and show success message
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } catch (e) {
+        // Si el envío falla, ofrecer WhatsApp con la consulta ya escrita para no perder el lead
+        const texto = `Hola, soy ${data.nombre}. Consulta por ${data.superficie} en ${data.departamento}. ${data.mensaje} (Tel: ${data.telefono}, ${data.email})`;
+        const wa = 'https://wa.me/59896001740?text=' + encodeURIComponent(texto);
+        showError(`No pudimos enviar la consulta en este momento. <a href="${wa}" target="_blank" rel="noopener" style="color:inherit;font-weight:600;text-decoration:underline">Envianosla por WhatsApp</a> con un clic, ya va escrita.`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ENVIAR MI CONSULTA →';
+      }
     }
 
     // Nav-home active state on initial load
