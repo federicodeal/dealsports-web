@@ -35,7 +35,7 @@ let projects = [
     "title": "Veramansa",
     "sport": "tenis",
     "type": "edificio",
-    "image": "./assets/fotos_web/1--Veramansa-tenis-Edificio.jpg",
+    "image": "./assets/fotos_web/1--veramansa-tenis-edificio.jpg",
     "featured": true,
     "date": "2025-01-01"
   },
@@ -62,7 +62,7 @@ let projects = [
     "title": "Reserva Montoya",
     "sport": "tenis",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/12--reserva-montoya-tenis- urbanizacion.JPG",
+    "image": "./assets/fotos_web/12--reserva-montoya-tenis- urbanizacion.jpg",
     "featured": true,
     "date": "2025-01-04"
   },
@@ -116,7 +116,7 @@ let projects = [
     "title": "Indigo",
     "sport": "tenis",
     "type": "edificio",
-    "image": "./assets/fotos_web/19--Indigo-edificio-tenis.jpg",
+    "image": "./assets/fotos_web/19--indigo-edificio-tenis.jpg",
     "featured": false,
     "date": "2025-01-01"
   },
@@ -125,7 +125,7 @@ let projects = [
     "title": "Horneros",
     "sport": "basket",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/2--horneros-pickleball-Urbanizacion.jpg",
+    "image": "./assets/fotos_web/2--horneros-pickleball-urbanizacion.jpg",
     "featured": false,
     "date": "2025-01-02"
   },
@@ -170,7 +170,7 @@ let projects = [
     "title": "Distrito 52",
     "sport": "padel",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/25---distrito-52-tenis-padel- urbanizacion.JPG",
+    "image": "./assets/fotos_web/25---distrito-52-tenis-padel- urbanizacion.jpg",
     "featured": false,
     "date": "2025-01-08"
   },
@@ -179,7 +179,7 @@ let projects = [
     "title": "Distrito 52",
     "sport": "futbol",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/26---distrito-52-futbol- urbanizacion.JPG",
+    "image": "./assets/fotos_web/26---distrito-52-futbol- urbanizacion.jpg",
     "featured": false,
     "date": "2025-01-09"
   },
@@ -188,7 +188,7 @@ let projects = [
     "title": "Reserva Montoya",
     "sport": "skate",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/28---reserva-montoya-skate- urbanizacion.JPG",
+    "image": "./assets/fotos_web/28---reserva-montoya-skate- urbanizacion.jpg",
     "featured": false,
     "date": "2025-01-01"
   },
@@ -197,7 +197,7 @@ let projects = [
     "title": "Aldeana",
     "sport": "tenis",
     "type": "edificio",
-    "image": "./assets/fotos_web/29---edificio-aldeana-tenis.JPG",
+    "image": "./assets/fotos_web/29---edificio-aldeana-tenis.jpg",
     "featured": false,
     "date": "2025-01-02"
   },
@@ -206,7 +206,7 @@ let projects = [
     "title": "Reserva",
     "sport": "futbol",
     "type": "urbanizacion",
-    "image": "./assets/fotos_web/3--reserva-futbol-Urbanizacion.jpg",
+    "image": "./assets/fotos_web/3--reserva-futbol-urbanizacion.jpg",
     "featured": false,
     "date": "2025-01-03"
   },
@@ -399,49 +399,25 @@ async function renderFeaturedHome() {
 let proyGalleryPhotos = [];
 let proyGalleryIdx    = 0;
 
-function _dbg(msg) {
-  let el = document.getElementById('_dbg');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = '_dbg';
-    el.style.cssText = 'position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.85);color:#0f0;padding:10px 14px;z-index:99999;font:12px monospace;border-radius:8px;max-width:340px;pointer-events:none';
-    document.body.appendChild(el);
-  }
-  el.textContent = msg;
-  console.log('[NAV]', msg);
-}
-
 async function navigateToProject(id) {
-  _dbg('1 navigate(' + id + ')');
-  try {
-    navigate('proyecto');
-    _dbg('2 navigate OK');
-  } catch(navErr) {
-    _dbg('2 navigate ERR: ' + navErr.message);
-  }
+  navigate('proyecto');
 
   const loadEl    = document.getElementById('proy-loading');
   const contentEl = document.getElementById('proy-content');
-  _dbg('3 loadEl=' + (loadEl ? 'OK' : 'NULL'));
   if (loadEl)    { loadEl.style.display = 'block'; loadEl.textContent = 'Cargando...'; }
   if (contentEl) contentEl.style.display = 'none';
 
   try {
-    _dbg('4 fetching id=' + id + '...');
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     const res  = await fetch(`${ERP_API}/web/proyectos.php?id=${id}`, { signal: controller.signal });
     clearTimeout(timeout);
-    _dbg('5 fetch ' + res.status);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
-    _dbg('6 data=' + (json.data ? 'OK' : 'NULL'));
     if (!json.data) throw new Error('Proyecto no encontrado');
     renderProjectDetail(json.data);
-    _dbg('7 render OK');
   } catch(e) {
-    _dbg('ERR ' + e.name + ': ' + e.message);
-    const msg = e.name === 'AbortError' ? 'Tiempo de espera agotado, intentá de nuevo' : 'Error: ' + e.message;
+    const msg = e.name === 'AbortError' ? 'Tiempo de espera agotado, intentá de nuevo' : 'No se pudo cargar el proyecto, intentá de nuevo';
     if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = msg; }
   }
 }
@@ -505,7 +481,9 @@ function onLightboxKey(e) {
 }
 
 function updateProyLightbox() {
-  document.getElementById('proy-lb-img').src = proyGalleryPhotos[proyGalleryIdx];
+  const lbImg = document.getElementById('proy-lb-img');
+  lbImg.src = proyGalleryPhotos[proyGalleryIdx];
+  lbImg.alt = `${document.getElementById('proy-titulo').textContent} foto ${proyGalleryIdx + 1}`;
   document.getElementById('proy-lb-counter').textContent = `${proyGalleryIdx + 1} / ${proyGalleryPhotos.length}`;
   document.getElementById('proy-lb-prev').disabled = proyGalleryIdx === 0;
   document.getElementById('proy-lb-next').disabled = proyGalleryIdx === proyGalleryPhotos.length - 1;
