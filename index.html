@@ -7,6 +7,28 @@
        Los eventos de contacto se mandan con trackEvent() al final del <body>. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-75TJG0DRKW"></script>
   <script>
+    // Excluir un navegador de las estadísticas (para el equipo de Deal Sports):
+    // entrar una vez a dealsports.net/?analytics=off  (y ?analytics=on para volver a medirlo)
+    (function () {
+      try {
+        var p = new URLSearchParams(location.search).get('analytics');
+        if (p === 'off') localStorage.setItem('ds_no_analytics', '1');
+        if (p === 'on')  localStorage.removeItem('ds_no_analytics');
+        if (localStorage.getItem('ds_no_analytics') === '1') window['ga-disable-G-75TJG0DRKW'] = true;
+        if (p === 'off' || p === 'on') {
+          window.addEventListener('DOMContentLoaded', function () {
+            var d = document.createElement('div');
+            d.textContent = p === 'off' ? '✓ Este navegador ya no cuenta en Google Analytics'
+                                        : '✓ Este navegador vuelve a contar en Google Analytics';
+            d.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99999;'
+              + 'background:#1E6875;color:#fff;padding:12px 20px;border-radius:999px;font:600 14px sans-serif;'
+              + 'box-shadow:0 8px 24px rgba(0,0,0,.2)';
+            document.body.appendChild(d);
+            setTimeout(function () { d.remove(); }, 5000);
+          });
+        }
+      } catch (e) {}
+    })();
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
