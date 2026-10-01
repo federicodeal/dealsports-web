@@ -5359,3 +5359,33 @@ video.hero__video-bg { object-fit: cover; }
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
 }
+
+/* Proveedores: etiqueta "Representante Oficial" + link al sitio de la marca */
+.proveedor-pie {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.proveedor-pie .btn-primary { white-space: nowrap; }
+.proveedor-link {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-teal);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.proveedor-link:hover { color: var(--brand-orange); }
+
+/* Tarjetas de proveedores parejas: mismo alto, logos en una franja fija y pie abajo */
+#page-proveedores .grid-5 { align-items: stretch; }
+#page-proveedores .option-box { display: flex !important; flex-direction: column; }
+#page-proveedores .option-box > div:first-child { flex: 1 1 auto; }
+#page-proveedores .option-box > div:first-child > div:first-child {
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
