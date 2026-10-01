@@ -5323,3 +5323,39 @@ video.hero__video-bg { object-fit: cover; }
   transform: none;
   object-fit: cover;
 }
+
+/* Botón "Presupuesto" del header: más grande y con acceso directo a WhatsApp dentro de la píldora */
+.header__cta .header-cta-btn {
+  gap: 10px;
+  font-size: 15px;
+  padding: 9px 9px 9px 26px;
+  cursor: default;
+}
+.header-cta-btn__main {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.header-cta-btn .btn-arrow-circle {
+  width: 34px;
+  height: 34px;
+}
+.header-cta-btn__wa {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--trans);
+}
+.header-cta-btn__wa:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
