@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
   <script>document.documentElement.classList.add('motion-ready');</script>
-  <!-- Google Analytics 4 (G-75TJG0DRKW). Las visitas entre páginas y los eventos (formulario,
-       WhatsApp, email) se mandan desde el router y trackEvent() al final del <body>. -->
+  <!-- Google Analytics 4 (G-75TJG0DRKW). Las visitas entre páginas las detecta GA4 solo (medición
+       mejorada: cambios del historial del navegador); no mandar page_view a mano o se duplican.
+       Los eventos de contacto se mandan con trackEvent() al final del <body>. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-75TJG0DRKW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -2200,10 +2201,6 @@
         history.pushState({ page }, '', url || PAGE_META[page].path);
       }
       applyPageMeta(page);
-      // Visita para Analytics: solo navegaciones después de la carga (la inicial la cuenta gtag)
-      if (document.readyState === 'complete') {
-        setTimeout(() => trackEvent('page_view', { page_location: location.href, page_title: document.title }), 0);
-      }
 
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => {
