@@ -2,6 +2,15 @@
 <html lang="es">
 <head>
   <script>document.documentElement.classList.add('motion-ready');</script>
+  <!-- Google Analytics 4 (G-75TJG0DRKW). Las visitas entre páginas y los eventos (formulario,
+       WhatsApp, email) se mandan desde el router y trackEvent() al final del <body>. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-75TJG0DRKW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-75TJG0DRKW');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deal Sports — Construcción de Superficies Deportivas en Uruguay</title>
@@ -2191,6 +2200,10 @@
         history.pushState({ page }, '', url || PAGE_META[page].path);
       }
       applyPageMeta(page);
+      // Visita para Analytics: solo navegaciones después de la carga (la inicial la cuenta gtag)
+      if (document.readyState === 'complete') {
+        setTimeout(() => trackEvent('page_view', { page_location: location.href, page_title: document.title }), 0);
+      }
 
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => {
@@ -2245,6 +2258,20 @@
         window.initPageAnimations(page);
       }
     }
+
+    // Eventos de Google Analytics (no hace nada si gtag no cargó, p. ej. por un bloqueador)
+    function trackEvent(name, params) {
+      try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (_) {}
+    }
+
+    // Clics en WhatsApp y en el email, en cualquier parte del sitio
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[onclick*="wa.me"], a[href*="wa.me"], a[href^="mailto:"]');
+      if (!el) return;
+      const pagina = document.querySelector('.page.active')?.id.replace('page-', '') || '';
+      if ((el.getAttribute('href') || '').startsWith('mailto:')) trackEvent('click_email', { pagina });
+      else trackEvent('click_whatsapp', { pagina });
+    }, true);
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', (e) => {
@@ -2409,11 +2436,13 @@
         const json = await res.json().catch(() => ({}));
         if (!res.ok || !json.success) throw new Error(json.message || 'HTTP ' + res.status);
 
+        trackEvent('generate_lead', { superficie: data.superficie, departamento: data.departamento, origen: data.origen || '' });
         // Hide form container and show success message
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
       } catch (e) {
         // Si el envío falla, ofrecer WhatsApp con la consulta ya escrita para no perder el lead
+        trackEvent('form_error', { motivo: String(e.message || '').slice(0, 80) });
         const texto = `Hola, soy ${data.nombre}. Consulta por ${data.superficie} en ${data.departamento}. ${data.mensaje} (Tel: ${data.telefono}, ${data.email})`;
         const wa = 'https://wa.me/59896001740?text=' + encodeURIComponent(texto);
         showError(`No pudimos enviar la consulta en este momento. <a href="${wa}" target="_blank" rel="noopener" style="color:inherit;font-weight:600;text-decoration:underline">Envianosla por WhatsApp</a> con un clic, ya va escrita.`);
