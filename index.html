@@ -164,7 +164,7 @@
     "knowsAbout": ["Canchas de tenis", "Canchas de pádel", "Fútbol sintético", "Canchas de hockey", "Canchas de basketball y pickleball", "Skateparks", "Putting greens"]
   }
   </script>
-  <link rel="stylesheet" href="/index.css?v=2.9">
+  <link rel="stylesheet" href="/index.css?v=3.0">
   <style>
     /* Immediate Layout Grid Fail-safe */
     .grid-2 { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; }
@@ -417,12 +417,15 @@
         
         <div class="skills-grid">
           <!-- Card 1: Tenis -->
-          <div class="skill-card" onclick="navigate('tenis')">
+          <div class="skill-card skill-card--foto" onclick="navigate('tenis')">
+            <!-- Foto configurable desde el ERP (Sitio Web → Fotos de la home), clave home_tenis -->
+            <img class="skill-card__foto" data-foto="home_tenis" src="/assets/fotos_web/thumbs/1--veramansa-tenis-edificio.webp" alt="Cancha de tenis construida por Deal Sports" loading="lazy">
+            <div class="skill-card__sombra"></div>
             <div class="skill-card-top">
               <div class="skill-icon-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7" fill="currentColor" fill-opacity="0.1"></circle><line x1="10" y1="3" x2="10" y2="17"></line><line x1="3" y1="10" x2="17" y2="10"></line><path d="M15 15L20 20"></path><circle cx="19" cy="5" r="2" fill="var(--brand-orange)" stroke="none"></circle></svg>
               </div>
-              <span class="skill-badge">Durocolor/Lykold</span>
+              <span class="skill-badge">Durocolor/Laykold</span>
             </div>
             <div class="skill-card-bottom">
               <h3 class="skill-title">Canchas de Tenis</h3>
@@ -431,7 +434,10 @@
           </div>
 
           <!-- Card 2: Padel -->
-          <div class="skill-card" onclick="navigate('padel')">
+          <div class="skill-card skill-card--foto" onclick="navigate('padel')">
+            <!-- Foto configurable desde el ERP (Sitio Web → Fotos de la home), clave home_padel -->
+            <img class="skill-card__foto" data-foto="home_padel" src="/assets/fotos_web/thumbs/21--aura-padel-- urbanizacion.webp" alt="Cancha de pádel construida por Deal Sports" loading="lazy">
+            <div class="skill-card__sombra"></div>
             <div class="skill-card-top">
               <div class="skill-icon-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6" fill="currentColor" fill-opacity="0.15"></circle><path d="M13.2 13.2L18 18"></path><path d="M16.5 16.5L19.5 19.5"></path><circle cx="16" cy="6" r="2.5" fill="var(--brand-orange)" stroke="none"></circle></svg>
@@ -445,7 +451,10 @@
           </div>
 
           <!-- Card 3: Fútbol -->
-          <div class="skill-card" onclick="navigate('futbol')">
+          <div class="skill-card skill-card--foto" onclick="navigate('futbol')">
+            <!-- Foto configurable desde el ERP (Sitio Web → Fotos de la home), clave home_futbol -->
+            <img class="skill-card__foto" data-foto="home_futbol" src="/assets/fotos_web/thumbs/3--reserva-futbol-urbanizacion.webp" alt="Cancha de fútbol sintético construida por Deal Sports" loading="lazy">
+            <div class="skill-card__sombra"></div>
             <div class="skill-card-top">
               <div class="skill-icon-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4M7.5 7.5l2.5 2.5M14 10l2.5-2.5M10 14l-2.5 2.5M16.5 16.5L14 14"></path></svg>
@@ -459,7 +468,10 @@
           </div>
 
           <!-- Card 4: Golf -->
-          <div class="skill-card" onclick="navigate('putting')">
+          <div class="skill-card skill-card--foto" onclick="navigate('putting')">
+            <!-- Foto configurable desde el ERP (Sitio Web → Fotos de la home), clave home_putting -->
+            <img class="skill-card__foto" data-foto="home_putting" src="/assets/fotos_web/thumbs/16--reserva-montoya-golf-- urbanizacion.webp" alt="Putting green construido por Deal Sports" loading="lazy">
+            <div class="skill-card__sombra"></div>
             <div class="skill-card-top">
               <div class="skill-icon-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22H6"></path><path d="M12 22V2"></path><path d="M12 2l7 4-7 4"></path><circle cx="16" cy="18" r="1.5" fill="var(--brand-orange)" stroke="none"></circle></svg>
@@ -2297,6 +2309,32 @@
       if ((el.getAttribute('href') || '').startsWith('mailto:')) trackEvent('click_email', { pagina });
       else trackEvent('click_whatsapp', { pagina });
     }, true);
+
+    // Fotos configurables desde el ERP (Sitio Web → Fotos de la home). El HTML trae la foto por
+    // defecto; si en el ERP se cargó otra, se reemplaza. Se guarda la última respuesta en el
+    // navegador para aplicarla al instante en la próxima visita.
+    (function fotosConfigurables() {
+      const aplicar = (mapa) => {
+        document.querySelectorAll('img[data-foto]').forEach(img => {
+          let url = mapa && mapa[img.dataset.foto];
+          if (!url) return;
+          if (url.includes('res.cloudinary.com/') && url.includes('/upload/')) {
+            url = url.replace('/upload/', '/upload/w_800,c_limit,f_auto,q_auto/');
+          }
+          if (img.hasAttribute('data-src')) img.dataset.src = url;          // imagen de una página oculta
+          else if (img.getAttribute('src') !== url) img.src = url;
+        });
+      };
+      try { aplicar(JSON.parse(localStorage.getItem('ds_fotos_web') || 'null')); } catch (_) {}
+      fetch('/backend/api/web/imagenes.php')
+        .then(r => r.json())
+        .then(j => {
+          if (!j || !j.success) return;
+          aplicar(j.data);
+          try { localStorage.setItem('ds_fotos_web', JSON.stringify(j.data)); } catch (_) {}
+        })
+        .catch(() => {});
+    })();
 
     // Handle browser back/forward buttons
     window.addEventListener('popstate', (e) => {

@@ -5389,3 +5389,32 @@ video.hero__video-bg { object-fit: cover; }
   display: flex;
   align-items: center;
 }
+
+/* Cuadros de superficies del inicio con foto de fondo (configurable desde el ERP) */
+.skill-card--foto {
+  position: relative;
+  overflow: hidden;
+  border-color: transparent;
+}
+.skill-card__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-card__sombra {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.78) 100%);
+}
+.skill-card--foto .skill-card-top,
+.skill-card--foto .skill-card-bottom { position: relative; z-index: 2; }
+.skill-card--foto:hover .skill-card__foto { transform: scale(1.06); }
+.skill-card--foto .skill-title { color: #FFFFFF; }
+.skill-card--foto .skill-desc { color: rgba(255, 255, 255, 0.88); }
+.skill-card--foto .skill-icon-circle { background: rgba(255, 255, 255, 0.9); color: var(--brand-teal); }
+.skill-card--foto .skill-badge { background: rgba(255, 255, 255, 0.92); border-color: transparent; }
